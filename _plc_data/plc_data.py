@@ -11,8 +11,11 @@ class PLC_Address:
     """
     IP, RACK, SLOT = None, None, None
 
-    BYTES_ADDRESS = ()
-    WORDS_ADDRESS = ()
+    READ_BYTES_ADDRESS = ()
+    READ_WORDS_ADDRESS = ()
+
+    WRITE_BYTES_ADDRESS = ()
+    WRITE_WORDS_ADDRESS = ()
 
     @staticmethod
     def byte_address(bit_address) -> str:
@@ -42,6 +45,7 @@ class PLC_data:
     read_word_data = {}
 
     write_byte_data = {}
+    write_word_data = {}
 
     def __init__(self, plc_address):
         self.__plc_address = plc_address
@@ -67,19 +71,21 @@ class PLC_data:
         Data to read_byte_data
         """
         try:
-            for byte_address in self.__plc_address.BYTES_ADDRESS:
+            for byte_address in self.__plc_address.READ_BYTES_ADDRESS:
                 self.read_byte_data[byte_address] = self.__plc_connect.get_bits(byte_address)
-            for word_address in self.__plc_address.WORDS_ADDRESS:
+            for word_address in self.__plc_address.READ_WORDS_ADDRESS:
                 self.read_word_data[word_address] = self.__plc_connect.get_int(word_address)
         except S7ConnectFailed:
-            for byte_address in self.__plc_address.BYTES_ADDRESS:
+            for byte_address in self.__plc_address.READ_BYTES_ADDRESS:
                 self.read_byte_data[byte_address] = [False, False, False, False, False, False, False, False]
-            for word_address in self.__plc_address.WORDS_ADDRESS:
+            for word_address in self.__plc_address.READ_WORDS_ADDRESS:
                 self.read_word_data[word_address] = 0
 
     def write_data(self):
         try:
-            for byte_address in self.__plc_address.BYTES_ADDRESS:
+            for byte_address in self.__plc_address.WRITE_BYTES_ADDRESS:
                 self.__plc_connect.set_bits(byte_address, self.write_byte_data[byte_address])
+            for word_address in self.__plc_address.WRITE_WORDS_ADDRESS:
+                self.__plc_connect.set_int(word_address, self.write_word_data[word_address])
         except S7ConnectFailed:
             pass

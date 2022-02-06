@@ -20,12 +20,12 @@ class Tartaly1_Address(PLC_Address):
     T3_KEVER = 'Q4.0'
     T3_URIT = 'Q4.1'
 
-    BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
     T1_HOMERSEKLET = 'IW64'
     T3_SZINT = 'IW66'
 
-    WORDS_ADDRESS = ('IW64', 'IW66')
+    READ_WORDS_ADDRESS = ('IW64', 'IW66')
 
     T1_HOMERSEKLET_RANGE = 24000
     T3_SZINT_RANGE = 24000

@@ -24,7 +24,7 @@ class Tartaly3_Address(PLC_Address):
     BEKAPCSOLVA = 'Q4.0'
     KIKAPCSOLVA = 'Q4.1'
 
-    BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
 
 # noinspection SpellCheckingInspection

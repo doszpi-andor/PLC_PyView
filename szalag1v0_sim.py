@@ -17,7 +17,7 @@ class IO_Address(PLC_Address):
     INPUT7 = 'I0.6'
     INPUT8 = 'I0.7'
 
-    BYTES_ADDRESS = ('IB0', )
+    WRITE_BYTES_ADDRESS = ('IB0',)
 
 
 class IO_data(PLC_data):
@@ -35,7 +35,7 @@ class IO_data(PLC_data):
 
     def write_data(self):
 
-        for byte_address in IO_Address.BYTES_ADDRESS:
+        for byte_address in IO_Address.WRITE_BYTES_ADDRESS:
             self.write_byte_data[byte_address] = [False, False, False, False, False, False, False, False]
 
         self.write_byte_data[PLC_Address.byte_address(IO_Address.INPUT1)][
