@@ -1,5 +1,0 @@
-<plc_config>
-    <ip>192.168.56.101</ip>
-    <rack>0</rack>
-    <slot>1</slot>
-</plc_config>
