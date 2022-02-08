@@ -1,3 +1,3 @@
 #!/bin/sh
 cd /home/pi/PLC_PyView
-python3 szalag1v1_main.py
+python3 szalag1v1_view.py
