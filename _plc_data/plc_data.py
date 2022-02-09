@@ -82,6 +82,10 @@ class PLC_data:
                 self.read_word_data[word_address] = 0
 
     def write_data(self):
+        """
+            Write PLC data bytes
+            Data to read_byte_data
+        """
         try:
             for byte_address in self.__plc_address.WRITE_BYTES_ADDRESS:
                 self.__plc_connect.set_bits(byte_address, self.write_byte_data[byte_address])
