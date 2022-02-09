@@ -67,7 +67,7 @@ class App(Tk):
             self.attributes("-fullscreen", True)
 
         # noinspection SpellCheckingInspection
-        self.title('szalag_data 1v1')
+        self.title('Szalag 1v1')
 
         self.name_frame = Frame()
         self.indicator_frame = Frame()
@@ -75,7 +75,7 @@ class App(Tk):
         self.connect_frame = Frame()
 
         # noinspection SpellCheckingInspection
-        self.name_label = Label(self.name_frame, text='szalag_data 1v1', font=("Arial", 25))
+        self.name_label = Label(self.name_frame, text='Szalag 1v1', font=("Arial", 25))
         # noinspection SpellCheckingInspection
         self.close_button = Button(self.name_frame, text='Bezárás', command=self.close)
         self.indicators_button = IndicatorsButton(self.indicator_frame)
