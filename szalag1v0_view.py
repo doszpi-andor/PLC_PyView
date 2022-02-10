@@ -1,5 +1,5 @@
 from platform import system
-from tkinter import Frame, Tk, Label, W, Button, RIGHT, X, LEFT, BOTTOM, Y, Toplevel
+from tkinter import Frame, Tk, Label, W, Button, RIGHT, X, LEFT, BOTTOM, Y, Toplevel, StringVar, OptionMenu
 
 from _threading.thread_loop import ThreadLoop
 from _view.conveyor_view import ConveyorView
@@ -78,6 +78,13 @@ class App(Tk):
         self.conveyors = Conveyors(self.conveyor_frame)
         self.connect_label = Label(self.connect_frame, text='--')
 
+        self.ip_opt = StringVar()
+        self.ip_opt.set('172.17.1.1')
+        self.ip_list = ['172.17.1.1', '172.17.1.2', '172.17.1.3',
+                        '172.17.1.4', '172.17.1.5', '172.17.1.6', '172.17.1.6']
+        self.ip_menu = OptionMenu(self.connect_frame, self.ip_opt, *self.ip_list, command=self.ip_selected)
+        self.ip_menu.pack()
+
         self.close_button.pack(side=RIGHT)
         self.name_label.pack()
         self.indicators_button.pack(side=LEFT)
@@ -94,6 +101,10 @@ class App(Tk):
         self.data_transfer.start()
 
         self.protocol('WM_DELETE_WINDOW', self.close)
+
+    def ip_selected(self, *args):
+        print(self.ip_opt.get())
+        self.plc_data.reconnect(self.ip_opt.get())
 
     def close(self):
         toplevel = Toplevel(self, bg='red')
