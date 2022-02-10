@@ -47,9 +47,9 @@ class PLC_data:
     write_byte_data = {}
     write_word_data = {}
 
-    def __init__(self, plc_address):
+    def __init__(self, plc_address, ip):
         self.__plc_address = plc_address
-        self.__plc_connect = PLC_Connect(plc_address.IP, plc_address.RACK, plc_address.SLOT)
+        self.__plc_connect = PLC_Connect(ip, plc_address.RACK, plc_address.SLOT)
 
     @property
     def connected(self) -> bool:
@@ -60,6 +60,7 @@ class PLC_data:
         return self.__plc_connect.connected
 
     def reconnect(self, ip):
+        self.__plc_connect.disconnect()
         self.__plc_address.IP = ip
         self.__plc_connect = PLC_Connect(self.__plc_address.IP, self.__plc_address.RACK, self.__plc_address.SLOT)
 

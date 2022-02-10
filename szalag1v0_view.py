@@ -1,6 +1,7 @@
 from platform import system
 from tkinter import Frame, Tk, Label, W, Button, RIGHT, X, LEFT, BOTTOM, Y, Toplevel, StringVar, OptionMenu
 
+from _plc_data.plc_ip_select import SelectIP
 from _threading.thread_loop import ThreadLoop
 from _view.conveyor_view import ConveyorView
 from _view.indicator_view import IndicatorSquare, IndicatorOval
@@ -52,7 +53,6 @@ class App(Tk):
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
-        self.plc_data = Szalag1v0_data()
 
         if system() == 'Windows':
             self.resizable(False, False)
@@ -78,18 +78,14 @@ class App(Tk):
         self.conveyors = Conveyors(self.conveyor_frame)
         self.connect_label = Label(self.connect_frame, text='--')
 
-        self.ip_opt = StringVar()
-        self.ip_opt.set('172.17.1.1')
-        self.ip_list = ['172.17.1.1', '172.17.1.2', '172.17.1.3',
-                        '172.17.1.4', '172.17.1.5', '172.17.1.6', '172.17.1.6']
-        self.ip_menu = OptionMenu(self.connect_frame, self.ip_opt, *self.ip_list, command=self.ip_selected)
-        self.ip_menu.pack()
+        self.ip_select = SelectIP(self.connect_frame)
 
         self.close_button.pack(side=RIGHT)
         self.name_label.pack()
         self.indicators_button.pack(side=LEFT)
         self.indicators_lamp.pack(side=RIGHT)
         self.conveyors.pack()
+        self.ip_select.pack()
         self.connect_label.pack()
 
         self.name_frame.pack(fill=X)
@@ -97,14 +93,15 @@ class App(Tk):
         self.conveyor_frame.pack(pady=50)
         self.connect_frame.pack(side=BOTTOM, fill=Y)
 
+        self.plc_data = Szalag1v0_data(self.ip_select.ip_address.get())
+
         self.data_transfer = ThreadLoop(loop=self.data_transfer)
         self.data_transfer.start()
 
         self.protocol('WM_DELETE_WINDOW', self.close)
 
     def ip_selected(self, *args):
-        print(self.ip_opt.get())
-        self.plc_data.reconnect(self.ip_opt.get())
+        self.plc_data.reconnect(self.ip_select.ip_address.get())
 
     def close(self):
         toplevel = Toplevel(self, bg='red')
