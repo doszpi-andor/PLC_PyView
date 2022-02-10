@@ -9,7 +9,8 @@ class PLC_Address:
     :var int SLOT: PLC slot number
     :var list BYTES_ADDRESS: PLC read bytes
     """
-    IP, RACK, SLOT = None, None, None
+    IP_LIST, RACK, SLOT = None, None, None
+    DEFAULT_IP = None
 
     READ_BYTES_ADDRESS = ()
     READ_WORDS_ADDRESS = ()
@@ -61,8 +62,7 @@ class PLC_data:
 
     def reconnect(self, ip):
         self.__plc_connect.disconnect()
-        self.__plc_address.IP = ip
-        self.__plc_connect = PLC_Connect(self.__plc_address.IP, self.__plc_address.RACK, self.__plc_address.SLOT)
+        self.__plc_connect.ip = ip
 
     def disconnect(self) -> None:
         """

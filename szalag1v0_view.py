@@ -78,7 +78,10 @@ class App(Tk):
         self.conveyors = Conveyors(self.conveyor_frame)
         self.connect_label = Label(self.connect_frame, text='--')
 
-        self.ip_select = SelectIP(self.connect_frame)
+        self.ip_select = SelectIP(self.connect_frame,
+                                  default_ip=Szalag1v0_Address.DEFAULT_IP,
+                                  ip_list=Szalag1v0_Address.IP_LIST,
+                                  change_process=self.ip_selected)
 
         self.close_button.pack(side=RIGHT)
         self.name_label.pack()

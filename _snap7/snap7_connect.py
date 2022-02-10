@@ -34,6 +34,14 @@ class PLC_Connect:
         self.__connected = False
 
     @property
+    def ip(self):
+        return self.__ip
+
+    @ip.setter
+    def ip(self, ip):
+        self.__ip = ip
+
+    @property
     def connected(self) -> bool:
         """
         PLC connected information (getter)

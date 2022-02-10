@@ -5,7 +5,7 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection SpellCheckingInspection
 class Tartaly3_Address(PLC_Address):
-    IP, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
+    IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
 
     T1_FELSO = 'I0.0'
     T1_ALSO = 'I0.1'
@@ -47,8 +47,8 @@ class Tartaly3_data(PLC_data):
     __bekapcsolva_old = False
     __kikapcsolva_old = False
 
-    def __init__(self):
-        super().__init__(Tartaly3_Address())
+    def __init__(self, ip):
+        super().__init__(Tartaly3_Address(), ip)
         self.__t1_felso = False
         self.__t1_also = False
         self.__t2_felso = False
