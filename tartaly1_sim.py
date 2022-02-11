@@ -1,4 +1,4 @@
-from tkinter import Frame, IntVar, Checkbutton, Label
+from tkinter import Frame, IntVar, Checkbutton, Label, Scale, HORIZONTAL, NORMAL, X
 
 from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
@@ -19,6 +19,21 @@ class IO_Address(PLC_Address):
 
     WRITE_BYTES_ADDRESS = ('IB0',)
 
+    OUTPUT_DIRECTION = 'write'
+    OUTPUT_ADDRESS = ('QB0',)
+
+    ANALOG_INPUT_CH0 = 'IW64'
+    ANALOG_INPUT_CH1 = 'IW66'
+
+    ANALOG_DIRECTION = 'write'
+    WRITE_WORDS_ADDRESS = ('IW64', 'IW66')
+
+    ANALOG_CH0_MAX = 27648
+    ANALOG_CH0_MIN = 0
+
+    ANALOG_CH1_MAX = 27648
+    ANALOG_CH1_MIN = 0
+
 
 class IO_data(PLC_data):
 
@@ -32,6 +47,9 @@ class IO_data(PLC_data):
         self.input6 = False
         self.input7 = False
         self.input8 = False
+
+        self.analog_ch0 = 0
+        self.analog_ch1 = 0
 
     def write_data(self):
 
@@ -54,6 +72,12 @@ class IO_data(PLC_data):
             PLC_Address.bit_index(IO_Address.INPUT7)] = self.input7
         self.write_byte_data[PLC_Address.byte_address(IO_Address.INPUT8)][
             PLC_Address.bit_index(IO_Address.INPUT8)] = self.input8
+
+        for word_address in IO_Address.WRITE_WORDS_ADDRESS:
+            self.write_word_data[word_address] = 0
+
+        self.write_word_data[IO_Address.ANALOG_INPUT_CH0] = self.analog_ch0
+        self.write_word_data[IO_Address.ANALOG_INPUT_CH1] = self.analog_ch1
 
         super().write_data()
 
@@ -97,16 +121,34 @@ class PLC_InputView(Frame):
         Label(self, text='%s' % IO_Address.INPUT8).grid(row=3, column=8)
 
 
+class PLC_AnalogInputView(Frame):
+
+    def __init__(self, master=None, change_process=None, state=None, cnf={}, **kw):
+        super().__init__(master, cnf, **kw)
+        self.analog_ch0_var = IntVar()
+        self.analog_ch0_scale = Scale(self, variable=self.analog_ch0_var, command=change_process, state=state,
+                                      from_=IO_Address.ANALOG_CH0_MIN, to=IO_Address.ANALOG_CH0_MAX, orient=HORIZONTAL)
+        self.analog_ch0_scale.pack(fill=X)
+        Label(self, text='Channel0 [%s]' % IO_Address.ANALOG_INPUT_CH0).pack()
+        self.analog_ch1_var = IntVar()
+        self.analog_ch1_scale = Scale(self, variable=self.analog_ch1_var, command=change_process, state=state,
+                                      from_=IO_Address.ANALOG_CH1_MIN, to=IO_Address.ANALOG_CH1_MAX, orient=HORIZONTAL)
+        self.analog_ch1_scale.pack(fill=X)
+        Label(self, text='Channel1 [%s]' % IO_Address.ANALOG_INPUT_CH1).pack()
+
+
 class IO_App(App):
 
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
         self.io_data = IO_data(self.ip_select.ip_address.get())
 
-        self.geometry("800x600")
+        self.geometry("800x700")
 
         self.io_frame = PLC_InputView(self, change_process=self.change_input)
+        self.plc_analog_frame = PLC_AnalogInputView(self, change_process=self.change_analog, state=NORMAL)
         self.io_frame.pack()
+        self.plc_analog_frame.pack()
 
     def ip_selected(self, *args):
         super().ip_selected(*args)
@@ -125,6 +167,10 @@ class IO_App(App):
         self.io_data.input6 = bool(self.io_frame.input6_var.get())
         self.io_data.input7 = bool(self.io_frame.input7_var.get())
         self.io_data.input8 = bool(self.io_frame.input8_var.get())
+
+    def change_analog(self, *args):
+        self.io_data.analog_ch0 = self.plc_analog_frame.analog_ch0_var.get()
+        self.io_data.analog_ch1 = self.plc_analog_frame.analog_ch1_var.get()
 
 
 if __name__ == '__main__':
