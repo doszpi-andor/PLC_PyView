@@ -58,11 +58,11 @@ class App(Tk):
         self.name_label.pack()
         self.indicators.pack(side=RIGHT)
         self.tanks.pack()
+        self.ip_select.pack(side=TOP)
         self.connect_label.pack()
-        self.ip_select.pack()
 
         self.name_frame.pack(side=RIGHT, fill=Y)
-        self.connect_frame.pack(side=LEFT)
+        self.connect_frame.pack(side=LEFT, fill=Y)
         self.tanks_frame.pack()
 
         self.plc_data = Tartaly1_data(self.ip_select.ip_address.get())
