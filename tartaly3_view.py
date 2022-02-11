@@ -31,7 +31,7 @@ class App(Tk):
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
-        self.plc_data = Tartaly3_data()
+        self.plc_data = Tartaly3_data(Tartaly3_Address.DEFAULT_IP)
 
         if system() == 'Windows':
             self.resizable(False, False)
