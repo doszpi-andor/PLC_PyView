@@ -22,8 +22,8 @@ class IO_Address(PLC_Address):
 
 class IO_data(PLC_data):
 
-    def __init__(self):
-        super().__init__(IO_Address())
+    def __init__(self, ip):
+        super().__init__(IO_Address(), ip)
         self.input1 = False
         self.input2 = False
         self.input3 = False
@@ -101,10 +101,14 @@ class IO_App(App):
 
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
-        self.io_data = IO_data()
+        self.io_data = IO_data(self.ip_select.ip_address.get())
 
         self.io_frame = PLC_InputView(self, change_process=self.change_input)
         self.io_frame.pack()
+
+    def ip_selected(self, *args):
+        super().ip_selected(*args)
+        self.io_data.reconnect(self.ip_select.ip_address.get())
 
     def data_transfer(self):
         super().data_transfer()
