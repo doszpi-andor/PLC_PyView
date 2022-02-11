@@ -7,6 +7,7 @@ from szalag1v0_view import App
 
 class IO_Address(PLC_Address):
     IP, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
+    DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
 
     INPUT1 = 'I0.0'
     INPUT2 = 'I0.1'
@@ -37,6 +38,8 @@ class IO_data(PLC_data):
 
         for byte_address in IO_Address.WRITE_BYTES_ADDRESS:
             self.write_byte_data[byte_address] = [False, False, False, False, False, False, False, False]
+
+        print('write PLC')
 
         self.write_byte_data[PLC_Address.byte_address(IO_Address.INPUT1)][
             PLC_Address.bit_index(IO_Address.INPUT1)] = self.input1
@@ -111,6 +114,7 @@ class IO_App(App):
         self.io_data.reconnect(self.ip_select.ip_address.get())
 
     def data_transfer(self):
+        print('transfer')
         super().data_transfer()
         self.io_data.write_data()
 
