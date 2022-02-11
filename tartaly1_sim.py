@@ -19,13 +19,11 @@ class IO_Address(PLC_Address):
 
     WRITE_BYTES_ADDRESS = ('IB0',)
 
-    OUTPUT_DIRECTION = 'write'
     OUTPUT_ADDRESS = ('QB0',)
 
     ANALOG_INPUT_CH0 = 'IW64'
     ANALOG_INPUT_CH1 = 'IW66'
 
-    ANALOG_DIRECTION = 'write'
     WRITE_WORDS_ADDRESS = ('IW64', 'IW66')
 
     ANALOG_CH0_MAX = 27648
@@ -139,8 +137,8 @@ class PLC_AnalogInputView(Frame):
         self.analog_ch1_scale.pack(fill=X)
         Label(self.analog_ch1_frame, text='Channel1 [%s]' % IO_Address.ANALOG_INPUT_CH1).pack()
 
-        self.analog_ch0_frame.pack(side=RIGHT)
-        self.analog_ch1_frame.pack(side=LEFT)
+        self.analog_ch0_frame.pack(side=LEFT)
+        self.analog_ch1_frame.pack(side=RIGHT)
 
 
 class IO_App(App):
@@ -149,7 +147,7 @@ class IO_App(App):
         super().__init__(screenName, baseName, className, useTk, sync, use)
         self.io_data = IO_data(self.ip_select.ip_address.get())
 
-        self.geometry("800x700")
+        self.geometry("800x620")
 
         self.io_frame = PLC_InputView(self, change_process=self.change_input)
         self.plc_analog_frame = PLC_AnalogInputView(self, change_process=self.change_analog, state=NORMAL)
