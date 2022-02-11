@@ -1,4 +1,4 @@
-from tkinter import Frame, IntVar, Checkbutton, Label, Scale, HORIZONTAL, NORMAL, X
+from tkinter import Frame, IntVar, Checkbutton, Label, Scale, HORIZONTAL, NORMAL, X, LEFT, RIGHT
 
 from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
@@ -125,16 +125,22 @@ class PLC_AnalogInputView(Frame):
 
     def __init__(self, master=None, change_process=None, state=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
+        self.analog_ch0_frame = Frame(self)
+        self.analog_ch1_frame = Frame(self)
+
         self.analog_ch0_var = IntVar()
-        self.analog_ch0_scale = Scale(self, variable=self.analog_ch0_var, command=change_process, state=state,
+        self.analog_ch0_scale = Scale(self.analog_ch0_frame, variable=self.analog_ch0_var, command=change_process, state=state,
                                       from_=IO_Address.ANALOG_CH0_MIN, to=IO_Address.ANALOG_CH0_MAX, orient=HORIZONTAL)
         self.analog_ch0_scale.pack(fill=X)
-        Label(self, text='Channel0 [%s]' % IO_Address.ANALOG_INPUT_CH0).pack()
+        Label(self.analog_ch0_frame, text='Channel0 [%s]' % IO_Address.ANALOG_INPUT_CH0).pack(side=LEFT)
         self.analog_ch1_var = IntVar()
-        self.analog_ch1_scale = Scale(self, variable=self.analog_ch1_var, command=change_process, state=state,
+        self.analog_ch1_scale = Scale(self.analog_ch1_frame, variable=self.analog_ch1_var, command=change_process, state=state,
                                       from_=IO_Address.ANALOG_CH1_MIN, to=IO_Address.ANALOG_CH1_MAX, orient=HORIZONTAL)
         self.analog_ch1_scale.pack(fill=X)
-        Label(self, text='Channel1 [%s]' % IO_Address.ANALOG_INPUT_CH1).pack()
+        Label(self.analog_ch1_frame, text='Channel1 [%s]' % IO_Address.ANALOG_INPUT_CH1).pack()
+
+        self.analog_ch0_frame.pack(side=RIGHT)
+        self.analog_ch1_frame.pack(side=LEFT)
 
 
 class IO_App(App):
