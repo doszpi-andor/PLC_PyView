@@ -67,7 +67,7 @@ class App(Tk):
 
         self.plc_data = Tartaly1_data(self.ip_select.ip_address.get())
 
-        self.data_transfer = ThreadLoop(loop=self.__data_transfer)
+        self.data_transfer = ThreadLoop(loop=self.data_transfer)
         self.data_transfer.start()
 
         self.protocol('WM_DELETE_WINDOW', self.close)
@@ -94,7 +94,7 @@ class App(Tk):
         self.data_transfer.join()
         super().destroy()
 
-    def __data_transfer(self):
+    def data_transfer(self):
         self.plc_data.read_data()
 
     def loop(self):
