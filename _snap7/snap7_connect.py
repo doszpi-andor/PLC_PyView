@@ -243,6 +243,9 @@ class PLC_Connect:
 
     def __connect(self):
         if not self.__connected:
+            if self.__ip == '':
+                self.__connected = False
+                raise S7ConnectFailed
             try:
                 self.__plc.connect(self.__ip, self.__rack, self.__slot)
             except Snap7Exception:
