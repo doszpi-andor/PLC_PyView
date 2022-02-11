@@ -34,6 +34,14 @@ class PLC_Connect:
         self.__connected = False
 
     @property
+    def ip(self):
+        return self.__ip
+
+    @ip.setter
+    def ip(self, ip):
+        self.__ip = ip
+
+    @property
     def connected(self) -> bool:
         """
         PLC connected information (getter)
@@ -235,6 +243,9 @@ class PLC_Connect:
 
     def __connect(self):
         if not self.__connected:
+            if self.__ip == '':
+                self.__connected = False
+                raise S7ConnectFailed
             try:
                 self.__plc.connect(self.__ip, self.__rack, self.__slot)
             except Snap7Exception:

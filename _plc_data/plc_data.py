@@ -9,7 +9,8 @@ class PLC_Address:
     :var int SLOT: PLC slot number
     :var list BYTES_ADDRESS: PLC read bytes
     """
-    IP, RACK, SLOT = None, None, None
+    IP_LIST, RACK, SLOT = None, None, None
+    DEFAULT_IP = None
 
     READ_BYTES_ADDRESS = ()
     READ_WORDS_ADDRESS = ()
@@ -47,9 +48,9 @@ class PLC_data:
     write_byte_data = {}
     write_word_data = {}
 
-    def __init__(self, plc_address):
+    def __init__(self, plc_address, ip):
         self.__plc_address = plc_address
-        self.__plc_connect = PLC_Connect(plc_address.IP, plc_address.RACK, plc_address.SLOT)
+        self.__plc_connect = PLC_Connect(ip, plc_address.RACK, plc_address.SLOT)
 
     @property
     def connected(self) -> bool:
@@ -58,6 +59,10 @@ class PLC_data:
         :return: PLC Snap7 connected state
         """
         return self.__plc_connect.connected
+
+    def reconnect(self, ip):
+        self.__plc_connect.disconnect()
+        self.__plc_connect.ip = ip
 
     def disconnect(self) -> None:
         """
