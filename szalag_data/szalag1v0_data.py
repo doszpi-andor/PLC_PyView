@@ -15,10 +15,10 @@ class Szalag1v0_Address(PLC_Address):
     M1 = 'Q0.0'
     M2 = 'Q0.1'
     UZEM = 'Q0.5'
-    HIBA1 = 'Q4.0'
-    HIBA2 = 'Q4.1'
+    HIBA1 = 'Q0.6'
+    HIBA2 = 'Q0.7'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0')
 
 
 # noinspection SpellCheckingInspection

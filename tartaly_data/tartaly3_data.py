@@ -22,10 +22,10 @@ class Tartaly3_Address(PLC_Address):
     T2_TOLT = 'Q0.1'
     T3_TOLT = 'Q0.2'
 
-    BEKAPCSOLVA = 'Q4.0'
-    KIKAPCSOLVA = 'Q4.1'
+    BEKAPCSOLVA = 'Q0.6'
+    KIKAPCSOLVA = 'Q0.7'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0')
 
 
 # noinspection SpellCheckingInspection
