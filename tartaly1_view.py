@@ -1,6 +1,7 @@
 from platform import system
 from tkinter import Frame, W, Tk, Label, Button, RIGHT, Y, Toplevel, LEFT, TOP
 
+from _plc_data.plc_ip_select import SelectIP
 from tartaly_data.tartaly1_data import Tartaly1_data, Tartaly1_Address
 from tartaly_data.tartaly1_draw import Tartaly1_View
 from _threading.thread_loop import ThreadLoop
@@ -25,7 +26,6 @@ class App(Tk):
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
-        self.plc_data = Tartaly1_data(Tartaly1_Address.DEFAULT_IP)
 
         if system() == 'Windows':
             self.resizable(False, False)
@@ -49,20 +49,31 @@ class App(Tk):
         self.tanks = Tartaly1_View(self.tanks_frame)
         self.connect_label = Label(self.connect_frame, text='--', wraplength=1)
 
+        self.ip_select = SelectIP(self.connect_frame,
+                                  default_ip=Tartaly1_Address.DEFAULT_IP,
+                                  ip_list=Tartaly1_Address.IP_LIST,
+                                  change_process=self.ip_selected)
+
         self.close_button.pack(side=TOP)
         self.name_label.pack()
         self.indicators.pack(side=RIGHT)
         self.tanks.pack()
         self.connect_label.pack()
+        self.ip_select.pack()
 
         self.name_frame.pack(side=RIGHT, fill=Y)
         self.connect_frame.pack(side=LEFT)
         self.tanks_frame.pack()
 
+        self.plc_data = Tartaly1_data(self.ip_select.ip_address.get())
+
         self.data_transfer = ThreadLoop(loop=self.__data_transfer)
         self.data_transfer.start()
 
         self.protocol('WM_DELETE_WINDOW', self.close)
+
+    def ip_selected(self, *args):
+        self.plc_data.reconnect(self.ip_select.ip_address.get())
 
     def close(self):
         toplevel = Toplevel(self, bg='red')
