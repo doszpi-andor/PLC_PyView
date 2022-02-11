@@ -4,7 +4,8 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection SpellCheckingInspection
 class Szalag1v0_Address(PLC_Address):
-    IP, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
+    IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
+    DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
 
     S1 = 'I0.0'
     S2 = 'I0.1'
@@ -14,10 +15,10 @@ class Szalag1v0_Address(PLC_Address):
     M1 = 'Q0.0'
     M2 = 'Q0.1'
     UZEM = 'Q0.5'
-    HIBA1 = 'Q0.6'
-    HIBA2 = 'Q0.7'
+    HIBA1 = 'Q4.0'
+    HIBA2 = 'Q4.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
 
 # noinspection SpellCheckingInspection
@@ -34,8 +35,8 @@ class Szalag1v0_data(PLC_data):
     __hiba1_old = False
     __hiba2_old = False
 
-    def __init__(self) -> None:
-        super().__init__(Szalag1v0_Address())
+    def __init__(self, ip) -> None:
+        super().__init__(Szalag1v0_Address(), ip)
         self.s1 = False
         self.s2 = False
         self.nyugta = False

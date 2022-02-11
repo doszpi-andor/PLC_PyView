@@ -51,8 +51,8 @@ class Tartaly1_data(PLC_data):
     __t1_homerseklet_old = 0
     __t3_szint_old = 0
 
-    def __init__(self):
-        super().__init__(Tartaly1_Address())
+    def __init__(self, ip):
+        super().__init__(Tartaly1_Address(), ip)
         self.__t1_teli = False
         self.__t2_teli = False
         self.__start = False
