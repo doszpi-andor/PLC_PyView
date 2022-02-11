@@ -1,0 +1,12 @@
+<plc_config>
+    <ip_list>
+        <ip>172.16.66.1</ip>
+        <ip>172.16.66.2</ip>
+        <ip>172.16.66.3</ip>
+        <ip>172.16.66.4</ip>
+        <ip>172.16.66.5</ip>
+        <ip>172.16.66.6</ip>
+    </ip_list>
+    <rack>0</rack>
+    <slot>1</slot>
+</plc_config>
