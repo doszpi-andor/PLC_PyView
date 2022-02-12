@@ -1,5 +1,5 @@
 from platform import system
-from tkinter import Frame, Tk, Label, W, Button, RIGHT, X, LEFT, BOTTOM, Y, Toplevel, StringVar, OptionMenu
+from tkinter import Frame, Tk, Label, W, Button, RIGHT, X, LEFT, BOTTOM, Y, Toplevel
 
 from _plc_data.plc_ip_select import SelectIP
 from _threading.thread_loop import ThreadLoop

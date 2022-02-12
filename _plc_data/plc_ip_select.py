@@ -8,6 +8,7 @@ class SelectIP(Frame):
     :param list ip_list: ip address list
     :param function change_process: ip selected event
     """
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, default_ip='172.0.0.1', ip_list=None, change_process=None, cnf={}, **kw) -> None:
         super().__init__(master, cnf, **kw)
 

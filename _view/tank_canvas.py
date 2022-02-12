@@ -1,4 +1,4 @@
-from tkinter import Canvas, Tk, ARC, W, CHORD, CENTER, S, N
+from tkinter import Canvas, ARC, W, CHORD, CENTER, S, N
 
 
 class TankCanvas(Canvas):
