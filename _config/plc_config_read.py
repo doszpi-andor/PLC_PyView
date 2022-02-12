@@ -97,7 +97,11 @@ class PLC_Config:
         if root.tag == 'default' and root[0].tag == 'ip':
             ip = root[0].text
             split_ip = [int(x) for x in ip.split('.')]
-            if len(split_ip) == 4 and 0 <= split_ip[0] <= 255 and 0 <= split_ip[1] <= 255 and 0 <= split_ip[2] <= 255 and 0 <= split_ip[3] <= 255:
+            if len(split_ip) == 4 and\
+                    0 <= split_ip[0] <= 255 and\
+                    0 <= split_ip[1] <= 255 and\
+                    0 <= split_ip[2] <= 255 and\
+                    0 <= split_ip[3] <= 255:
                 return ip
 
         raise PLC_ConfigXML_Exception
@@ -106,4 +110,3 @@ class PLC_Config:
 if __name__ == '__main__':
     print(PLC_Config.read_plc_config('config.xml'))
     print(PLC_Config.read_plc_default_ip('default.xml'))
-

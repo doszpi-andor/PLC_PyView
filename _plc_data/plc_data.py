@@ -43,6 +43,7 @@ class PLC_Address:
 
 class PLC_data:
     """
+    PLC data
     :param PLC_Address plc_address: PLC Address class
     :param str ip:  PLC ip address
     :var dict read_byte_data: read PLC data bytes

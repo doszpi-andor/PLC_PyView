@@ -82,6 +82,7 @@ class IO_data(PLC_data):
 
 class PLC_InputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         Label(self, text='Input').grid(row=1, column=1, columnspan=8)
@@ -121,18 +122,21 @@ class PLC_InputView(Frame):
 
 class PLC_AnalogInputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         self.analog_ch0_frame = Frame(self)
         self.analog_ch1_frame = Frame(self)
 
         self.analog_ch0_var = IntVar()
-        self.analog_ch0_scale = Scale(self.analog_ch0_frame, variable=self.analog_ch0_var, command=change_process, state=state,
+        self.analog_ch0_scale = Scale(self.analog_ch0_frame,
+                                      variable=self.analog_ch0_var, command=change_process, state=state,
                                       from_=IO_Address.ANALOG_CH0_MIN, to=IO_Address.ANALOG_CH0_MAX, orient=HORIZONTAL)
         self.analog_ch0_scale.pack(fill=X)
         Label(self.analog_ch0_frame, text='Channel0 [%s]' % IO_Address.ANALOG_INPUT_CH0).pack(side=LEFT)
         self.analog_ch1_var = IntVar()
-        self.analog_ch1_scale = Scale(self.analog_ch1_frame, variable=self.analog_ch1_var, command=change_process, state=state,
+        self.analog_ch1_scale = Scale(self.analog_ch1_frame,
+                                      variable=self.analog_ch1_var, command=change_process, state=state,
                                       from_=IO_Address.ANALOG_CH1_MIN, to=IO_Address.ANALOG_CH1_MAX, orient=HORIZONTAL)
         self.analog_ch1_scale.pack(fill=X)
         Label(self.analog_ch1_frame, text='Channel1 [%s]' % IO_Address.ANALOG_INPUT_CH1).pack()
@@ -143,6 +147,7 @@ class PLC_AnalogInputView(Frame):
 
 class IO_App(App):
 
+    # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
         self.io_data = IO_data(self.ip_select.ip_address.get())
@@ -172,6 +177,7 @@ class IO_App(App):
         self.io_data.input7 = bool(self.io_frame.input7_var.get())
         self.io_data.input8 = bool(self.io_frame.input8_var.get())
 
+    # noinspection PyUnusedLocal
     def change_analog(self, *args):
         self.io_data.analog_ch0 = self.plc_analog_frame.analog_ch0_var.get()
         self.io_data.analog_ch1 = self.plc_analog_frame.analog_ch1_var.get()

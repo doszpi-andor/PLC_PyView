@@ -63,6 +63,7 @@ class IO_data(PLC_data):
 
 class PLC_InputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         Label(self, text='Input').grid(row=1, column=1, columnspan=8)
@@ -102,6 +103,7 @@ class PLC_InputView(Frame):
 
 class IO_App(App):
 
+    # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
         self.io_data = IO_data(self.ip_select.ip_address.get())

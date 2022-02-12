@@ -108,6 +108,7 @@ class App(Tk):
 
         self.protocol('WM_DELETE_WINDOW', self.close)
 
+    # noinspection PyUnusedLocal
     def ip_selected(self, *args):
         self.plc_data.reconnect(self.ip_select.ip_address.get())
 
