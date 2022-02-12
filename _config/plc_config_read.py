@@ -1,19 +1,36 @@
 """
 PLC config read
 
-File format (xml):
+config.xml file format:
     <plc_config>
-        <ip>[PLC ip address (str)]</ip>
+         <ip_list>
+            <ip>[PLC ip address 1 (str)]</ip>
+            <ip>[PLC ip address 2 (str)]</ip>
+            ...
+            <ip>[PLC ip address n (str)]</ip>
+        </ip_list>
         <rack>[PLC rack id (int)]</rack>
         <slot>[PLC slot id (int)]</slot>
     </plc_config>
 
-Example:
+default.xml file format:
+    <default>
+        <ip>[PLC ip address (str)]</ip>
+    </default>
+
+config.xml example:
     <plc_config>
-        <ip>127.0.0.1</ip>
+        <ip>192.168.0.1</ip>
+        <ip>192.168.0.2</ip>
+        <ip>192.168.0.3</ip>
         <rack>0</rack>
         <slot>1</slot>
     </plc_config>
+
+default.xml example:
+    <default>
+        <ip>127.0.0.1</ip>
+    </default>
 """
 
 from xml.etree.ElementTree import parse
@@ -66,7 +83,12 @@ class PLC_Config:
         raise PLC_ConfigXML_Exception
 
     @staticmethod
-    def read_plc_default_ip(filename):
+    def read_plc_default_ip(filename) -> str:
+        """
+        PLC default ip read
+        :param str filename: file name string
+        :return: return PLC ip [str]
+        """
         try:
             root = parse(filename).getroot()
         except FileNotFoundError:
