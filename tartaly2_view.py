@@ -103,10 +103,204 @@ class App(Tk):
         else:
             self.connect_label.configure(text='PLC-not-connected', fg='red')
 
+        if self.plc_data.start_is_changed():
+            self.start_refresh()
+
+        if self.plc_data.stop_is_changed():
+            self.stop_refresh()
+
+        if self.plc_data.t1_tolt_is_changed() or\
+                self.plc_data.t1_urit_is_changed() or\
+                self.plc_data.t1_fut_is_changed():
+            self.tank1_refresh()
+
+        if self.plc_data.t1_teli_is_changed() or\
+                self.plc_data.t1_meleg_is_changed() or\
+                self.plc_data.t1_hideg_is_changed():
+            self.tank1_sensor_refresh()
+
+        if self.plc_data.t2_adalek_is_changed() or self.plc_data.t2_urit_is_changed():
+            self.tank2_refresh()
+
+        if self.plc_data.t2_szint_is_changed(threshold=1000):
+            self.tank2_level_refresh()
+
+        if self.plc_data.t3_tolt_is_changed() or \
+                self.plc_data.t3_urit_is_changed() or \
+                self.plc_data.t3_fut_is_changed():
+            self.tank3_refresh()
+
+        if self.plc_data.t3_teli_is_changed() or \
+                self.plc_data.t3_meleg_is_changed() or \
+                self.plc_data.t3_hideg_is_changed():
+            self.tank3_sensor_refresh()
+
+        if self.plc_data.t4_adalek_is_changed() or self.plc_data.t2_urit_is_changed():
+            self.tank4_refresh()
+
+        if self.plc_data.t4_szint_is_changed(threshold=1000):
+            self.tank4_level_refresh()
+
         if self.__closed and not self.data_transfer.is_alive():
             self.destroy()
 
         self.after(100, self.loop)
+
+    def start_refresh(self):
+        if self.plc_data.start:
+            self.indicators.start.change_color('green')
+        else:
+            self.indicators.start.change_color('gray')
+
+    def stop_refresh(self):
+        if self.plc_data.stop:
+            self.indicators.stop.change_color('red')
+        else:
+            self.indicators.stop.change_color('gray')
+
+    def tank1_refresh(self):
+
+        # 1 1 1
+        if self.plc_data.t1_tolt and self.plc_data.t1_urit and self.plc_data.t1_fut:
+            pass
+        # 0 1 1
+        elif not self.plc_data.t1_tolt and self.plc_data.t1_urit and self.plc_data.t1_fut:
+            pass
+        # 1 0 1
+        elif self.plc_data.t1_tolt and not self.plc_data.t1_urit and self.plc_data.t1_fut:
+            pass
+        # 0 0 1
+        elif not self.plc_data.t1_tolt and not self.plc_data.t1_urit and self.plc_data.t1_fut:
+            pass
+        # 1 1 0
+        elif self.plc_data.t1_tolt and self.plc_data.t1_urit and not self.plc_data.t1_fut:
+            pass
+        # 0 1 0
+        elif not self.plc_data.t1_tolt and self.plc_data.t1_urit and not self.plc_data.t1_fut:
+            pass
+        # 1 0 0
+        elif self.plc_data.t1_tolt and not self.plc_data.t1_urit and not self.plc_data.t1_fut:
+            pass
+        # 0 0 0
+        else:
+            pass
+
+    def tank1_sensor_refresh(self):
+
+        # 1 1 1
+        if self.plc_data.t1_teli and self.plc_data.t1_meleg and self.plc_data.t1_hideg:
+            pass
+        # 0 1 1
+        elif not self.plc_data.t1_teli and self.plc_data.t1_meleg and self.plc_data.t1_hideg:
+            pass
+        # 1 0 1
+        elif self.plc_data.t1_teli and not self.plc_data.t1_meleg and self.plc_data.t1_hideg:
+            pass
+        # 0 0 1
+        elif not self.plc_data.t1_teli and not self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
+            pass
+        # 1 1 0
+        elif self.plc_data.t1_teli and self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
+            pass
+        # 0 1 0
+        elif not self.plc_data.t1_teli and self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
+            pass
+        # 1 0 0
+        elif self.plc_data.t1_teli and not self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
+            pass
+        # 0 0 0
+        else:
+            pass
+
+    def tank2_refresh(self):
+
+        # 1 1
+        if self.plc_data.t2_adalek and self.plc_data.t2_urit:
+            pass
+        # 0 1
+        elif not self.plc_data.t2_adalek and self.plc_data.t2_urit:
+            pass
+        # 1 0
+        elif self.plc_data.t2_adalek and not self.plc_data.t2_urit:
+            pass
+        # 0 0
+        else:
+            pass
+
+    def tank2_level_refresh(self):
+        pass
+
+    def tank3_refresh(self):
+
+        # 1 1 1
+        if self.plc_data.t3_tolt and self.plc_data.t3_urit and self.plc_data.t3_fut:
+            pass
+        # 0 1 1
+        elif not self.plc_data.t3_tolt and self.plc_data.t3_urit and self.plc_data.t3_fut:
+            pass
+        # 1 0 1
+        elif self.plc_data.t3_tolt and not self.plc_data.t3_urit and self.plc_data.t3_fut:
+            pass
+        # 0 0 1
+        elif not self.plc_data.t3_tolt and not self.plc_data.t3_urit and self.plc_data.t3_fut:
+            pass
+        # 1 1 0
+        elif self.plc_data.t3_tolt and self.plc_data.t3_urit and not self.plc_data.t3_fut:
+            pass
+        # 0 1 0
+        elif not self.plc_data.t3_tolt and self.plc_data.t3_urit and not self.plc_data.t3_fut:
+            pass
+        # 1 0 0
+        elif self.plc_data.t3_tolt and not self.plc_data.t3_urit and not self.plc_data.t3_fut:
+            pass
+        # 0 0 0
+        else:
+            pass
+
+    def tank3_sensor_refresh(self):
+
+        # 1 1 1
+        if self.plc_data.t3_teli and self.plc_data.t3_meleg and self.plc_data.t3_hideg:
+            pass
+        # 0 1 1
+        elif not self.plc_data.t3_teli and self.plc_data.t3_meleg and self.plc_data.t3_hideg:
+            pass
+        # 1 0 1
+        elif self.plc_data.t3_teli and not self.plc_data.t3_meleg and self.plc_data.t3_hideg:
+            pass
+        # 0 0 1
+        elif not self.plc_data.t3_teli and not self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
+            pass
+        # 1 1 0
+        elif self.plc_data.t3_teli and self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
+            pass
+        # 0 1 0
+        elif not self.plc_data.t3_teli and self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
+            pass
+        # 1 0 0
+        elif self.plc_data.t3_teli and not self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
+            pass
+        # 0 0 0
+        else:
+            pass
+
+    def tank4_refresh(self):
+
+        # 1 1
+        if self.plc_data.t4_adalek and self.plc_data.t4_urit:
+            pass
+        # 0 1
+        elif not self.plc_data.t4_adalek and self.plc_data.t4_urit:
+            pass
+        # 1 0
+        elif self.plc_data.t4_adalek and not self.plc_data.t4_urit:
+            pass
+        # 0 0
+        else:
+            pass
+
+    def tank4_level_refresh(self):
+        pass
 
 
 if __name__ == '__main__':
