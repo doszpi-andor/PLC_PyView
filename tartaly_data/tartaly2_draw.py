@@ -66,6 +66,9 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     FULL_WIDTH = T4_ADDITIVE_VALVE_X_POSITION + 200
     FULL_HEIGHT = T2_TANK_Y_POSITION + TANK_HEIGHT + VALVE_HEIGHT + 80
 
+    __tank2_analog_id = None
+    __tank4_analog_id = None
+
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
 
@@ -253,7 +256,8 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.create_tank(x_position=self.T2_TANK_X_POSITION,
                          y_position=self.T2_TANK_Y_POSITION,
                          tank_name='T2', tank_color='gray')
-        self.__tank3_analog_id = self.create_analog(x_position=self.T2_TANK_X_POSITION,
+        self.delete(self.__tank2_analog_id)
+        self.__tank2_analog_id = self.create_analog(x_position=self.T2_TANK_X_POSITION,
                                                     y_position=self.T2_LEVEL_SENSOR_Y_POSITION,
                                                     height=self.TANK_HEIGHT * 6 // 8, marks_position=(20, 60, 80),
                                                     line_length=self.TANK_WIDTH + 10,
@@ -295,7 +299,8 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.create_tank(x_position=self.T4_TANK_X_POSITION,
                          y_position=self.T4_TANK_Y_POSITION,
                          tank_name='T4', tank_color='gray')
-        self.__tank3_analog_id = self.create_analog(x_position=self.T4_TANK_X_POSITION,
+        self.delete(self.__tank4_analog_id)
+        self.__tank4_analog_id = self.create_analog(x_position=self.T4_TANK_X_POSITION,
                                                     y_position=self.T4_LEVEL_SENSOR_Y_POSITION,
                                                     height=self.TANK_HEIGHT * 6 // 8, marks_position=(20, 60, 80),
                                                     line_length=self.TANK_WIDTH + 10,
