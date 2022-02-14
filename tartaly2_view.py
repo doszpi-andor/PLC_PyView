@@ -136,7 +136,7 @@ class App(Tk):
                 self.plc_data.t3_hideg_is_changed():
             self.tank3_sensor_refresh()
 
-        if self.plc_data.t4_adalek_is_changed() or self.plc_data.t2_urit_is_changed():
+        if self.plc_data.t4_adalek_is_changed() or self.plc_data.t4_urit_is_changed():
             self.tank4_refresh()
 
         if self.plc_data.t4_szint_is_changed(threshold=1000):
@@ -286,7 +286,7 @@ class App(Tk):
             self.tanks.tank3_change_sensor_color(sensor_color='gray', hot_sensor_color='gray', clod_sensor_color='gray')
 
     def tank4_refresh(self):
-
+        
         # 1 1
         if self.plc_data.t4_adalek and self.plc_data.t4_urit:
             self.tanks.tank4_change_color(add_valve_color='blue', bottom_valve_color='blue')
