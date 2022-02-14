@@ -107,7 +107,7 @@ class Tartaly2_data(PLC_data):
 
     @property
     def t3_meleg(self):
-        return self.__t1_meleg
+        return self.__t3_meleg
 
     @property
     def t3_hideg(self):
@@ -139,11 +139,11 @@ class Tartaly2_data(PLC_data):
 
     @property
     def t3_fut(self):
-        return self.__t1_fut
+        return self.__t3_fut
 
     @property
     def t3_urit(self):
-        return self.__t1_urit
+        return self.__t3_urit
 
     @property
     def t2_adalek(self):

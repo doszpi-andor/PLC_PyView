@@ -162,145 +162,145 @@ class App(Tk):
 
         # 1 1 1
         if self.plc_data.t1_tolt and self.plc_data.t1_urit and self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='blue', bottom_valve_color='blue', heating_color='red')
         # 0 1 1
         elif not self.plc_data.t1_tolt and self.plc_data.t1_urit and self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='gray', bottom_valve_color='blue', heating_color='red')
         # 1 0 1
         elif self.plc_data.t1_tolt and not self.plc_data.t1_urit and self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='blue', bottom_valve_color='gray', heating_color='red')
         # 0 0 1
         elif not self.plc_data.t1_tolt and not self.plc_data.t1_urit and self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='gray', bottom_valve_color='gray', heating_color='red')
         # 1 1 0
         elif self.plc_data.t1_tolt and self.plc_data.t1_urit and not self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='blue', bottom_valve_color='blue', heating_color='black')
         # 0 1 0
         elif not self.plc_data.t1_tolt and self.plc_data.t1_urit and not self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='gray', bottom_valve_color='blue', heating_color='black')
         # 1 0 0
         elif self.plc_data.t1_tolt and not self.plc_data.t1_urit and not self.plc_data.t1_fut:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='blue', bottom_valve_color='gray', heating_color='black')
         # 0 0 0
         else:
-            pass
+            self.tanks.tank1_change_color(top_valve_color='gray', bottom_valve_color='gray', heating_color='black')
 
     def tank1_sensor_refresh(self):
 
         # 1 1 1
         if self.plc_data.t1_teli and self.plc_data.t1_meleg and self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='red', hot_sensor_color='red', clod_sensor_color='red')
         # 0 1 1
         elif not self.plc_data.t1_teli and self.plc_data.t1_meleg and self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='gray', hot_sensor_color='red', clod_sensor_color='red')
         # 1 0 1
         elif self.plc_data.t1_teli and not self.plc_data.t1_meleg and self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='red', hot_sensor_color='gray', clod_sensor_color='red')
         # 0 0 1
-        elif not self.plc_data.t1_teli and not self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
-            pass
+        elif not self.plc_data.t1_teli and not self.plc_data.t1_meleg and self.plc_data.t1_hideg:
+            self.tanks.tank1_change_sensor_color(sensor_color='gray', hot_sensor_color='gray', clod_sensor_color='red')
         # 1 1 0
         elif self.plc_data.t1_teli and self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='red', hot_sensor_color='red', clod_sensor_color='gray')
         # 0 1 0
         elif not self.plc_data.t1_teli and self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='gray', hot_sensor_color='red', clod_sensor_color='gray')
         # 1 0 0
         elif self.plc_data.t1_teli and not self.plc_data.t1_meleg and not self.plc_data.t1_hideg:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='red', hot_sensor_color='gray', clod_sensor_color='gray')
         # 0 0 0
         else:
-            pass
+            self.tanks.tank1_change_sensor_color(sensor_color='gray', hot_sensor_color='gray', clod_sensor_color='gray')
 
     def tank2_refresh(self):
 
         # 1 1
         if self.plc_data.t2_adalek and self.plc_data.t2_urit:
-            pass
+            self.tanks.tank2_change_color(add_valve_color='blue', bottom_valve_color='blue')
         # 0 1
         elif not self.plc_data.t2_adalek and self.plc_data.t2_urit:
-            pass
+            self.tanks.tank2_change_color(add_valve_color='gray', bottom_valve_color='blue')
         # 1 0
         elif self.plc_data.t2_adalek and not self.plc_data.t2_urit:
-            pass
+            self.tanks.tank2_change_color(add_valve_color='blue', bottom_valve_color='gray')
         # 0 0
         else:
-            pass
+            self.tanks.tank2_change_color(add_valve_color='gray', bottom_valve_color='gray')
 
     def tank2_level_refresh(self):
-        pass
+        self.tanks.tank2_change_level(level_percent=self.plc_data.t2_szint_percent)
 
     def tank3_refresh(self):
 
         # 1 1 1
         if self.plc_data.t3_tolt and self.plc_data.t3_urit and self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='blue', bottom_valve_color='blue', heating_color='red')
         # 0 1 1
         elif not self.plc_data.t3_tolt and self.plc_data.t3_urit and self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='gray', bottom_valve_color='blue', heating_color='red')
         # 1 0 1
         elif self.plc_data.t3_tolt and not self.plc_data.t3_urit and self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='blue', bottom_valve_color='gray', heating_color='red')
         # 0 0 1
         elif not self.plc_data.t3_tolt and not self.plc_data.t3_urit and self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='gray', bottom_valve_color='gray', heating_color='red')
         # 1 1 0
         elif self.plc_data.t3_tolt and self.plc_data.t3_urit and not self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='blue', bottom_valve_color='blue', heating_color='black')
         # 0 1 0
         elif not self.plc_data.t3_tolt and self.plc_data.t3_urit and not self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='gray', bottom_valve_color='blue', heating_color='black')
         # 1 0 0
         elif self.plc_data.t3_tolt and not self.plc_data.t3_urit and not self.plc_data.t3_fut:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='blue', bottom_valve_color='gray', heating_color='black')
         # 0 0 0
         else:
-            pass
+            self.tanks.tank3_change_color(top_valve_color='gray', bottom_valve_color='gray', heating_color='black')
 
     def tank3_sensor_refresh(self):
 
         # 1 1 1
         if self.plc_data.t3_teli and self.plc_data.t3_meleg and self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='red', hot_sensor_color='red', clod_sensor_color='red')
         # 0 1 1
         elif not self.plc_data.t3_teli and self.plc_data.t3_meleg and self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='gray', hot_sensor_color='red', clod_sensor_color='red')
         # 1 0 1
         elif self.plc_data.t3_teli and not self.plc_data.t3_meleg and self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='red', hot_sensor_color='gray', clod_sensor_color='red')
         # 0 0 1
-        elif not self.plc_data.t3_teli and not self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
-            pass
+        elif not self.plc_data.t3_teli and not self.plc_data.t3_meleg and self.plc_data.t3_hideg:
+            self.tanks.tank3_change_sensor_color(sensor_color='gray', hot_sensor_color='gray', clod_sensor_color='red')
         # 1 1 0
         elif self.plc_data.t3_teli and self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='red', hot_sensor_color='red', clod_sensor_color='gray')
         # 0 1 0
         elif not self.plc_data.t3_teli and self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='gray', hot_sensor_color='red', clod_sensor_color='gray')
         # 1 0 0
         elif self.plc_data.t3_teli and not self.plc_data.t3_meleg and not self.plc_data.t3_hideg:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='red', hot_sensor_color='gray', clod_sensor_color='gray')
         # 0 0 0
         else:
-            pass
+            self.tanks.tank3_change_sensor_color(sensor_color='gray', hot_sensor_color='gray', clod_sensor_color='gray')
 
     def tank4_refresh(self):
 
         # 1 1
         if self.plc_data.t4_adalek and self.plc_data.t4_urit:
-            pass
+            self.tanks.tank4_change_color(add_valve_color='blue', bottom_valve_color='blue')
         # 0 1
         elif not self.plc_data.t4_adalek and self.plc_data.t4_urit:
-            pass
+            self.tanks.tank4_change_color(add_valve_color='gray', bottom_valve_color='blue')
         # 1 0
         elif self.plc_data.t4_adalek and not self.plc_data.t4_urit:
-            pass
+            self.tanks.tank4_change_color(add_valve_color='blue', bottom_valve_color='grey')
         # 0 0
         else:
-            pass
+            self.tanks.tank4_change_color(add_valve_color='gray', bottom_valve_color='gray')
 
     def tank4_level_refresh(self):
-        pass
+        self.tanks.tank4_change_level(level_percent=self.plc_data.t4_szint_percent)
 
 
 if __name__ == '__main__':
