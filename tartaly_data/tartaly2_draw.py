@@ -3,7 +3,7 @@ from tkinter import Tk
 from _view.tank_canvas import TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, PipeCanvas
 
 
-class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, PipeCanvas):
+class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, PipeCanvas):
     TANK_WIDTH = 55
     TANK_HEIGHT = 120
     VALVE_WIDTH = 15
