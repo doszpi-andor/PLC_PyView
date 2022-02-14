@@ -42,7 +42,7 @@ class App(Tk):
         self.connect_frame = Frame(self)
 
         # noinspection SpellCheckingInspection
-        self.name_label = Label(self.name_frame, text='Tartály-1', font=("Arial", 25), wraplength=1)
+        self.name_label = Label(self.name_frame, text='Tartály-2', font=("Arial", 25), wraplength=1)
         # noinspection SpellCheckingInspection
         self.close_button = Button(self.name_frame, text='Bezárás', command=self.close)
         self.indicators = Indicators(self.tanks_frame)
