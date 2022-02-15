@@ -4,8 +4,6 @@ from _snap7.snap7_connect import PLC_Connect, S7ConnectFailed
 class PLC_Address:
     """
     PLC Address
-    :var str IP_LIST: PLC ipv4 address list (string)
-    :var str DEFAULT_IP: PLC default ipv4 address (string)
     :var int RACK: PLC rack number
     :var int SLOT: PLC slot number
     :var list READ_BYTES_ADDRESS: PLC read bytes
@@ -13,8 +11,6 @@ class PLC_Address:
     :var list WRITE_BYTES_ADDRESS: PLC write bytes
     :var list WRITE_WORDS_ADDRESS: PLC write words
     """
-    IP_LIST, RACK, SLOT = None, None, None
-    DEFAULT_IP = None
 
     READ_BYTES_ADDRESS = ()
     READ_WORDS_ADDRESS = ()
