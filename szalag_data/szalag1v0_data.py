@@ -35,8 +35,8 @@ class Szalag1v0_data(PLC_data):
     __hiba1_old = False
     __hiba2_old = False
 
-    def __init__(self, ip) -> None:
-        super().__init__(Szalag1v0_Address(), ip)
+    def __init__(self, ip, rack, slot) -> None:
+        super().__init__(Szalag1v0_Address(), ip, rack, slot)
         self.s1 = False
         self.s2 = False
         self.nyugta = False
