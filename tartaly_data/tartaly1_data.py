@@ -5,8 +5,8 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection SpellCheckingInspection
 class Tartaly1_Address(PLC_Address):
-    IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
-    DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
+    # IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
+    # DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
 
     T1_TELI = 'I0.0'
     T2_TELI = 'I0.3'
@@ -51,8 +51,8 @@ class Tartaly1_data(PLC_data):
     __t1_homerseklet_old = 0
     __t3_szint_old = 0
 
-    def __init__(self, ip):
-        super().__init__(Tartaly1_Address(), ip)
+    def __init__(self, ip, rack, slot):
+        super().__init__(Tartaly1_Address(), ip, rack, slot)
         self.__t1_teli = False
         self.__t2_teli = False
         self.__start = False
