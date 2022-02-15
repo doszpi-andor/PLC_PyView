@@ -1,11 +1,8 @@
-from platform import system
-from tkinter import Frame, W, Tk, Label, Button, RIGHT, Y, Toplevel, LEFT, TOP
+from tkinter import Frame, W, RIGHT, Y, LEFT, TOP
 
-from _config.plc_config_read import PLC_Config
-from _plc_data.plc_ip_select import SelectIP
+from _view.plc_view import PLC_View
 from tartaly_data.tartaly1_data import Tartaly1_data, Tartaly1_Address
 from tartaly_data.tartaly1_draw import Tartaly1_View
-from _threading.thread_loop import ThreadLoop
 from _view.indicator_view import IndicatorSquare
 
 
@@ -21,92 +18,30 @@ class Indicators(Frame):
         self.stop.grid(row=2, column=1, sticky=W)
 
 
-class App(Tk):
+class App(PLC_View):
     __closed = False
 
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
-        self.plc_ip_list, self.plc_rack, self.plc_slot = PLC_Config.read_plc_config('_config/config.xml')
-        self.plc_default_ip = PLC_Config.read_plc_default_ip('_config/default.xml')
+        self.title('Tartaly 1')
+        self.name_label.config(text='Tartály-1', wraplength=1)
+        self.connect_label.config(wraplength=1)
 
-        if system() == 'Windows':
-            self.resizable(False, False)
-            self.geometry("800x480")
-        else:
-            # noinspection SpellCheckingInspection
-            self.attributes("-fullscreen", True)
-
-        # noinspection SpellCheckingInspection
-        self.title('Tartály 1')
-
-        self.name_frame = Frame(self)
-        self.indicator_frame = Frame(self)
-        self.tanks_frame = Frame(self)
-        self.connect_frame = Frame(self)
-
-        # noinspection SpellCheckingInspection
-        self.name_label = Label(self.name_frame, text='Tartály-1', font=("Arial", 25), wraplength=1)
-        # noinspection SpellCheckingInspection
-        self.close_button = Button(self.name_frame, text='Bezárás', command=self.close)
-        self.indicators = Indicators(self.tanks_frame)
-        self.tanks = Tartaly1_View(self.tanks_frame)
-        self.connect_label = Label(self.connect_frame, text='--', wraplength=1)
-
-        self.ip_select = SelectIP(self.connect_frame,
-                                  default_ip=self.plc_default_ip,
-                                  ip_list=self.plc_ip_list,
-                                  change_process=self.ip_selected)
+        self.indicators = Indicators(self.process_frame)
+        self.tanks = Tartaly1_View(self.process_frame)
 
         self.close_button.pack(side=TOP)
-        self.name_label.pack()
         self.indicators.pack(side=RIGHT)
         self.tanks.pack()
-        self.ip_select.pack(side=TOP)
-        self.connect_label.pack()
 
         self.name_frame.pack(side=RIGHT, fill=Y)
         self.connect_frame.pack(side=LEFT, fill=Y)
-        self.tanks_frame.pack()
 
         self.plc_data = Tartaly1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
-        self.data_transfer = ThreadLoop(loop=self.data_transfer)
-        self.data_transfer.start()
-
-        self.protocol('WM_DELETE_WINDOW', self.close)
-
-    def ip_selected(self, *args):
-        self.plc_data.reconnect(self.ip_select.ip_address.get())
-
-    def close(self):
-        toplevel = Toplevel(self, bg='red')
-        Label(toplevel, text='Close connection!').pack(padx=10, pady=10)
-        toplevel.overrideredirect(True)
-        toplevel_width = 140
-        toplevel_height = 40
-        toplevel.geometry('%sx%s+%s+%s' % (toplevel_width,
-                                           toplevel_height,
-                                           (self.winfo_rootx() + self.winfo_width() // 2) - toplevel_width // 2,
-                                           (self.winfo_y() + self.winfo_height() // 2) - toplevel_height // 2))
-        toplevel.grab_set()
-        self.data_transfer.stop()
-        self.__closed = True
-
-    def destroy(self):
-        self.data_transfer.stop()
-        self.data_transfer.join()
-        super().destroy()
-
-    def data_transfer(self):
-        self.plc_data.read_data()
-
     def loop(self):
-        if self.plc_data.connected:
-            self.connect_label.configure(text='PLC-connected', fg='black')
-        else:
-            self.connect_label.configure(text='PLC-not-connected', fg='red')
 
         if self.plc_data.start_is_changed():
             self.start_refresh()
@@ -133,10 +68,7 @@ class App(Tk):
         if self.plc_data.t3_szint_is_changed(threshold=1000):
             self.tank3_level_refresh()
 
-        if self.__closed and not self.data_transfer.is_alive():
-            self.destroy()
-
-        self.after(100, self.loop)
+        super().loop()
 
     def start_refresh(self):
         if self.plc_data.start:
