@@ -40,7 +40,8 @@ class App(Tk):
             # noinspection SpellCheckingInspection
             self.attributes("-fullscreen", True)
 
-        self.title('tartaly_data 3')
+        # noinspection SpellCheckingInspection
+        self.title('Tartály 3')
 
         self.name_frame = Frame(self)
         self.indicator_frame = Frame(self)
