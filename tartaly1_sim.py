@@ -35,8 +35,8 @@ class IO_Address(PLC_Address):
 
 class IO_data(PLC_data):
 
-    def __init__(self, ip):
-        super().__init__(IO_Address(), ip)
+    def __init__(self, ip, rack, slot):
+        super().__init__(IO_Address(), ip, rack, slot)
         self.input1 = False
         self.input2 = False
         self.input3 = False
@@ -150,7 +150,7 @@ class IO_App(App):
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
-        self.io_data = IO_data(self.ip_select.ip_address.get())
+        self.io_data = IO_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
         self.geometry("800x620")
 

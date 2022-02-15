@@ -1,6 +1,7 @@
 from platform import system
 from tkinter import Frame, W, Tk, Label, Button, RIGHT, Y, Toplevel, LEFT, TOP
 
+from _config.plc_config_read import PLC_Config
 from _plc_data.plc_ip_select import SelectIP
 from tartaly_data.tartaly1_data import Tartaly1_data, Tartaly1_Address
 from tartaly_data.tartaly1_draw import Tartaly1_View
@@ -27,6 +28,9 @@ class App(Tk):
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
+        self.plc_ip_list, self.plc_rack, self.plc_slot = PLC_Config.read_plc_config('_config/config.xml')
+        self.plc_default_ip = PLC_Config.read_plc_default_ip('_config/default.xml')
+
         if system() == 'Windows':
             self.resizable(False, False)
             self.geometry("800x480")
@@ -50,8 +54,8 @@ class App(Tk):
         self.connect_label = Label(self.connect_frame, text='--', wraplength=1)
 
         self.ip_select = SelectIP(self.connect_frame,
-                                  default_ip=Tartaly1_Address.DEFAULT_IP,
-                                  ip_list=Tartaly1_Address.IP_LIST,
+                                  default_ip=self.plc_default_ip,
+                                  ip_list=self.plc_ip_list,
                                   change_process=self.ip_selected)
 
         self.close_button.pack(side=TOP)
@@ -65,7 +69,7 @@ class App(Tk):
         self.connect_frame.pack(side=LEFT, fill=Y)
         self.tanks_frame.pack()
 
-        self.plc_data = Tartaly1_data(self.ip_select.ip_address.get())
+        self.plc_data = Tartaly1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
         self.data_transfer = ThreadLoop(loop=self.data_transfer)
         self.data_transfer.start()
