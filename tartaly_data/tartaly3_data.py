@@ -48,8 +48,8 @@ class Tartaly3_data(PLC_data):
     __bekapcsolva_old = False
     __kikapcsolva_old = False
 
-    def __init__(self, ip):
-        super().__init__(Tartaly3_Address(), ip)
+    def __init__(self, ip, rack, slot):
+        super().__init__(Tartaly3_Address(), ip, rack, slot)
         self.__t1_felso = False
         self.__t1_also = False
         self.__t2_felso = False
