@@ -63,8 +63,8 @@ class Tartaly2_data(PLC_data):
     __t2_szint_old = 0
     __t4_szint_old = 0
 
-    def __init__(self, ip):
-        super().__init__(Tartaly2_Address(), ip)
+    def __init__(self, ip, rack, slot):
+        super().__init__(Tartaly2_Address(), ip, rack, slot)
 
         self.__t1_teli = False
         self.__t1_meleg = False
