@@ -77,6 +77,55 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__tank2_drawing()
         self.__tank3_drawing()
 
+    def tank1_change_color(self, sensor_color, heating_color):
+        if self.__tank1_sensor_color != sensor_color or self.__tank1_heating_color != heating_color:
+            self.__tank1_sensor_color = sensor_color
+            self.__tank1_heating_color = heating_color
+            self.__tank1_drawing()
+
+    def tank1_change_valve_color(self, top_valve_color, bottom_valve_color):
+        if self.__tank1_top_valve_color != top_valve_color or self.__tank1_bottom_valve_color != bottom_valve_color:
+            self.__tank1_top_valve_color = top_valve_color
+            self.__tank1_bottom_valve_color = bottom_valve_color
+            self.__tank1_drawing()
+
+    def tank2_change_color(self, sensor_color, heating_color):
+        if self.__tank2_sensor_color != sensor_color or self.__tank2_heating_color != heating_color:
+            self.__tank2_sensor_color = sensor_color
+            self.__tank2_heating_color = heating_color
+            self.__tank2_drawing()
+
+    def tank2_change_valve_color(self, top_valve_color, bottom_valve_color):
+        if self.__tank2_top_valve_color != top_valve_color or self.__tank2_bottom_valve_color != bottom_valve_color:
+            self.__tank2_top_valve_color = top_valve_color
+            self.__tank2_bottom_valve_color = bottom_valve_color
+            self.__tank2_drawing()
+
+    def tank3_change_color(self, rotor_color, bottom_valve_color):
+        if self.__tank3_rotor_color != rotor_color or self.__tank3_bottom_valve_color != bottom_valve_color:
+            self.__tank3_rotor_color = rotor_color
+            self.__tank3_bottom_valve_color = bottom_valve_color
+            self.__tank3_drawing()
+
+    def tank3_change_sensor_color(self, top_sensor_color, half_sensor_color, bottom_sensor_color):
+        if self.__tank3_top_sensor_color != top_sensor_color or\
+                self.__tank3_half_sensor_color != half_sensor_color or\
+                self.__tank3_bottom_sensor_color != bottom_sensor_color:
+            self.__tank3_top_sensor_color = top_sensor_color
+            self.__tank3_half_sensor_color = half_sensor_color
+            self.__tank3_bottom_sensor_color = bottom_sensor_color
+            self.__tank3_drawing()
+
+    def tank1_change_heating_level(self, temperature_percent):
+        if self.__tank1_temperature_percent != temperature_percent:
+            self.__tank1_temperature_percent = temperature_percent
+            self.__tank1_drawing()
+
+    def tank2_change_heating_level(self, temperature_percent):
+        if self.__tank2_temperature_percent != temperature_percent:
+            self.__tank2_temperature_percent = temperature_percent
+            self.__tank2_drawing()
+
     def __pipe_drawing(self):
 
         self.create_vertical_pipe(x_position=self.T1_TANK_X_POSITION + self.TANK_WIDTH // 2 - self.PIPE_WIDTH // 2,

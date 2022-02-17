@@ -51,7 +51,7 @@ class App(PLC_View):
             self.stop_refresh()
 
         if self.plc_data.start_urit_is_changed():
-            self.start_urit_refresh()
+            self.dump_refresh()
 
         if self.plc_data.t1_teli_is_changed() or self.plc_data.t1_fut_is_changed():
             self.tank1_refresh()
@@ -68,6 +68,11 @@ class App(PLC_View):
         if self.plc_data.t3_kever_is_changed() or self.plc_data.t3_urit_is_changed():
             self.tank3_refresh()
 
+        if self.plc_data.t3_felso_is_changed() or\
+                self.plc_data.t3_kozep_is_changed() or\
+                self.plc_data.t3_also_is_changed():
+            self.tank3_sensor_refresh()
+
         super().loop()
 
     def start_refresh(self):
@@ -76,7 +81,7 @@ class App(PLC_View):
     def stop_refresh(self):
         pass
 
-    def start_urit_refresh(self):
+    def dump_refresh(self):
         pass
 
     def tank1_refresh(self):
@@ -92,6 +97,9 @@ class App(PLC_View):
         pass
 
     def tank3_refresh(self):
+        pass
+
+    def tank3_sensor_refresh(self):
         pass
 
 
