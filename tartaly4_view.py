@@ -73,6 +73,12 @@ class App(PLC_View):
                 self.plc_data.t3_also_is_changed():
             self.tank3_sensor_refresh()
 
+        if self.plc_data.t1_homerseklet_is_changed(threshold=1000):
+            self.tank1_heating_refresh()
+
+        if self.plc_data.t2_homerseklet_is_changed(threshold=1000):
+            self.tank2_heating_refresh()
+
         super().loop()
 
     def start_refresh(self):
@@ -141,7 +147,7 @@ class App(PLC_View):
             self.tanks.tank2_change_valve_color(top_valve_color='blue', bottom_valve_color='blue')
         # 0 1
         elif not self.plc_data.t2_tolt and self.plc_data.t2_urit:
-            self.tanks.tank1_change_valve_color(top_valve_color='gray', bottom_valve_color='blue')
+            self.tanks.tank2_change_valve_color(top_valve_color='gray', bottom_valve_color='blue')
         # 1 0
         elif self.plc_data.t2_tolt and not self.plc_data.t2_urit:
             self.tanks.tank2_change_valve_color(top_valve_color='blue', bottom_valve_color='gray')
@@ -196,6 +202,12 @@ class App(PLC_View):
         else:
             self.tanks.tank3_change_sensor_color(
                 top_sensor_color='gray', half_sensor_color='gray', bottom_sensor_color='gray')
+
+    def tank1_heating_refresh(self):
+        self.tanks.tank1_change_heating_level(temperature_percent=self.plc_data.t1_homerseklet_percent)
+
+    def tank2_heating_refresh(self):
+        self.tanks.tank2_change_heating_level(temperature_percent=self.plc_data.t2_homerseklet_percent)
 
 
 if __name__ == '__main__':
