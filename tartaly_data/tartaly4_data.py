@@ -19,10 +19,10 @@ class Tartaly4_Address(PLC_Address):
     T2_TOLT = 'Q0.3'
     T2_FUT = 'Q0.4'
     T2_URIT = 'Q0.5'
-    T3_KEVER = 'Q4.0'
-    T3_URIT = 'Q4.1'
+    T3_KEVER = 'Q1.0'
+    T3_URIT = 'Q1.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB1')
 
     T1_HOMERSEKLET = 'IW64'
     T2_HOMERSEKLET = 'IW66'
