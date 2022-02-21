@@ -1,6 +1,7 @@
 from tkinter import Tk
 
-from _view.tank_canvas import TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas
+from _view.sensor_canvas import SensorCanvas
+from _view.tank_canvas import TankCanvas, ValveCanvas, PipeCanvas
 from tartaly_data.tartaly3_data import Tartaly3_Address
 
 
