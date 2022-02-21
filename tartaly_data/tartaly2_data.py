@@ -4,8 +4,6 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection SpellCheckingInspection
 class Tartaly2_Address(PLC_Address):
-    IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
-    DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
 
     T1_TELI = 'I0.0'
     T1_MELEG = 'I0.1'
