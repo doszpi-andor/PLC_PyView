@@ -2,6 +2,7 @@
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly4_Address(PLC_Address):
 
     T1_TELI = 'I0.0'
@@ -33,6 +34,7 @@ class Tartaly4_Address(PLC_Address):
     T2_HOMERSEKLET_RANGE = 24000
 
 
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly4_data(PLC_data):
 
     __t1_teli_old = False

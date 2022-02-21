@@ -1,6 +1,7 @@
 from _snap7.snap7_connect import PLC_Connect, S7ConnectFailed
 
 
+# noinspection PyPep8Naming
 class PLC_Address:
     """
     PLC Address
@@ -37,6 +38,7 @@ class PLC_Address:
         return int(bit_address[3])
 
 
+# noinspection PyPep8Naming
 class PLC_data:
     """
     PLC data

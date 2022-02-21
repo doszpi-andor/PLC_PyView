@@ -25,7 +25,9 @@ class App(PLC_View):
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
+        # noinspection SpellCheckingInspection
         self.title('Tartaly 1')
+        # noinspection SpellCheckingInspection
         self.name_label.config(text='Tartály-1', wraplength=1)
         self.connect_label.config(wraplength=1)
 

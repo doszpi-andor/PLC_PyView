@@ -1,9 +1,8 @@
 
-from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly3_Address(PLC_Address):
 
     T1_FELSO = 'I0.0'
@@ -26,7 +25,7 @@ class Tartaly3_Address(PLC_Address):
     READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly3_data(PLC_data):
 
     __t1_felso_old = False

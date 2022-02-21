@@ -18,6 +18,7 @@ class S7ConnectFailed(Exception):
     pass
 
 
+# noinspection PyPep8Naming
 class PLC_Connect:
     """
     Snap 7 connection

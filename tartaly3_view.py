@@ -1,11 +1,9 @@
-from platform import system
-from tkinter import Tk, Frame, Label, Button, RIGHT, X, BOTTOM, Y, Toplevel, W
 
-from _plc_data.plc_ip_select import SelectIP
+from tkinter import Frame, RIGHT, W
+
 from _view.plc_view import PLC_View
 from tartaly_data.tartaly3_data import Tartaly3_Address, Tartaly3_data
 from tartaly_data.tartaly3_draw import Tartaly3_View
-from _threading.thread_loop import ThreadLoop
 from _view.indicator_view import IndicatorSquare, IndicatorOval
 
 
@@ -38,9 +36,6 @@ class App(PLC_View):
         self.title('Tartály 3')
         # noinspection SpellCheckingInspection
         self.name_label.config(text='Tartály 3')
-
-        #self.indicator_frame = Frame(self.process_frame)
-        #self.tanks_frame = Frame(self.process_frame)
 
         self.indicators = Indicators(self.process_frame)
         self.tanks = Tartaly3_View(self.process_frame)

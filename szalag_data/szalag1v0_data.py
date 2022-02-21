@@ -2,7 +2,7 @@ from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Szalag1v0_Address(PLC_Address):
     IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
     DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
@@ -21,7 +21,7 @@ class Szalag1v0_Address(PLC_Address):
     READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Szalag1v0_data(PLC_data):
 
     __s1_old = False

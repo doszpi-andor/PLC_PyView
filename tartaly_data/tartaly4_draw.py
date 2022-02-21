@@ -5,6 +5,7 @@ from _view.tank_canvas import TankCanvas, ValveCanvas, HeatingCanvas, RotorCanva
 from tartaly_data.tartaly4_data import Tartaly4_Address
 
 
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, RotorCanvas, PipeCanvas):
     TANK_WIDTH = 60
     TANK_HEIGHT = 130

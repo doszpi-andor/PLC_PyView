@@ -1,5 +1,5 @@
 from platform import system
-from tkinter import Tk, Frame, Label, Button, TOP, RIGHT, LEFT, Y, Toplevel, BOTTOM, X
+from tkinter import Tk, Frame, Label, Button, RIGHT, Y, Toplevel, BOTTOM, X
 
 from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_data, PLC_Address
@@ -7,6 +7,7 @@ from _plc_data.plc_ip_select import SelectIP
 from _threading.thread_loop import ThreadLoop
 
 
+# noinspection PyPep8Naming
 class PLC_View(Tk):
     __closed = False
 
@@ -65,6 +66,7 @@ class PLC_View(Tk):
 
         self.protocol('WM_DELETE_WINDOW', self.close)
 
+    # noinspection PyUnusedLocal
     def ip_selected(self, *args):
         self.plc_data.reconnect(self.ip_select.ip_address.get())
 
@@ -108,4 +110,3 @@ if __name__ == '__main__':
     app.after(100, app.loop)
 
     app.mainloop()
-
