@@ -1,8 +1,6 @@
-from platform import system
-from tkinter import Frame, Tk, Label, Button, TOP, RIGHT, LEFT, Y, Toplevel, W
 
-from _plc_data.plc_ip_select import SelectIP
-from _threading.thread_loop import ThreadLoop
+from tkinter import Frame, TOP, RIGHT, LEFT, Y, W
+
 from _view.indicator_view import IndicatorSquare
 from _view.plc_view import PLC_View
 from tartaly_data.tartaly2_data import Tartaly2_Address, Tartaly2_data

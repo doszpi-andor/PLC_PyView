@@ -1,8 +1,8 @@
-from _config.plc_config_read import PLC_Config
+
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly2_Address(PLC_Address):
 
     T1_TELI = 'I0.0'
@@ -36,7 +36,7 @@ class Tartaly2_Address(PLC_Address):
     T4_SZINT_RANGE = 24000
 
 
-# noinspection SpellCheckingInspection
+# noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly2_data(PLC_data):
     __t1_teli_old = False
     __t1_meleg_old = False

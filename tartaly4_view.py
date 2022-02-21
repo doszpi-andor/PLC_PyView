@@ -13,6 +13,7 @@ class Indicators(Frame):
         super().__init__(master, cnf, **kw)
         self.start = IndicatorSquare(self, text='Start [%s]' % Tartaly4_Address.START)
         self.stop = IndicatorSquare(self, text='Stop [%s]' % Tartaly4_Address.STOP)
+        # noinspection SpellCheckingInspection
         self.start_urit = IndicatorSquare(self, text='Start ürít [%s]' % Tartaly4_Address.START_URIT)
 
         self.start.grid(row=1, column=1, sticky=W)
@@ -26,7 +27,9 @@ class App(PLC_View):
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
+        # noinspection SpellCheckingInspection
         self.title('Tartaly 4')
+        # noinspection SpellCheckingInspection
         self.name_label.config(text='Tartály-4', wraplength=1)
         self.connect_label.config(wraplength=1)
 

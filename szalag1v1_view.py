@@ -1,8 +1,6 @@
-from platform import system
-from tkinter import Frame, W, Tk, Label, Button, RIGHT, LEFT, X, BOTTOM, Y, Toplevel
 
-from _plc_data.plc_ip_select import SelectIP
-from _threading.thread_loop import ThreadLoop
+from tkinter import Frame, W, RIGHT, LEFT, X
+
 from _view.conveyor_view import ConveyorView
 from _view.indicator_view import IndicatorSquare, IndicatorOval
 from _view.plc_view import PLC_View
@@ -201,6 +199,7 @@ class App(PLC_View):
         else:
             self.conveyors.conveyor3.change_motor_color('gray')
 
+    # noinspection SpellCheckingInspection
     def uzem_refresh(self):
         if self.plc_data.uzem:
             self.indicators_lamp.uzem.change_color('green')

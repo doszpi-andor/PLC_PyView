@@ -36,6 +36,7 @@ default.xml example:
 from xml.etree.ElementTree import parse
 
 
+# noinspection PyPep8Naming
 class PLC_ConfigXML_Exception(Exception):
     """
     PLC config read exception
@@ -43,6 +44,7 @@ class PLC_ConfigXML_Exception(Exception):
     pass
 
 
+# noinspection PyPep8Naming
 class PLC_Config:
 
     @staticmethod

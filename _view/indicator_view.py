@@ -75,7 +75,7 @@ def flash():
 if __name__ == "__main__":
     root = Tk()
 
-    indicator1 = IndicatorOval(root, text='Uzem 1')
+    indicator1 = IndicatorOval(root, text='Running')
     indicator2 = IndicatorSquare(root, text='Start')
     indicator1.grid(row=1, column=1, sticky=W)
     indicator2.grid(row=2, column=1, sticky=W)
