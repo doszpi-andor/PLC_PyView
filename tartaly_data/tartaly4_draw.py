@@ -21,10 +21,10 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     PIPE_WIDTH = 7
 
     T1_TANK_X_POSITION = 100
-    T1_THERMOMETER_X_POSITION = T1_TANK_X_POSITION - ANALOG_INDICATOR_WIDTH - 10
-    T2_TANK_X_POSITION = T1_TANK_X_POSITION + TANK_WIDTH + INDICATOR_TEXT_LENGTH + 50
-    T2_THERMOMETER_X_POSITION = T2_TANK_X_POSITION - ANALOG_INDICATOR_WIDTH - 10
-    T3_TANK_X_POSITION = T1_TANK_X_POSITION + (TANK_WIDTH * 2 + INDICATOR_TEXT_LENGTH + 50) // 2 - TANK_WIDTH // 2
+    T1_THERMOMETER_X_POSITION = T1_TANK_X_POSITION - ANALOG_SENSOR_WIDTH - 10
+    T2_TANK_X_POSITION = T1_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 50
+    T2_THERMOMETER_X_POSITION = T2_TANK_X_POSITION - ANALOG_SENSOR_WIDTH - 10
+    T3_TANK_X_POSITION = T1_TANK_X_POSITION + (TANK_WIDTH * 2 + SENSOR_TEXT_LENGTH + 50) // 2 - TANK_WIDTH // 2
 
     T1_TOP_VALVE_Y_POSITION = 10
     T1_TANK_Y_POSITION = T1_TOP_VALVE_Y_POSITION + VALVE_HEIGHT + 10
@@ -161,7 +161,7 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T1_TANK_X_POSITION,
                            y_position=self.T1_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T1_Teli\n[%s]' % Tartaly4_Address.T1_TELI, color=self.__tank1_sensor_color)
         self.delete(self.__tank1_analog_id)
         # noinspection SpellCheckingInspection
@@ -190,7 +190,7 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T2_TANK_X_POSITION,
                            y_position=self.T2_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T2_Teli\n[%s]' % Tartaly4_Address.T2_TELI, color=self.__tank2_sensor_color)
         self.delete(self.__tank2_analog_id)
         # noinspection SpellCheckingInspection
@@ -211,15 +211,15 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     def __tank3_drawing(self):
         self.create_sensor(x_position=self.T3_TANK_X_POSITION,
                            y_position=self.T3_TOP_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Felso\n[%s]' % Tartaly4_Address.T3_FELSO, color=self.__tank3_top_sensor_color)
         self.create_sensor(x_position=self.T3_TANK_X_POSITION,
                            y_position=self.T3_HALF_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Kozep\n[%s]' % Tartaly4_Address.T3_KOZEP, color=self.__tank3_half_sensor_color)
         self.create_sensor(x_position=self.T3_TANK_X_POSITION,
                            y_position=self.T3_BOTTOM_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Also\n[%s]' % Tartaly4_Address.T3_ALSO, color=self.__tank3_bottom_sensor_color)
         self.create_tank(x_position=self.T3_TANK_X_POSITION,
                          y_position=self.T3_TANK_Y_POSITION,

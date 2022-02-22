@@ -17,8 +17,8 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
     PIPE_WIDTH = 10
 
     TANK1_X_POSITION = 4
-    TANK2_X_POSITION = TANK1_X_POSITION + INDICATOR_LINE_LENGTH + INDICATOR_SQUARE + INDICATOR_TEXT_LENGTH
-    TANK3_X_POSITION = TANK2_X_POSITION + INDICATOR_LINE_LENGTH + INDICATOR_SQUARE + INDICATOR_TEXT_LENGTH
+    TANK2_X_POSITION = TANK1_X_POSITION + SENSOR_LINE_LENGTH + SENSOR_SQUARE + SENSOR_TEXT_LENGTH
+    TANK3_X_POSITION = TANK2_X_POSITION + SENSOR_LINE_LENGTH + SENSOR_SQUARE + SENSOR_TEXT_LENGTH
 
     TOP_VALVE_Y_POSITION = PIPE_WIDTH + 10
     TANK_Y_POSITION = TOP_VALVE_Y_POSITION + VALVE_HEIGHT + 10
@@ -27,7 +27,7 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
     BOTTOM_VALVE_Y_POSITION = TANK_Y_POSITION + TANK_HEIGHT + 10
     BOTTOM_SHIFT = 10
 
-    FULL_WIDTH = TANK3_X_POSITION + INDICATOR_LINE_LENGTH + INDICATOR_SQUARE + INDICATOR_TEXT_LENGTH
+    FULL_WIDTH = TANK3_X_POSITION + SENSOR_LINE_LENGTH + SENSOR_SQUARE + SENSOR_TEXT_LENGTH
     FULL_HEIGHT = BOTTOM_VALVE_Y_POSITION + ValveCanvas.VALVE_HEIGHT + BOTTOM_SHIFT
 
     HORIZONTAL_PIPE_LENGTH = TANK3_X_POSITION + TANK_WIDTH // 2 + PipeCanvas.PIPE_WIDTH // 2
@@ -120,11 +120,11 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.TANK1_X_POSITION,
                            y_position=self.TOP_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T1_Felso\n[%s]' % Tartaly3_Address.T1_FELSO, color=self.__tank1_top_sensor_color)
         self.create_sensor(x_position=self.TANK1_X_POSITION,
                            y_position=self.BOTTOM_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T1_Also\n[%s]' % Tartaly3_Address.T1_ALSO, color=self.__tank1_bottom_sensor_color)
         self.create_valve(x_position=self.TANK1_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.BOTTOM_VALVE_Y_POSITION,
@@ -141,11 +141,11 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.TANK2_X_POSITION,
                            y_position=self.TOP_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T2_Felso\n[%s]' % Tartaly3_Address.T2_FELSO, color=self.__tank2_top_sensor_color)
         self.create_sensor(x_position=self.TANK2_X_POSITION,
                            y_position=self.BOTTOM_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T2_Also\n[%s]' % Tartaly3_Address.T2_ALSO, color=self.__tank2_bottom_sensor_color)
         self.create_valve(x_position=self.TANK2_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.BOTTOM_VALVE_Y_POSITION,
@@ -161,11 +161,11 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.TANK3_X_POSITION,
                            y_position=self.TOP_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Felso\n[%s]' % Tartaly3_Address.T3_FELSO, color=self.__tank3_top_sensor_color)
         self.create_sensor(x_position=self.TANK3_X_POSITION,
                            y_position=self.BOTTOM_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Also\n[%s]' % Tartaly3_Address.T3_ALSO, color=self.__tank3_bottom_sensor_color)
         self.create_valve(x_position=self.TANK3_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.BOTTOM_VALVE_Y_POSITION,
