@@ -141,13 +141,13 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
         self.create_conveyor(self.CONVEYOR1_X_POSITION,
                              self.CONVEYOR1_Y_POSITION,
                              length=self.CONVEYOR1_LENGTH, name='Szalag 1',
-                             circle1_name='M1\n[%s]' % Szalag5v1_Address.M1, circle1_color=self.conveyor1_motor_color,
-                             circle2_name='S1\n[%s]' % Szalag5v1_Address.S1, circle2_color=self.conveyor1_sensor_color)
+                             circle1_name='M3\n[%s]' % Szalag5v1_Address.M3, circle1_color=self.conveyor1_motor_color,
+                             circle2_name='S3\n[%s]' % Szalag5v1_Address.S3, circle2_color=self.conveyor1_sensor_color)
         self.create_conveyor(self.CONVEYOR2_X_POSITION,
                              self.CONVEYOR2_Y_POSITION,
                              length=self.CONVEYOR2_LENGTH, name='Szalag 2',
-                             circle1_name='M2\n[%s]' % Szalag5v1_Address.M2, circle1_color=self.conveyor2_motor_color,
-                             circle2_name='S2\n[%s]' % Szalag5v1_Address.S2, circle2_color=self.conveyor2_sensor_color)
+                             circle1_name='M4\n[%s]' % Szalag5v1_Address.M4, circle1_color=self.conveyor2_motor_color,
+                             circle2_name='S4\n[%s]' % Szalag5v1_Address.S4, circle2_color=self.conveyor2_sensor_color)
 
 
 if __name__ == "__main__":
