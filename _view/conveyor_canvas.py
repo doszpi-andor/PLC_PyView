@@ -3,6 +3,7 @@ from tkinter import Canvas, Tk, CENTER
 
 class ConveyorCanvas(Canvas):
     CONVEYOR_WIDTH = 50
+    NAME_FONT_SIZE = 12
 
     def create_conveyor(self, x_position, y_position, length, name='', circle1_name='',
                         circle1_color='gray', circle2_name='', circle2_color='gray'):
@@ -16,6 +17,7 @@ class ConveyorCanvas(Canvas):
                          y_position + self.CONVEYOR_WIDTH)
         self.create_text(x_position + length // 2,
                          y_position + self.CONVEYOR_WIDTH // 2,
+                         font=("Arial", self.NAME_FONT_SIZE),
                          text=name)
         self.create_oval(x_position,
                          y_position,
