@@ -9,7 +9,7 @@ from szalag_data.szalag5v1_data import Szalag5v1_Address
 
 class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     SILO_WIDTH = 100
-    SILO_HEIGHT = 140
+    SILO_HEIGHT = 150
 
     CONVEYOR_WIDTH = 45
 
@@ -37,8 +37,11 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
     INDICATOR_ROW3_Y_POSITION = INDICATOR_ROW2_Y_POSITION + INDICATOR_WIDTH + 10
 
+    FULL_WIDTH = CONVEYOR2_X_POSITION + CONVEYOR2_LENGTH
+    FULL_HEIGHT = CONVEYOR2_Y_POSITION + CONVEYOR_WIDTH
+
     def __init__(self, master=None, cnf={}, **kw):
-        super().__init__(master, cnf, width=800, height=480, **kw)
+        super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
 
         self.silo1_motor_color = 'gray'
         self.silo2_motor_color = 'gray'
@@ -79,14 +82,16 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     def __silos_drawing(self):
         self.create_silo(self.SILO1_X_POSITION,
                          self.SILO_Y_POSITION,
-                         silo_name='Siló 1', motor_name='M1', motor_color=self.silo1_motor_color)
+                         silo_name='Siló 1',
+                         motor_name='M1[%s]' % Szalag5v1_Address.M1, motor_color=self.silo1_motor_color)
         self.create_sensor(self.SILO1_SENSOR_X_POSITION,
                            self.SILO_SENSOR_Y_POSITION,
                            line_length=self.SILO_WIDTH,
                            name='S1\n[%s]' % Szalag5v1_Address.S1, color=self.silo1_sensor_color)
         self.create_silo(self.SILO2_X_POSITION,
                          self.SILO_Y_POSITION,
-                         silo_name='Siló 2', motor_name='M2', motor_color=self.silo2_motor_color)
+                         silo_name='Siló 2',
+                         motor_name='M2[%s]' % Szalag5v1_Address.M2, motor_color=self.silo2_motor_color)
         self.create_sensor(self.SILO2_SENSOR_X_POSITION,
                            self.SILO_SENSOR_Y_POSITION,
                            line_length=self.SILO_WIDTH,
