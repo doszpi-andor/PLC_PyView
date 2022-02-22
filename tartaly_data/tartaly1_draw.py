@@ -21,9 +21,9 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     PIPE_WIDTH = 7
 
     T1_TANK_X_POSITION = 100
-    T1_THERMOMETER_X_POSITION = T1_TANK_X_POSITION - ANALOG_INDICATOR_WIDTH - 10
-    T2_TANK_X_POSITION = T1_TANK_X_POSITION + TANK_WIDTH + INDICATOR_TEXT_LENGTH + 10
-    T3_TANK_X_POSITION = T1_TANK_X_POSITION + (TANK_WIDTH * 2 + INDICATOR_TEXT_LENGTH + 10) // 2 - TANK_WIDTH // 2
+    T1_THERMOMETER_X_POSITION = T1_TANK_X_POSITION - ANALOG_SENSOR_WIDTH - 10
+    T2_TANK_X_POSITION = T1_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 10
+    T3_TANK_X_POSITION = T1_TANK_X_POSITION + (TANK_WIDTH * 2 + SENSOR_TEXT_LENGTH + 10) // 2 - TANK_WIDTH // 2
 
     T1_TOP_VALVE_Y_POSITION = 10
     T1_TANK_Y_POSITION = T1_TOP_VALVE_Y_POSITION + VALVE_HEIGHT + 10
@@ -42,7 +42,7 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     T3_LEVEL_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT // 8
     T3_ROTOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT // 2
 
-    FULL_WIDTH = T2_TANK_X_POSITION + INDICATOR_LINE_LENGTH + INDICATOR_SQUARE + INDICATOR_TEXT_LENGTH
+    FULL_WIDTH = T2_TANK_X_POSITION + SENSOR_LINE_LENGTH + SENSOR_SQUARE + SENSOR_TEXT_LENGTH
     FULL_HEIGHT = T3_BOTTOM_VALVE_Y_POSITION + VALVE_HEIGHT + 10
 
     __tank1_analog_id = None
@@ -140,7 +140,7 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T1_TANK_X_POSITION,
                            y_position=self.T1_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T1_Teli\n[%s]' % Tartaly1_Address.T1_TELI, color=self.__tank1_sensor_color)
         self.delete(self.__tank1_analog_id)
         # noinspection SpellCheckingInspection
@@ -169,7 +169,7 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T2_TANK_X_POSITION,
                            y_position=self.T2_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T2_Teli\n[%s]' % Tartaly1_Address.T2_TELI, color=self.__tank2_sensor_color)
         # noinspection SpellCheckingInspection
         self.create_valve(x_position=self.T2_TANK_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,

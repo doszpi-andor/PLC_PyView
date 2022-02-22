@@ -234,7 +234,7 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T1_TANK_X_POSITION,
                            y_position=self.T1_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T1_Teli\n[%s]' % Tartaly2_Address.T1_TELI, color=self.__tank1_sensor_color)
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T1_TANK_THERMO_SENSOR_POSITION,
@@ -285,7 +285,7 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T3_TANK_X_POSITION,
                            y_position=self.T3_SENSOR_Y_POSITION,
-                           line_length=self.INDICATOR_LINE_LENGTH,
+                           line_length=self.SENSOR_LINE_LENGTH,
                            name='T3_Teli\n[%s]' % Tartaly2_Address.T3_TELI, color=self.__tank3_sensor_color)
         # noinspection SpellCheckingInspection
         self.create_sensor(x_position=self.T3_TANK_THERMO_SENSOR_POSITION,
