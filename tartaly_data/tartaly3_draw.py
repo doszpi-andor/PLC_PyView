@@ -9,9 +9,9 @@ from tartaly_data.tartaly3_data import Tartaly3_Address
 class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas):
     TANK_WIDTH = 90
     TANK_HEIGHT = 220
-    INDICATOR_SQUARE = 20
-    INDICATOR_LINE_LENGTH = TANK_WIDTH + 10
-    INDICATOR_TEXT_LENGTH = 80
+    SENSOR_SQUARE = 20
+    SENSOR_LINE_LENGTH = TANK_WIDTH + 10
+    SENSOR_TEXT_LENGTH = 80
     VALVE_WIDTH = 30
     VALVE_HEIGHT = 40
     PIPE_WIDTH = 10
