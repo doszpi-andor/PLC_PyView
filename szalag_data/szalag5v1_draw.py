@@ -25,7 +25,7 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     CONVEYOR1_X_POSITION = SILO1_X_POSITION
     CONVEYOR2_X_POSITION = CONVEYOR1_X_POSITION + CONVEYOR1_LENGTH * 2 // 3
 
-    INDICATOR_COLUMN1_X_POSITION = SILO2_X_POSITION + SILO_WIDTH + 220
+    INDICATOR_COLUMN1_X_POSITION = SILO2_X_POSITION + SILO_WIDTH + 200
     INDICATOR_COLUMN2_X_POSITION = INDICATOR_COLUMN1_X_POSITION + 100
 
     SILO_Y_POSITION = 5
@@ -60,9 +60,47 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
 
         self.__silos_drawing()
         self.__conveyors_drawing()
+        self.__buttons_drawing()
         self.__indicators_drawing()
 
-    def __indicators_drawing(self):
+    def button_change_color(self, start1_color, start2_color, stop_color):
+        if self.start1_color != start1_color or self.start2_color != start2_color or self.stop_color != stop_color:
+            self.start1_color = start1_color
+            self.start2_color = start2_color
+            self.stop_color = stop_color
+            self.__buttons_drawing()
+
+    def indicator_change_color(self, factory_color, error_color):
+        if self.factory_color != factory_color or self.error_color != error_color:
+            self.factory_color = factory_color
+            self.error_color = error_color
+            self.__indicators_drawing()
+
+    def silo1_change_color(self, motor_color, sensor_color):
+        if self.silo1_motor_color != motor_color or self.silo1_sensor_color != sensor_color:
+            self.silo1_motor_color = motor_color
+            self.silo1_sensor_color = sensor_color
+            self.__silos_drawing()
+
+    def silo2_change_color(self, motor_color, sensor_color):
+        if self.silo2_motor_color != motor_color or self.silo2_sensor_color != sensor_color:
+            self.silo2_motor_color = motor_color
+            self.silo2_sensor_color = sensor_color
+            self.__silos_drawing()
+
+    def conveyor1_change_color(self, motor_color, sensor_color):
+        if self.conveyor1_motor_color != motor_color or self.conveyor1_sensor_color != sensor_color:
+            self.conveyor1_motor_color = motor_color
+            self.conveyor1_sensor_color = sensor_color
+            self.__conveyors_drawing()
+
+    def conveyor2_change_color(self, motor_color, sensor_color):
+        if self.conveyor2_motor_color != motor_color or self.conveyor2_sensor_color != sensor_color:
+            self.conveyor2_motor_color = motor_color
+            self.conveyor2_sensor_color = sensor_color
+            self.__conveyors_drawing()
+
+    def __buttons_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
                                      name='Start 1\n[%s]' % Szalag5v1_Address.START1, color=self.start1_color)
@@ -72,6 +110,8 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW3_Y_POSITION,
                                      name='Stop\n[%s]' % Szalag5v1_Address.STOP, color=self.stop_color)
+
+    def __indicators_drawing(self):
         self.create_circle_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
                                      name='Üzem\n[%s]' % Szalag5v1_Address.UZEM, color=self.factory_color)
@@ -114,7 +154,7 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("800x480")
 
-    tank = Szalag5v1_View(root)
-    tank.pack()
+    conveyor = Szalag5v1_View(root)
+    conveyor.pack()
 
     root.mainloop()
