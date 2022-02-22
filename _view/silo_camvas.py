@@ -8,7 +8,7 @@ class SiloCanvas(Canvas):
 
     def create_silo(self, x_position, y_position, silo_name='', silo_color='gray', motor_name='', motor_color='gray'):
         self.create_rectangle(x_position,
-                              y_position,
+                              y_position + self.SILO_HEIGHT * 1 // 10,
                               x_position + self.SILO_WIDTH,
                               y_position + self.SILO_HEIGHT * 4 // 5,
                               fill=silo_color, outline=silo_color)
@@ -23,11 +23,11 @@ class SiloCanvas(Canvas):
                             fill=silo_color, outline=silo_color)
 
         self.create_line(x_position,
-                         y_position,
+                         y_position + self.SILO_HEIGHT * 1 // 10,
                          x_position + self.SILO_WIDTH,
-                         y_position)
+                         y_position + self.SILO_HEIGHT * 1 // 10)
         self.create_line(x_position,
-                         y_position,
+                         y_position + self.SILO_HEIGHT * 1 // 10,
                          x_position,
                          y_position + self.SILO_HEIGHT * 4 // 5)
         self.create_line(x_position,
@@ -35,7 +35,7 @@ class SiloCanvas(Canvas):
                          x_position + self.SILO_WIDTH * 2 // 5,
                          y_position + self.SILO_HEIGHT)
         self.create_line(x_position + self.SILO_WIDTH,
-                         y_position,
+                         y_position + self.SILO_HEIGHT * 1 // 10,
                          x_position + self.SILO_WIDTH,
                          y_position + self.SILO_HEIGHT * 4 // 5)
         self.create_line(x_position + self.SILO_WIDTH,
@@ -43,9 +43,9 @@ class SiloCanvas(Canvas):
                          x_position + self.SILO_WIDTH * 3 // 5,
                          y_position + self.SILO_HEIGHT)
 
-        self.create_rectangle(x_position + self.SILO_WIDTH * 2 // 5,
+        self.create_rectangle(x_position + self.SILO_WIDTH * 1 // 5,
                               y_position,
-                              x_position + self.SILO_WIDTH * 3 // 5,
+                              x_position + self.SILO_WIDTH * 4 // 5,
                               y_position + self.SILO_HEIGHT * 1 // 10,
                               fill=motor_color)
         self.create_text(x_position + self.SILO_WIDTH * 5 // 10,
@@ -130,7 +130,7 @@ class SiloCanvas(Canvas):
                          y_position + self.SILO_HEIGHT)
         # noinspection PyArgumentList
         self.create_text(x_position + self.SILO_WIDTH // 5,
-                         y_position + self.SILO_HEIGHT * 2 // 5,
+                         y_position + self.SILO_HEIGHT // 2,
                          font=("Arial", self.NAME_FONT_SIZE),
                          angle=90, text=silo_name)
 
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     root = Tk()
 
     silo = SiloCanvas(root)
-    silo.create_silo(5, 5, silo_name='Silo 1', motor_name='M1', motor_color='red')
+    silo.create_silo(5, 5, silo_name='Silo 1', motor_name='M1[Q0.0]', motor_color='red')
     silo.pack()
 
     root.mainloop()
