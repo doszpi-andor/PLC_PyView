@@ -47,8 +47,8 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     T3_HALF_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT // 2
     T3_BOTTOM_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT * 7 // 8
 
-    FULL_WIDTH = 800
-    FULL_HEIGHT = 480
+    FULL_WIDTH = T2_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 50
+    FULL_HEIGHT = T3_BOTTOM_VALVE_Y_POSITION + VALVE_HEIGHT + 10
 
     __tank1_analog_id = None
     __tank2_analog_id = None
