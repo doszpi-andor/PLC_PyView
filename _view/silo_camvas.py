@@ -10,12 +10,12 @@ class SiloCanvas(Canvas):
         self.create_rectangle(x_position,
                               y_position,
                               x_position + self.SILO_WIDTH,
-                              y_position + silo.SILO_HEIGHT * 4 // 5,
+                              y_position + self.SILO_HEIGHT * 4 // 5,
                               fill=silo_color, outline=silo_color)
         self.create_polygon(x_position,
-                            y_position + silo.SILO_HEIGHT * 4 // 5,
+                            y_position + self.SILO_HEIGHT * 4 // 5,
                             x_position + self.SILO_WIDTH,
-                            y_position + silo.SILO_HEIGHT * 4 // 5,
+                            y_position + self.SILO_HEIGHT * 4 // 5,
                             x_position + self.SILO_WIDTH * 3 // 5,
                             y_position + self.SILO_HEIGHT,
                             x_position + self.SILO_WIDTH * 2 // 5,
@@ -29,17 +29,17 @@ class SiloCanvas(Canvas):
         self.create_line(x_position,
                          y_position,
                          x_position,
-                         y_position + silo.SILO_HEIGHT * 4 // 5)
+                         y_position + self.SILO_HEIGHT * 4 // 5)
         self.create_line(x_position,
-                         y_position + silo.SILO_HEIGHT * 4 // 5,
+                         y_position + self.SILO_HEIGHT * 4 // 5,
                          x_position + self.SILO_WIDTH * 2 // 5,
                          y_position + self.SILO_HEIGHT)
         self.create_line(x_position + self.SILO_WIDTH,
                          y_position,
                          x_position + self.SILO_WIDTH,
-                         y_position + silo.SILO_HEIGHT * 4 // 5)
+                         y_position + self.SILO_HEIGHT * 4 // 5)
         self.create_line(x_position + self.SILO_WIDTH,
-                         y_position + silo.SILO_HEIGHT * 4 // 5,
+                         y_position + self.SILO_HEIGHT * 4 // 5,
                          x_position + self.SILO_WIDTH * 3 // 5,
                          y_position + self.SILO_HEIGHT)
 
