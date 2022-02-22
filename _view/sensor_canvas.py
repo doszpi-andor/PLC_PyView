@@ -8,9 +8,9 @@ class SensorCanvas(Canvas):
     :var int INDICATOR_LINE_LENGTH: active line length
     :var int INDICATOR_TEXT_LENGTH: sensor name text length
     """
-    INDICATOR_SQUARE = 20
-    INDICATOR_LINE_LENGTH = 10
-    INDICATOR_TEXT_LENGTH = 80
+    SENSOR_SQUARE = 20
+    SENSOR_LINE_LENGTH = 10
+    SENSOR_TEXT_LENGTH = 80
 
     def create_sensor(self, x_position, y_position, name, color, line_length=0) -> None:
         """
@@ -27,11 +27,11 @@ class SensorCanvas(Canvas):
                          y_position,
                          fill=color)
         self.create_rectangle(x_position + line_length + 2,
-                              y_position - self.INDICATOR_SQUARE // 2,
-                              x_position + line_length + self.INDICATOR_SQUARE + 2,
-                              y_position + self.INDICATOR_SQUARE // 2,
+                              y_position - self.SENSOR_SQUARE // 2,
+                              x_position + line_length + self.SENSOR_SQUARE + 2,
+                              y_position + self.SENSOR_SQUARE // 2,
                               fill=color)
-        self.create_text(x_position + line_length + self.INDICATOR_SQUARE + 4,
+        self.create_text(x_position + line_length + self.SENSOR_SQUARE + 4,
                          y_position,
                          anchor=W, text=name)
 
@@ -41,7 +41,7 @@ class AnalogCanvas(Canvas):
     Analog sensor canvas
     :var int ANALOG_INDICATOR_WIDTH: analog indicator bar size
     """
-    ANALOG_INDICATOR_WIDTH = 20
+    ANALOG_SENSOR_WIDTH = 20
 
     def create_analog(self, x_position, y_position, height, name, active_color, active_level=0, activ_level_print=False,
                       background_color='gray', line_length=0, name_position='right', marks_position=None) -> int:
@@ -78,12 +78,12 @@ class AnalogCanvas(Canvas):
                          fill=background_color)
         self.create_rectangle(x_position + line_length,
                               y_position,
-                              x_position + line_length + self.ANALOG_INDICATOR_WIDTH,
+                              x_position + line_length + self.ANALOG_SENSOR_WIDTH,
                               y_position + height,
                               fill=background_color)
         self.create_rectangle(x_position + line_length,
                               y_position + height - int(height / 100 * active_level),
-                              x_position + line_length + self.ANALOG_INDICATOR_WIDTH,
+                              x_position + line_length + self.ANALOG_SENSOR_WIDTH,
                               y_position + height,
                               fill=active_color)
         self.create_line(x_position,
@@ -95,12 +95,12 @@ class AnalogCanvas(Canvas):
             for item in marks_position:
                 self.create_line(x_position + line_length,
                                  y_position + height - int(height / 100 * item),
-                                 x_position + line_length + self.ANALOG_INDICATOR_WIDTH,
+                                 x_position + line_length + self.ANALOG_SENSOR_WIDTH,
                                  y_position + height - int(height / 100 * item),
                                  dash=(1, 1))
         if name_position == 'right':
             # noinspection PyArgumentList
-            text_id = self.create_text(x_position + line_length + self.ANALOG_INDICATOR_WIDTH,
+            text_id = self.create_text(x_position + line_length + self.ANALOG_SENSOR_WIDTH,
                                        y_position + height // 2,
                                        angle=90, anchor=N, text=name)
         elif name_position == 'left':
