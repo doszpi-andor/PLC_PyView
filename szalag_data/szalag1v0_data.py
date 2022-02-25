@@ -4,8 +4,6 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection SpellCheckingInspection,PyPep8Naming
 class Szalag1v0_Address(PLC_Address):
-    # IP_LIST, RACK, SLOT = PLC_Config.read_plc_config('_config/config.xml')
-    # DEFAULT_IP = PLC_Config.read_plc_default_ip('_config/default.xml')
 
     S1 = 'I0.0'
     S2 = 'I0.1'
@@ -103,31 +101,31 @@ class Szalag1v0_data(PLC_data):
             return True
         return False
 
-    def m1_is_change(self):
+    def m1_is_changed(self):
         if self.m1 != self.__m1_old:
             self.__m1_old = self.m1
             return True
         return False
 
-    def m2_is_change(self):
+    def m2_is_changed(self):
         if self.m2 != self.__m2_old:
             self.__m2_old = self.m2
             return True
         return False
 
-    def uzem_is_change(self):
+    def uzem_is_changed(self):
         if self.uzem != self.__uzem_old:
             self.__uzem_old = self.uzem
             return True
         return False
 
-    def hiba1_is_change(self):
+    def hiba1_is_changed(self):
         if self.hiba1 != self.__hiba1_old:
             self.__hiba1_old = self.hiba1
             return True
         return False
 
-    def hiba2_is_change(self):
+    def hiba2_is_changed(self):
         if self.hiba2 != self.__hiba2_old:
             self.__hiba2_old = self.hiba2
             return True
