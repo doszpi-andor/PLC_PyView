@@ -7,6 +7,7 @@ from _view.silo_camvas import SiloCanvas
 from szalag_data.szalag5v1_data import Szalag5v1_Address
 
 
+# noinspection PyPep8Naming,SpellCheckingInspection
 class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     SILO_WIDTH = 100
     SILO_HEIGHT = 150
@@ -40,6 +41,7 @@ class Szalag5v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     FULL_WIDTH = CONVEYOR2_X_POSITION + CONVEYOR2_LENGTH
     FULL_HEIGHT = CONVEYOR2_Y_POSITION + CONVEYOR_WIDTH
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
 

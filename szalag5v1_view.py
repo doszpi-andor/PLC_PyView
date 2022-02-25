@@ -5,6 +5,7 @@ from szalag_data.szalag5v1_draw import Szalag5v1_View
 
 class App(PLC_View):
 
+    # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
