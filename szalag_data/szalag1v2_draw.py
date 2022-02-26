@@ -3,7 +3,7 @@ from tkinter import Tk
 from _view.conveyor_canvas import ConveyorCanvas
 from _view.indicator_canvas import IndicatorCanvas
 from _view.silo_camvas import SiloCanvas
-from szalag_data.szalag1v1_data import Szalag1v1_Address
+from szalag_data.szalag1v2_data import Szalag1v2_Address
 
 
 class Szalag1v2_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
@@ -112,50 +112,50 @@ class Szalag1v2_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
     def __buttons_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Start 1 [%s]' % Szalag1v1_Address.START1, color=self.start1_color)
+                                     name='Start 1 [%s]' % Szalag1v2_Address.START1, color=self.start1_color)
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Stop 1 [%s]' % Szalag1v1_Address.STOP1, color=self.stop1_color)
+                                     name='Stop 1 [%s]' % Szalag1v2_Address.STOP1, color=self.stop1_color)
         self.create_square_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Start 2 [%s]' % Szalag1v1_Address.START2, color=self.start2_color)
+                                     name='Start 2 [%s]' % Szalag1v2_Address.START2, color=self.start2_color)
         self.create_square_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Stop 2 [%s]' % Szalag1v1_Address.STOP2, color=self.stop2_color)
+                                     name='Stop 2 [%s]' % Szalag1v2_Address.STOP2, color=self.stop2_color)
 
     def __indicators_drawing(self):
         self.create_circle_indicator(self.INDICATOR_COLUMN3_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Üzem 1 [%s]' % Szalag1v1_Address.UZEM, color=self.factory1_color)
+                                     name='Üzem 1 [%s]' % Szalag1v2_Address.UZEM1, color=self.factory1_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN3_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Üzem 2 [%s]' % Szalag1v1_Address.UZEM, color=self.factory2_color)
+                                     name='Üzem 2 [%s]' % Szalag1v2_Address.UZEM2, color=self.factory2_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN4_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Hiba 1 [%s]' % Szalag1v1_Address.HIBA1, color=self.error1_color)
+                                     name='Hiba 1 [%s]' % Szalag1v2_Address.HIBA1, color=self.error1_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN4_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Hiba 2 [%s]' % Szalag1v1_Address.HIBA2, color=self.error2_color)
+                                     name='Hiba 2 [%s]' % Szalag1v2_Address.HIBA2, color=self.error2_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN4_X_POSITION,
                                      self.INDICATOR_ROW3_Y_POSITION,
-                                     name='Hiba 3 [%s]' % Szalag1v1_Address.HIBA3, color=self.error3_color)
+                                     name='Hiba 3 [%s]' % Szalag1v2_Address.HIBA3, color=self.error3_color)
 
     def __conveyors_drawing(self):
         self.create_conveyor(self.CONVEYOR1_X_POSITION,
                              self.CONVEYOR1_Y_POSITION,
                              length=self.CONVEYOR1_LENGTH, name='Szalag 1',
-                             circle1_name='M1\n[%s]' % Szalag1v1_Address.M1, circle1_color=self.conveyor1_motor_color,
-                             circle2_name='S1\n[%s]' % Szalag1v1_Address.S1, circle2_color=self.conveyor1_sensor_color)
+                             circle1_name='M1\n[%s]' % Szalag1v2_Address.M1, circle1_color=self.conveyor1_motor_color,
+                             circle2_name='S1\n[%s]' % Szalag1v2_Address.S1, circle2_color=self.conveyor1_sensor_color)
         self.create_conveyor(self.CONVEYOR2_X_POSITION,
                              self.CONVEYOR2_Y_POSITION,
                              length=self.CONVEYOR2_LENGTH, name='Szalag 2',
-                             circle1_name='S2\n[%s]' % Szalag1v1_Address.S2, circle1_color=self.conveyor2_motor_color,
-                             circle2_name='M2\n[%s]' % Szalag1v1_Address.M2, circle2_color=self.conveyor2_sensor_color)
+                             circle1_name='S2\n[%s]' % Szalag1v2_Address.S2, circle1_color=self.conveyor2_motor_color,
+                             circle2_name='M2\n[%s]' % Szalag1v2_Address.M2, circle2_color=self.conveyor2_sensor_color)
         self.create_conveyor(self.CONVEYOR3_X_POSITION,
                              self.CONVEYOR3_Y_POSITION,
                              length=self.CONVEYOR3_LENGTH, name='Szalag 3',
-                             circle1_name='M3\n[%s]' % Szalag1v1_Address.M3, circle1_color=self.conveyor3_motor_color,
-                             circle2_name='S3\n[%s]' % Szalag1v1_Address.S3, circle2_color=self.conveyor3_sensor_color)
+                             circle1_name='M3\n[%s]' % Szalag1v2_Address.M3, circle1_color=self.conveyor3_motor_color,
+                             circle2_name='S3\n[%s]' % Szalag1v2_Address.S3, circle2_color=self.conveyor3_sensor_color)
 
 
 if __name__ == "__main__":
