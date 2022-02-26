@@ -5,50 +5,7 @@ from _view.conveyor_view import ConveyorView
 from _view.indicator_view import IndicatorSquare, IndicatorOval
 from _view.plc_view import PLC_View
 from szalag_data.szalag1v1_data import Szalag1v1_data, Szalag1v1_Address
-
-
-class Conveyors(Frame):
-
-    # noinspection PyDefaultArgument
-    def __init__(self, master=None, cnf={}, **kw):
-        super().__init__(master, cnf, **kw)
-        self.conveyor1 = ConveyorView(self, conv_number=1, motor_number=1, length=340)
-        self.conveyor2 = ConveyorView(self, conv_number=2, motor_number=2, length=340, mirror='yes', shift_x=100)
-        self.conveyor3 = ConveyorView(self, conv_number=3, motor_number=3, shift_x=150)
-        self.conveyor1.grid(row=1, column=1, sticky='W')
-        self.conveyor2.grid(row=1, column=2)
-        self.conveyor3.grid(row=2, column=1, columnspan=2)
-
-
-class IndicatorsButton(Frame):
-
-    # noinspection PyDefaultArgument
-    def __init__(self, master=None, cnf={}, **kw):
-        super().__init__(master, cnf, **kw)
-        self.start1 = IndicatorSquare(self, text='Start 1 [%s]' % Szalag1v1_Address.START1)
-        self.stop1 = IndicatorSquare(self, text='Stop 1 [%s]' % Szalag1v1_Address.STOP1)
-        self.start2 = IndicatorSquare(self, text='Start 2 [%s]' % Szalag1v1_Address.START2)
-        self.stop2 = IndicatorSquare(self, text='Stop 2 [%s]' % Szalag1v1_Address.STOP2)
-        self.start1.grid(row=1, column=1, sticky=W)
-        self.stop1.grid(row=2, column=1, sticky=W)
-        self.start2.grid(row=1, column=2, sticky=W)
-        self.stop2.grid(row=2, column=2, sticky=W)
-
-
-class IndicatorsLamp(Frame):
-
-    # noinspection PyDefaultArgument
-    def __init__(self, master=None, cnf={}, **kw):
-        super().__init__(master, cnf, **kw)
-        # noinspection SpellCheckingInspection
-        self.uzem = IndicatorOval(self, text='Üzem [%s]' % Szalag1v1_Address.UZEM)
-        self.hiba1 = IndicatorOval(self, text='Hiba 1 [%s]' % Szalag1v1_Address.HIBA1)
-        self.hiba2 = IndicatorOval(self, text='Hiba 2 [%s]' % Szalag1v1_Address.HIBA2)
-        self.hiba3 = IndicatorOval(self, text='Hiba 3 [%s]' % Szalag1v1_Address.HIBA3)
-        self.uzem.grid(row=1, column=1, sticky=W)
-        self.hiba1.grid(row=1, column=2, sticky=W)
-        self.hiba2.grid(row=2, column=2, sticky=W)
-        self.hiba3.grid(row=3, column=2, sticky=W)
+from szalag_data.szalag1v1_draw import Szalag1v1_View
 
 
 class App(PLC_View):
@@ -62,167 +19,135 @@ class App(PLC_View):
         # noinspection SpellCheckingInspection
         self.name_label.config(text='Szalag 1v1')
 
-        self.indicator_frame = Frame(self.process_frame)
-        self.conveyor_frame = Frame(self.process_frame)
-
-        self.indicators_button = IndicatorsButton(self.indicator_frame)
-        self.indicators_lamp = IndicatorsLamp(self.indicator_frame)
-        self.conveyors = Conveyors(self.conveyor_frame)
-
-        self.indicators_button.pack(side=LEFT)
-        self.indicators_lamp.pack(side=RIGHT)
+        self.conveyors = Szalag1v1_View(self.process_frame)
         self.conveyors.pack()
-
-        self.indicator_frame.pack(fill=X)
-        self.conveyor_frame.pack()
 
         self.plc_data = Szalag1v1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
     def loop(self):
-
-        if self.plc_data.s1_is_changed():
-            self.s1_refresh()
-
-        if self.plc_data.s2_is_changed():
-            self.s2_refresh()
-
-        if self.plc_data.s3_is_changed():
-            self.s3_refresh()
-
-        if self.plc_data.start1_is_changed():
-            self.start1_refresh()
-
-        if self.plc_data.stop1_is_changed():
-            self.stop1_refresh()
-
-        if self.plc_data.start2_is_changed():
-            self.start2_refresh()
-
-        if self.plc_data.stop2_is_changed():
-            self.stop2_refresh()
-
-        if self.plc_data.m1_is_change():
-            self.m1_refresh()
-            self.s1_refresh()
-
-        if self.plc_data.m2_is_change():
-            self.m2_refresh()
-            self.s2_refresh()
-
-        if self.plc_data.m3_is_change():
-            self.m3_refresh()
-            self.s3_refresh()
-
-        if self.plc_data.uzem_is_change():
-            self.uzem_refresh()
-
-        if self.plc_data.hiba1_is_change():
-            self.hiba1_refresh()
-
-        if self.plc_data.hiba2_is_change():
-            self.hiba2_refresh()
-
-        if self.plc_data.hiba3_is_change():
-            self.hiba3_refresh()
-
         super().loop()
 
-    def s1_refresh(self):
-        if self.plc_data.s1 and self.plc_data.m1:
-            self.conveyors.conveyor1.change_indicator_color('green')
-        elif self.plc_data.s1 and not self.plc_data.m1:
-            self.conveyors.conveyor1.change_indicator_color('yellow')
-        elif not self.plc_data.s1 and self.plc_data.m1:
-            self.conveyors.conveyor1.change_indicator_color('red')
-        else:
-            self.conveyors.conveyor1.change_indicator_color('gray')
+        if self.plc_data.start1_is_changed() or self.plc_data.stop1_is_changed():
+            self.button1_refresh()
 
-    def s2_refresh(self):
-        if self.plc_data.s2 and self.plc_data.m2:
-            self.conveyors.conveyor2.change_indicator_color('green')
-        elif self.plc_data.s2 and not self.plc_data.m2:
-            self.conveyors.conveyor2.change_indicator_color('yellow')
-        elif not self.plc_data.s2 and self.plc_data.m2:
-            self.conveyors.conveyor2.change_indicator_color('red')
-        else:
-            self.conveyors.conveyor2.change_indicator_color('gray')
+        if self.plc_data.start2_is_changed() or self.plc_data.stop2_is_changed():
+            self.button2_refresh()
 
-    def s3_refresh(self):
-        if self.plc_data.s3 and self.plc_data.m3:
-            self.conveyors.conveyor3.change_indicator_color('green')
-        elif self.plc_data.s3 and not self.plc_data.m3:
-            self.conveyors.conveyor3.change_indicator_color('yellow')
-        elif not self.plc_data.s3 and self.plc_data.m3:
-            self.conveyors.conveyor3.change_indicator_color('red')
-        else:
-            self.conveyors.conveyor3.change_indicator_color('gray')
+        if self.plc_data.uzem_is_changed():
+            self.factory_refresh()
 
-    def start1_refresh(self):
-        if self.plc_data.start1:
-            self.indicators_button.start1.change_color('green')
-        else:
-            self.indicators_button.start1.change_color('gray')
+        if self.plc_data.hiba1_is_changed() or self.plc_data.hiba2_is_changed() or self.plc_data.hiba3_is_changed():
+            self.error_refresh()
 
-    def stop1_refresh(self):
-        if self.plc_data.stop1:
-            self.indicators_button.stop1.change_color('red')
-        else:
-            self.indicators_button.stop1.change_color('gray')
+        if self.plc_data.m1_is_changed() or self.plc_data.s1_is_changed():
+            self.conveyor1_refresh()
 
-    def start2_refresh(self):
-        if self.plc_data.start2:
-            self.indicators_button.start2.change_color('green')
-        else:
-            self.indicators_button.start2.change_color('gray')
+        if self.plc_data.m2_is_changed() or self.plc_data.s2_is_changed():
+            self.conveyor2_refresh()
 
-    def stop2_refresh(self):
-        if self.plc_data.stop2:
-            self.indicators_button.stop2.change_color('red')
-        else:
-            self.indicators_button.stop2.change_color('gray')
+        if self.plc_data.m3_is_changed() or self.plc_data.s3_is_changed():
+            self.conveyor3_refresh()
 
-    def m1_refresh(self):
-        if self.plc_data.m1:
-            self.conveyors.conveyor1.change_motor_color('green')
+    def button1_refresh(self):
+        # 1 1
+        if self.plc_data.start1 and self.plc_data.stop1:
+            self.conveyors.button1_change_color(start_color='green', stop_color='red')
+        # 0 1
+        elif not self.plc_data.start1 and self.plc_data.stop1:
+            self.conveyors.button1_change_color(start_color='gray', stop_color='red')
+        # 1 0
+        elif self.plc_data.start1 and not self.plc_data.stop1:
+            self.conveyors.button1_change_color(start_color='green', stop_color='gray')
+        # 0 0
         else:
-            self.conveyors.conveyor1.change_motor_color('gray')
+            self.conveyors.button1_change_color(start_color='gray', stop_color='gray')
 
-    def m2_refresh(self):
-        if self.plc_data.m2:
-            self.conveyors.conveyor2.change_motor_color('green')
+    def button2_refresh(self):
+        # 1 1
+        if self.plc_data.start2 and self.plc_data.stop2:
+            self.conveyors.button2_change_color(start_color='green', stop_color='red')
+        # 0 1
+        elif not self.plc_data.start2 and self.plc_data.stop2:
+            self.conveyors.button2_change_color(start_color='gray', stop_color='red')
+        # 1 0
+        elif self.plc_data.start2 and not self.plc_data.stop2:
+            self.conveyors.button2_change_color(start_color='green', stop_color='gray')
+        # 0 0
         else:
-            self.conveyors.conveyor2.change_motor_color('gray')
+            self.conveyors.button2_change_color(start_color='gray', stop_color='gray')
 
-    def m3_refresh(self):
-        if self.plc_data.m3:
-            self.conveyors.conveyor3.change_motor_color('green')
-        else:
-            self.conveyors.conveyor3.change_motor_color('gray')
-
-    # noinspection SpellCheckingInspection
-    def uzem_refresh(self):
+    def factory_refresh(self):
         if self.plc_data.uzem:
-            self.indicators_lamp.uzem.change_color('green')
+            self.conveyors.factory_change_color('green')
         else:
-            self.indicators_lamp.uzem.change_color('gray')
+            self.conveyors.factory_change_color('gray')
 
-    def hiba1_refresh(self):
-        if self.plc_data.hiba1:
-            self.indicators_lamp.hiba1.change_color('red')
+    def error_refresh(self):
+        # 1 1 1
+        if self.plc_data.hiba1 and self.plc_data.hiba2 and self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='red', error2_color='red', error3_color='red')
+        # 0 1 1
+        elif not self.plc_data.hiba1 and self.plc_data.hiba2 and self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='gray', error2_color='red', error3_color='red')
+        # 1 0 1
+        elif self.plc_data.hiba1 and not self.plc_data.hiba2 and self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='red', error2_color='gray', error3_color='red')
+        # 0 0 1
+        elif not self.plc_data.hiba1 and not self.plc_data.hiba2 and self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='gray', error2_color='gray', error3_color='red')
+        # 1 1 0
+        elif self.plc_data.hiba1 and self.plc_data.hiba2 and not self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='red', error2_color='red', error3_color='gray')
+        # 0 1 0
+        elif not self.plc_data.hiba1 and self.plc_data.hiba2 and not self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='gray', error2_color='red', error3_color='gray')
+        # 1 0 0
+        elif self.plc_data.hiba1 and not self.plc_data.hiba2 and not self.plc_data.hiba3:
+            self.conveyors.error_change_color(error1_color='red', error2_color='gray', error3_color='gray')
         else:
-            self.indicators_lamp.hiba1.change_color('gray')
+            self.conveyors.error_change_color(error1_color='gray', error2_color='gray', error3_color='gray')
 
-    def hiba2_refresh(self):
-        if self.plc_data.hiba2:
-            self.indicators_lamp.hiba2.change_color('red')
+    def conveyor1_refresh(self):
+        # 1 1
+        if self.plc_data.m1 and self.plc_data.s1:
+            self.conveyors.conveyor1_change_color(motor_color='green', sensor_color='green')
+        # 0 1
+        elif not self.plc_data.m1 and self.plc_data.s1:
+            self.conveyors.conveyor1_change_color(motor_color='gray', sensor_color='yellow')
+        # 1 0
+        elif self.plc_data.m1 and not self.plc_data.s1:
+            self.conveyors.conveyor1_change_color(motor_color='green', sensor_color='red')
+        # 0 0
         else:
-            self.indicators_lamp.hiba2.change_color('gray')
+            self.conveyors.conveyor1_change_color(motor_color='grey', sensor_color='grey')
 
-    def hiba3_refresh(self):
-        if self.plc_data.hiba3:
-            self.indicators_lamp.hiba3.change_color('red')
+    def conveyor2_refresh(self):
+        # 1 1
+        if self.plc_data.m2 and self.plc_data.s2:
+            self.conveyors.conveyor2_change_color(motor_color='green', sensor_color='green')
+        # 0 1
+        elif not self.plc_data.m2 and self.plc_data.s2:
+            self.conveyors.conveyor2_change_color(motor_color='gray', sensor_color='yellow')
+        # 1 0
+        elif self.plc_data.m2 and not self.plc_data.s2:
+            self.conveyors.conveyor2_change_color(motor_color='green', sensor_color='red')
+        # 0 0
         else:
-            self.indicators_lamp.hiba3.change_color('gray')
+            self.conveyors.conveyor2_change_color(motor_color='grey', sensor_color='grey')
+
+    def conveyor3_refresh(self):
+        # 1 1
+        if self.plc_data.m3 and self.plc_data.s3:
+            self.conveyors.conveyor3_change_color(motor_color='green', sensor_color='green')
+        # 0 1
+        elif not self.plc_data.m3 and self.plc_data.s3:
+            self.conveyors.conveyor3_change_color(motor_color='gray', sensor_color='yellow')
+        # 1 0
+        elif self.plc_data.m3 and not self.plc_data.s3:
+            self.conveyors.conveyor3_change_color(motor_color='green', sensor_color='red')
+        # 0 0
+        else:
+            self.conveyors.conveyor3_change_color(motor_color='grey', sensor_color='grey')
 
 
 if __name__ == '__main__':
