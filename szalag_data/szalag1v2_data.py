@@ -22,7 +22,7 @@ class Szalag1v2_Address(PLC_Address):
     READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
 
 
-class Szalag1v1_data(PLC_data):
+class Szalag1v2_data(PLC_data):
 
     __s1_old = False
     __s2_old = False
