@@ -1,10 +1,5 @@
-
-from tkinter import Frame, W, RIGHT, X, LEFT
-
-from _view.conveyor_view import ConveyorView
-from _view.indicator_view import IndicatorSquare, IndicatorOval
 from _view.plc_view import PLC_View
-from szalag_data.szalag1v0_data import Szalag1v0_Address, Szalag1v0_data
+from szalag_data.szalag1v0_data import Szalag1v0_data
 from szalag_data.szalag1v0_draw import Szalag1v0_View
 
 

@@ -1,9 +1,9 @@
 from tkinter import Frame, W, RIGHT, Y, LEFT, TOP
 
+from _view.indicator_view import IndicatorSquare
 from _view.plc_view import PLC_View
 from tartaly_data.tartaly1_data import Tartaly1_data, Tartaly1_Address
 from tartaly_data.tartaly1_draw import Tartaly1_View
-from _view.indicator_view import IndicatorSquare
 
 
 class Indicators(Frame):
