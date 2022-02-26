@@ -16,10 +16,10 @@ class Szalag1v2_Address(PLC_Address):
     UZEM1 = 'Q0.3'
     UZEM2 = 'Q0.4'
     HIBA1 = 'Q0.5'
-    HIBA2 = 'Q4.0'
-    HIBA3 = 'Q4.1'
+    HIBA2 = 'Q0.6'
+    HIBA3 = 'Q0.7'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = ('IB0', 'QB0')
 
 
 class Szalag1v2_data(PLC_data):
