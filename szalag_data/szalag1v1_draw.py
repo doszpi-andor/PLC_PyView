@@ -63,23 +63,27 @@ class Szalag1v1_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
         self.__indicators_drawing()
         self.__conveyors_drawing()
 
-    def button_change_color(self, start1_color, stop1_color, start2_color, stop2_color):
-        if self.start1_color != start1_color or\
-                self.stop1_color != stop1_color or\
-                self.start2_color != start2_color or\
-                self.stop2_color != stop2_color:
-            self.start1_color = start1_color
-            self.stop1_color = stop1_color
-            self.start2_color = start2_color
-            self.stop2_color = stop2_color
+    def button1_change_color(self, start_color, stop_color):
+        if self.start1_color != start_color or self.stop1_color != stop_color:
+            self.start1_color = start_color
+            self.stop1_color = stop_color
             self.__buttons_drawing()
 
-    def indicator_change_color(self, factory_color, error1_color, error2_color, error3_color):
-        if self.factory_color != factory_color or\
-                self.error1_color != error1_color or\
+    def button2_change_color(self, start_color, stop_color):
+        if self.start2_color != start_color or self.stop2_color != stop_color:
+            self.start2_color = start_color
+            self.stop2_color = stop_color
+            self.__buttons_drawing()
+
+    def factory_change_color(self, factory_color):
+        if self.factory_color != factory_color:
+            self.factory_color = factory_color
+            self.__indicators_drawing()
+
+    def error_change_color(self, error1_color, error2_color, error3_color):
+        if self.error1_color != error1_color or\
                 self.error2_color != error2_color or\
                 self.error3_color != error3_color:
-            self.factory_color = factory_color
             self.error1_color = error1_color
             self.error2_color = error2_color
             self.error3_color = error3_color
