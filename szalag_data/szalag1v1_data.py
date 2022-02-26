@@ -133,43 +133,43 @@ class Szalag1v1_data(PLC_data):
             return True
         return False
 
-    def m1_is_change(self):
+    def m1_is_changed(self):
         if self.m1 != self.__m1_old:
             self.__m1_old = self.m1
             return True
         return False
 
-    def m2_is_change(self):
+    def m2_is_changed(self):
         if self.m2 != self.__m2_old:
             self.__m2_old = self.m2
             return True
         return False
 
-    def m3_is_change(self):
+    def m3_is_changed(self):
         if self.m3 != self.__m3_old:
             self.__m3_old = self.m3
             return True
         return False
 
-    def uzem_is_change(self):
+    def uzem_is_changed(self):
         if self.uzem != self.__uzem_old:
             self.__uzem_old = self.uzem
             return True
         return False
 
-    def hiba1_is_change(self):
+    def hiba1_is_changed(self):
         if self.hiba1 != self.__hiba1_old:
             self.__hiba1_old = self.hiba1
             return True
         return False
 
-    def hiba2_is_change(self):
+    def hiba2_is_changed(self):
         if self.hiba2 != self.__hiba2_old:
             self.__hiba2_old = self.hiba2
             return True
         return False
 
-    def hiba3_is_change(self):
+    def hiba3_is_changed(self):
         if self.hiba3 != self.__hiba3_old:
             self.__hiba3_old = self.hiba3
             return True
