@@ -1,3 +1,5 @@
+from snap7.util import get_bool
+
 from _snap7.snap7_connect import PLC_Connect, S7ConnectFailed
 
 
@@ -18,6 +20,12 @@ class PLC_Address:
 
     WRITE_BYTES_ADDRESS = ()
     WRITE_WORDS_ADDRESS = ()
+
+    INPUT_START_BYTE_ADDRESS = ''
+    INPUT_PROCESS_IMAGE_SIZE = 0
+
+    OUTPUT_START_BYTE_ADDRESS = ''
+    OUTPUT_PROCESS_IMAGE_SIZE = 0
 
     @staticmethod
     def byte_address(bit_address) -> str:
@@ -44,20 +52,8 @@ class PLC_Address:
 
 # noinspection PyPep8Naming
 class PLC_data:
-    """
-    PLC data
-    :param PLC_Address plc_address: PLC Address class
-    :param str ip:  PLC ip address
-    :var dict read_byte_data: read PLC data bytes
-    :var dict read_word_data: read PLC data words
-    :var dict write_byte_data: write PLC data bytes
-    :var dict write_word_data: write PLC data words
-    """
-    read_byte_data = {}
-    read_word_data = {}
-
-    write_byte_data = {}
-    write_word_data = {}
+    input_process_image = None
+    output_process_image = None
 
     def __init__(self, plc_address, ip, rack, slot):
         self.__plc_address = plc_address
@@ -91,25 +87,15 @@ class PLC_data:
         Data to read_byte_data
         """
         try:
-            for byte_address in self.__plc_address.READ_BYTES_ADDRESS:
-                self.read_byte_data[byte_address] = self.__plc_connect.get_bits(byte_address)
-            for word_address in self.__plc_address.READ_WORDS_ADDRESS:
-                self.read_word_data[word_address] = self.__plc_connect.get_int(word_address)
+            if self.__plc_address.INPUT_START_BYTE_ADDRESS != '' and self.__plc_address.INPUT_PROCESS_IMAGE_SIZE > 0:
+                self.input_process_image = self.__plc_connect.get_bytes(self.__plc_address.INPUT_START_BYTE_ADDRESS,
+                                                                        self.__plc_address.INPUT_PROCESS_IMAGE_SIZE)
+            if self.__plc_address.OUTPUT_START_BYTE_ADDRESS != '' and self.__plc_address.OUTPUT_PROCESS_IMAGE_SIZE > 0:
+                self.output_process_image = self.__plc_connect.get_bytes(self.__plc_address.OUTPUT_START_BYTE_ADDRESS,
+                                                                         self.__plc_address.OUTPUT_PROCESS_IMAGE_SIZE)
         except S7ConnectFailed:
-            for byte_address in self.__plc_address.READ_BYTES_ADDRESS:
-                self.read_byte_data[byte_address] = [False, False, False, False, False, False, False, False]
-            for word_address in self.__plc_address.READ_WORDS_ADDRESS:
-                self.read_word_data[word_address] = 0
+            self.input_process_image = None
+            self.output_process_image = None
 
     def write_data(self):
-        """
-            Write PLC data bytes
-            Data to read_byte_data
-        """
-        try:
-            for byte_address in self.__plc_address.WRITE_BYTES_ADDRESS:
-                self.__plc_connect.set_bits(byte_address, self.write_byte_data[byte_address])
-            for word_address in self.__plc_address.WRITE_WORDS_ADDRESS:
-                self.__plc_connect.set_int(word_address, self.write_word_data[word_address])
-        except S7ConnectFailed:
-            pass
+        pass
