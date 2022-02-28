@@ -165,7 +165,7 @@ class PLC_Connect:
         except ValueError:
             raise S7AddressException
 
-        if self.__connected:
+        if self.__connect():
             if s7_address[0] == 'I':
                 return self.__get_byte(Areas.PE, address)
             elif s7_address[0] == 'Q':
@@ -189,13 +189,31 @@ class PLC_Connect:
         except ValueError:
             raise S7AddressException
 
-        if self.__connected:
+        if self.__connect():
             if s7_address[0] == 'I':
                 self.__set_byte(Areas.PE, address, byte_value)
             elif s7_address[0] == 'Q':
                 self.__set_byte(Areas.PA, address, byte_value)
             elif s7_address[0] == 'M':
                 self.__set_byte(Areas.MK, address, byte_value)
+
+    def get_bytes(self, s7_address, length):
+        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
+            raise S7AddressException
+        try:
+            address = int(s7_address[2:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            if s7_address[0] == 'I':
+                return self.__get_bytes(Areas.PE, address, length)
+            elif s7_address[0] == 'Q':
+                return self.__get_bytes(Areas.PA, address, length)
+            elif s7_address[0] == 'M':
+                return self.__get_bytes(Areas.MK, address, length)
+        else:
+            return 0
 
     # noinspection SpellCheckingInspection
     def get_int(self, s7_address) -> int:
@@ -322,6 +340,14 @@ class PLC_Connect:
             self.disconnect()
             raise S7ConnectFailed
 
+    def __get_bytes(self, area, address, length):
+        try:
+            result = self.__plc.read_area(area, 0, address, length)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+        return result
+
     def __get_int(self, area, address):
         try:
             result = self.__plc.read_area(area, 0, address, S7WLWord)
@@ -342,16 +368,8 @@ class PLC_Connect:
 
 if __name__ == '__main__':
     # plc = PLC_Connect('172.16.65.1', 0, 2)
-    plc = PLC_Connect('192.168.56.101', 0, 1)
+    plc = PLC_Connect('172.17.1.1', 0, 1)
 
-    plc.set_bit('Q100.0', True)
-    print(plc.get_bit('Q100.0'))
+    byte_array = plc.get_bytes('QB0', 1024)
+    print(get_bool(byte_array, 4, 0))
 
-    print(hex(plc.get_byte('IB100')))
-    print(plc.get_bits('IB100'))
-
-    plc.set_bits('QB100', [False, True, False, True, False, True, False, True])
-    print(plc.get_bits('QB100'))
-
-    plc.set_int('IW200', -200)
-    print(plc.get_int('IW200'))
