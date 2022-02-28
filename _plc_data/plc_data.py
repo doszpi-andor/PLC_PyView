@@ -29,6 +29,10 @@ class PLC_Address:
         return bit_address[0] + 'B' + bit_address[1]
 
     @staticmethod
+    def byte_index(bit_address) -> int:
+        return int(bit_address[1])
+
+    @staticmethod
     def bit_index(bit_address) -> int:
         """
         PLC bit index create
