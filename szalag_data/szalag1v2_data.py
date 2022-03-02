@@ -19,7 +19,11 @@ class Szalag1v2_Address(PLC_Address):
     HIBA2 = 'Q4.0'
     HIBA3 = 'Q4.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_PII_ADDRESS = 'IB0'
+    READ_PII_SIZE = 1
+
+    READ_PIQ_ADDRESS = 'QB0'
+    READ_PIQ_SIZE = 5
 
 
 class Szalag1v2_data(PLC_data):
@@ -61,37 +65,22 @@ class Szalag1v2_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.s1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.S1)][PLC_Address.bit_index(Szalag1v2_Address.S1)]
-        self.s2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.S2)][PLC_Address.bit_index(Szalag1v2_Address.S2)]
-        self.s3 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.S3)][PLC_Address.bit_index(Szalag1v2_Address.S3)]
-        self.start1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.START1)][PLC_Address.bit_index(Szalag1v2_Address.START1)]
-        self.stop1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.STOP1)][PLC_Address.bit_index(Szalag1v2_Address.STOP1)]
-        self.start2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.START2)][PLC_Address.bit_index(Szalag1v2_Address.START2)]
-        self.stop2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.STOP2)][PLC_Address.bit_index(Szalag1v2_Address.STOP2)]
+        self.s1 = self.get_page_bit(self.read_pii, Szalag1v2_Address.S1)
+        self.s2 = self.get_page_bit(self.read_pii, Szalag1v2_Address.S2)
+        self.s3 = self.get_page_bit(self.read_pii, Szalag1v2_Address.S3)
+        self.start1 = self.get_page_bit(self.read_pii, Szalag1v2_Address.START1)
+        self.stop1 = self.get_page_bit(self.read_pii, Szalag1v2_Address.STOP1)
+        self.start2 = self.get_page_bit(self.read_pii, Szalag1v2_Address.START2)
+        self.stop2 = self.get_page_bit(self.read_pii, Szalag1v2_Address.STOP2)
 
-        self.m1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.M1)][PLC_Address.bit_index(Szalag1v2_Address.M1)]
-        self.m2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.M2)][PLC_Address.bit_index(Szalag1v2_Address.M2)]
-        self.m3 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.M3)][PLC_Address.bit_index(Szalag1v2_Address.M3)]
-        self.uzem1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.UZEM1)][PLC_Address.bit_index(Szalag1v2_Address.UZEM1)]
-        self.uzem2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.UZEM2)][PLC_Address.bit_index(Szalag1v2_Address.UZEM2)]
-        self.hiba1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.HIBA1)][PLC_Address.bit_index(Szalag1v2_Address.HIBA1)]
-        self.hiba2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.HIBA2)][PLC_Address.bit_index(Szalag1v2_Address.HIBA2)]
-        self.hiba3 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag1v2_Address.HIBA3)][PLC_Address.bit_index(Szalag1v2_Address.HIBA3)]
+        self.m1 = self.get_page_bit(self.read_piq, Szalag1v2_Address.M1)
+        self.m2 = self.get_page_bit(self.read_piq, Szalag1v2_Address.M2)
+        self.m3 = self.get_page_bit(self.read_piq, Szalag1v2_Address.M3)
+        self.uzem1 = self.get_page_bit(self.read_piq, Szalag1v2_Address.UZEM1)
+        self.uzem2 = self.get_page_bit(self.read_piq, Szalag1v2_Address.UZEM1)
+        self.hiba1 = self.get_page_bit(self.read_piq, Szalag1v2_Address.HIBA1)
+        self.hiba2 = self.get_page_bit(self.read_piq, Szalag1v2_Address.HIBA2)
+        self.hiba3 = self.get_page_bit(self.read_piq, Szalag1v2_Address.HIBA3)
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:
