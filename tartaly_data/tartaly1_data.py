@@ -18,7 +18,11 @@ class Tartaly1_Address(PLC_Address):
     T3_KEVER = 'Q4.0'
     T3_URIT = 'Q4.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_PII_ADDRESS = 'IB0'
+    READ_PII_SIZE = 1
+
+    READ_PIQ_ADDRESS = 'QB0'
+    READ_PIQ_SIZE = 5
 
     T1_HOMERSEKLET = 'IW64'
     T3_SZINT = 'IW66'
@@ -129,29 +133,18 @@ class Tartaly1_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.__t1_teli = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T1_TELI)][PLC_Address.bit_index(Tartaly1_Address.T1_TELI)]
-        self.__t2_teli = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T2_TELI)][PLC_Address.bit_index(Tartaly1_Address.T2_TELI)]
-        self.__start = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.START)][PLC_Address.bit_index(Tartaly1_Address.START)]
-        self.__stop = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.STOP)][PLC_Address.bit_index(Tartaly1_Address.STOP)]
+        self.__t1_teli = self.get_page_bit(self.read_pii, Tartaly1_Address.T1_TELI)
+        self.__t2_teli = self.get_page_bit(self.read_pii, Tartaly1_Address.T2_TELI)
+        self.__start = self.get_page_bit(self.read_pii, Tartaly1_Address.START)
+        self.__stop = self.get_page_bit(self.read_pii, Tartaly1_Address.STOP)
 
-        self.__t1_tolt = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T1_TOLT)][PLC_Address.bit_index(Tartaly1_Address.T1_TOLT)]
-        self.__t1_fut = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T1_FUT)][PLC_Address.bit_index(Tartaly1_Address.T1_FUT)]
-        self.__t1_urit = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T1_URIT)][PLC_Address.bit_index(Tartaly1_Address.T1_URIT)]
-        self.__t2_tolt = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T2_TOLT)][PLC_Address.bit_index(Tartaly1_Address.T2_TOLT)]
-        self.__t2_urit = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T2_URIT)][PLC_Address.bit_index(Tartaly1_Address.T2_URIT)]
-        self.__t3_kever = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T3_KEVER)][PLC_Address.bit_index(Tartaly1_Address.T3_KEVER)]
-        self.__t3_urit = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly1_Address.T3_URIT)][PLC_Address.bit_index(Tartaly1_Address.T3_URIT)]
+        self.__t1_tolt = self.get_page_bit(self.read_piq, Tartaly1_Address.T1_TOLT)
+        self.__t1_fut = self.get_page_bit(self.read_piq, Tartaly1_Address.T1_FUT)
+        self.__t1_urit = self.get_page_bit(self.read_piq, Tartaly1_Address.T1_URIT)
+        self.__t2_tolt = self.get_page_bit(self.read_piq, Tartaly1_Address.T2_TOLT)
+        self.__t2_urit = self.get_page_bit(self.read_piq, Tartaly1_Address.T2_URIT)
+        self.__t3_kever = self.get_page_bit(self.read_piq, Tartaly1_Address.T3_KEVER)
+        self.__t3_urit = self.get_page_bit(self.read_piq, Tartaly1_Address.T3_URIT)
 
         self.__t1_homerseklet = self.read_word_data[Tartaly1_Address.T1_HOMERSEKLET]
         self.__t3_szint = self.read_word_data[Tartaly1_Address.T3_SZINT]
