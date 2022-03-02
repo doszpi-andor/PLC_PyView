@@ -1,5 +1,3 @@
-from snap7.util import get_bool
-
 from _snap7.snap7_connect import PLC_Connect, S7ConnectFailed
 
 
@@ -7,34 +5,13 @@ from _snap7.snap7_connect import PLC_Connect, S7ConnectFailed
 class PLC_Address:
     """
     PLC Address
-    :var int RACK: PLC rack number
-    :var int SLOT: PLC slot number
-    :var list READ_BYTES_ADDRESS: PLC read bytes
-    :var list READ_WORDS_ADDRESS: PLC read words
-    :var list WRITE_BYTES_ADDRESS: PLC write bytes
-    :var list WRITE_WORDS_ADDRESS: PLC write words
     """
 
-    READ_BYTES_ADDRESS = ()
-    READ_WORDS_ADDRESS = ()
+    READ_PII_ADDRESS = None
+    READ_PII_SIZE = None
 
-    WRITE_BYTES_ADDRESS = ()
-    WRITE_WORDS_ADDRESS = ()
-
-    INPUT_START_BYTE_ADDRESS = ''
-    INPUT_PROCESS_IMAGE_SIZE = 0
-
-    OUTPUT_START_BYTE_ADDRESS = ''
-    OUTPUT_PROCESS_IMAGE_SIZE = 0
-
-    @staticmethod
-    def byte_address(bit_address) -> str:
-        """
-        PLC byte address create
-        :param str bit_address: PLC bit address
-        :return: PLC byte address
-        """
-        return bit_address[0] + 'B' + bit_address[1]
+    READ_PIQ_ADDRESS = None
+    READ_PIQ_SIZE = None
 
     @staticmethod
     def byte_index(bit_address) -> int:
@@ -52,8 +29,8 @@ class PLC_Address:
 
 # noinspection PyPep8Naming
 class PLC_data:
-    input_process_image = None
-    output_process_image = None
+    read_pii = None
+    read_piq = None
 
     def __init__(self, plc_address, ip, rack, slot):
         self.__plc_address = plc_address
@@ -87,15 +64,19 @@ class PLC_data:
         Data to read_byte_data
         """
         try:
-            if self.__plc_address.INPUT_START_BYTE_ADDRESS != '' and self.__plc_address.INPUT_PROCESS_IMAGE_SIZE > 0:
-                self.input_process_image = self.__plc_connect.get_bytes(self.__plc_address.INPUT_START_BYTE_ADDRESS,
-                                                                        self.__plc_address.INPUT_PROCESS_IMAGE_SIZE)
-            if self.__plc_address.OUTPUT_START_BYTE_ADDRESS != '' and self.__plc_address.OUTPUT_PROCESS_IMAGE_SIZE > 0:
-                self.output_process_image = self.__plc_connect.get_bytes(self.__plc_address.OUTPUT_START_BYTE_ADDRESS,
-                                                                         self.__plc_address.OUTPUT_PROCESS_IMAGE_SIZE)
+            if self.__plc_address.READ_PII_ADDRESS is not None and self.__plc_address.READ_PII_SIZE is not None:
+                self.read_pii = self.__plc_connect.get_bytes(self.__plc_address.READ_PII_ADDRESS,
+                                                             self.__plc_address.READ_PII_SIZE)
+            if self.__plc_address.READ_PIQ_ADDRESS is not None and self.__plc_address.READ_PIQ_SIZE is not None:
+                self.read_piq = self.__plc_connect.get_bytes(self.__plc_address.READ_PIQ_ADDRESS,
+                                                             self.__plc_address.READ_PIQ_SIZE)
         except S7ConnectFailed:
-            self.input_process_image = None
-            self.output_process_image = None
+            self.read_pii = None
+            self.read_piq = None
 
     def write_data(self):
         pass
+
+    @staticmethod
+    def get_page_bit(page, s7_bit_address):
+        return bool(page[PLC_Address.byte_index(s7_bit_address)] & (0x01 << PLC_Address.bit_index(s7_bit_address)))

@@ -22,13 +22,11 @@ class Szalag1v1_Address(PLC_Address):
     HIBA2 = 'Q4.0'
     HIBA3 = 'Q4.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_PII_ADDRESS = 'IB0'
+    READ_PII_SIZE = 1
 
-    INPUT_START_BYTE_ADDRESS = 'IB0'
-    INPUT_PROCESS_IMAGE_SIZE = 1
-
-    OUTPUT_START_BYTE_ADDRESS = 'QB0'
-    OUTPUT_PROCESS_IMAGE_SIZE = 5
+    READ_PIQ_ADDRESS = 'QB0'
+    READ_PIQ_SIZE = 5
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
@@ -69,53 +67,21 @@ class Szalag1v1_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        if self.input_process_image is not None:
-            self.s1 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.S1),
-                               PLC_Address.bit_index(Szalag1v1_Address.S1))
-            self.s1 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.S2),
-                               PLC_Address.bit_index(Szalag1v1_Address.S2))
-            self.s1 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.S3),
-                               PLC_Address.bit_index(Szalag1v1_Address.S3))
-            self.start1 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.START1),
-                                   PLC_Address.bit_index(Szalag1v1_Address.START1))
-            self.stop1 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.STOP1),
-                                  PLC_Address.bit_index(Szalag1v1_Address.STOP1))
-            self.start2 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.START2),
-                                   PLC_Address.bit_index(Szalag1v1_Address.START2))
-            self.stop2 = get_bool(self.input_process_image, PLC_Address.byte_index(Szalag1v1_Address.STOP2),
-                                  PLC_Address.bit_index(Szalag1v1_Address.STOP2))
-        else:
-            self.s1 = False
-            self.s2 = False
-            self.s3 = False
-            self.start1 = False
-            self.stop1 = False
-            self.start2 = False
-            self.stop2 = False
+        self.s1 = self.get_page_bit(self.read_pii, Szalag1v1_Address.S1)
+        self.s2 = self.get_page_bit(self.read_pii, Szalag1v1_Address.S2)
+        self.s3 = self.get_page_bit(self.read_pii, Szalag1v1_Address.S3)
+        self.start1 = self.get_page_bit(self.read_pii, Szalag1v1_Address.START1)
+        self.stop1 = self.get_page_bit(self.read_pii, Szalag1v1_Address.STOP1)
+        self.start2 = self.get_page_bit(self.read_pii, Szalag1v1_Address.START2)
+        self.stop2 = self.get_page_bit(self.read_pii, Szalag1v1_Address.STOP2)
 
-        if self.output_process_image is not None:
-            self.m1 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.M1),
-                               PLC_Address.bit_index(Szalag1v1_Address.M1))
-            self.m2 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.M2),
-                               PLC_Address.bit_index(Szalag1v1_Address.M2))
-            self.m3 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.M3),
-                               PLC_Address.bit_index(Szalag1v1_Address.M3))
-            self.uzem = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.UZEM),
-                                 PLC_Address.bit_index(Szalag1v1_Address.UZEM))
-            self.hiba1 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.HIBA1),
-                                  PLC_Address.bit_index(Szalag1v1_Address.HIBA1))
-            self.hiba2 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.HIBA2),
-                                  PLC_Address.bit_index(Szalag1v1_Address.HIBA2))
-            self.hiba3 = get_bool(self.output_process_image, PLC_Address.byte_index(Szalag1v1_Address.HIBA3),
-                                  PLC_Address.bit_index(Szalag1v1_Address.HIBA3))
-        else:
-            self.m1 = False
-            self.m2 = False
-            self.m3 = False
-            self.uzem = False
-            self.hiba1 = False
-            self.hiba2 = False
-            self.hiba3 = False
+        self.m1 = self.get_page_bit(self.read_piq, Szalag1v1_Address.M1)
+        self.m2 = self.get_page_bit(self.read_piq, Szalag1v1_Address.M2)
+        self.m3 = self.get_page_bit(self.read_piq, Szalag1v1_Address.M3)
+        self.uzem = self.get_page_bit(self.read_piq, Szalag1v1_Address.UZEM)
+        self.hiba1 = self.get_page_bit(self.read_piq, Szalag1v1_Address.HIBA1)
+        self.hiba2 = self.get_page_bit(self.read_piq, Szalag1v1_Address.HIBA2)
+        self.hiba3 = self.get_page_bit(self.read_piq, Szalag1v1_Address.HIBA3)
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:

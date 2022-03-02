@@ -346,7 +346,10 @@ class PLC_Connect:
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
-        return result
+        byte_list = []
+        for index in range(0, length):
+            byte_list.append(get_byte(result, index))
+        return byte_list
 
     def __get_int(self, area, address):
         try:
@@ -370,6 +373,5 @@ if __name__ == '__main__':
     # plc = PLC_Connect('172.16.65.1', 0, 2)
     plc = PLC_Connect('172.17.1.1', 0, 1)
 
-    byte_array = plc.get_bytes('QB0', 1024)
-    print(get_bool(byte_array, 4, 0))
+
 
