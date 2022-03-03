@@ -260,6 +260,23 @@ class PLC_Connect:
             elif s7_address[0] == 'M':
                 self.__set_int(Areas.MK, address, int_value)
 
+    def get_ints(self, s7_address, length):
+        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
+            raise S7AddressException
+        try:
+            address = int(s7_address[2:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            if s7_address[0] == 'I':
+                return self.__get_ints(Areas.PE, address, length)
+            elif s7_address[0] == 'Q':
+                return self.__get_ints(Areas.PA, address, length)
+            elif s7_address[0] == 'M':
+                return self.__get_ints(Areas.MK, address, length)
+        return 0
+
     def __connect(self):
         if not self.__connected:
             if self.__ip == '':
@@ -368,10 +385,21 @@ class PLC_Connect:
             self.disconnect()
             raise S7ConnectFailed
 
+    def __get_ints(self, area, address, length):
+        try:
+            result = self.__plc.read_area(area, 0, address, length)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+        int_list = []
+        for index in (x for x in range(0, length) if x % 2 == 0):
+            int_list.append(get_int(result, index))
+        return int_list
+
 
 if __name__ == '__main__':
     # plc = PLC_Connect('172.16.65.1', 0, 2)
-    plc = PLC_Connect('172.17.1.1', 0, 1)
+    plc = PLC_Connect('192.168.90.2', 0, 1)
 
-
+    print(plc.get_ints('IW64', 4))
 

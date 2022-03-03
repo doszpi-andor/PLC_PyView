@@ -13,6 +13,9 @@ class PLC_Address:
     READ_PIQ_ADDRESS = None
     READ_PIQ_SIZE = None
 
+    READ_AI_ADDRESS = None
+    READ_AI_SIZE = None
+
     def byte_index(self, bit_address) -> int:
         byte_address, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
         return byte_address - int(self.READ_PIQ_ADDRESS[2:])
@@ -32,6 +35,7 @@ class PLC_Address:
 class PLC_data:
     read_pii = None
     read_piq = None
+    read_ai = None
 
     def __init__(self, plc_address, ip, rack, slot):
         self.__plc_address = plc_address
@@ -71,9 +75,13 @@ class PLC_data:
             if self.__plc_address.READ_PIQ_ADDRESS is not None and self.__plc_address.READ_PIQ_SIZE is not None:
                 self.read_piq = self.__plc_connect.get_bytes(self.__plc_address.READ_PIQ_ADDRESS,
                                                              self.__plc_address.READ_PIQ_SIZE)
+            if self.__plc_address.READ_AI_ADDRESS is not None and self.__plc_address.READ_AI_SIZE is not None:
+                self.read_ai = self.__plc_connect.get_ints(self.__plc_address.READ_AI_ADDRESS,
+                                                           self.__plc_address.READ_AI_SIZE)
         except S7ConnectFailed:
             self.read_pii = None
             self.read_piq = None
+            self.read_ai = None
 
     def write_data(self):
         pass
