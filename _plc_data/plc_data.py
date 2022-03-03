@@ -79,4 +79,5 @@ class PLC_data:
         pass
 
     def get_page_bit(self,  page, s7_bit_address):
-        return bool(page[self.__plc_address.byte_index(s7_bit_address)] & (0x01 << PLC_Address.bit_index(s7_bit_address)))
+        return bool(page[self.__plc_address.byte_index(s7_bit_address)] &
+                    (0x01 << self.__plc_address.bit_index(s7_bit_address)))
