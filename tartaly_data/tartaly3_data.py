@@ -11,18 +11,20 @@ class Tartaly3_Address(PLC_Address):
     T2_ALSO = 'I0.3'
     T3_FELSO = 'I0.4'
     T3_ALSO = 'I0.5'
-
     START = 'I0.6'
     STOP = 'I0.7'
 
     T1_TOLT = 'Q0.0'
     T2_TOLT = 'Q0.1'
     T3_TOLT = 'Q0.2'
-
     BEKAPCSOLVA = 'Q4.0'
     KIKAPCSOLVA = 'Q4.1'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_PII_ADDRESS = 'IB0'
+    READ_PII_SIZE = 1
+
+    READ_PIQ_ADDRESS = 'QB0'
+    READ_PIQ_SIZE = 5
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
@@ -34,14 +36,12 @@ class Tartaly3_data(PLC_data):
     __t2_also_old = False
     __t3_felso_old = False
     __t3_also_old = False
-
     __start_old = False
     __stop_old = False
 
     __t1_tolt_old = False
     __t2_tolt_old = False
     __t3_tolt_old = False
-
     __bekapcsolva_old = False
     __kikapcsolva_old = False
 
@@ -53,14 +53,12 @@ class Tartaly3_data(PLC_data):
         self.__t2_also = False
         self.__t3_felso = False
         self.__t3_also = False
-
         self.__start = False
         self.__stop = False
 
         self.__t1_tolt = False
         self.__t2_tolt = False
         self.__t3_tolt = False
-
         self.__bekapcsolva = False
         self.__kikapcsolva = False
 
@@ -119,34 +117,37 @@ class Tartaly3_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.__t1_felso = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T1_FELSO)][PLC_Address.bit_index(Tartaly3_Address.T1_FELSO)]
-        self.__t1_also = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T1_ALSO)][PLC_Address.bit_index(Tartaly3_Address.T1_ALSO)]
-        self.__t2_felso = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T2_FELSO)][PLC_Address.bit_index(Tartaly3_Address.T2_FELSO)]
-        self.__t2_also = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T2_ALSO)][PLC_Address.bit_index(Tartaly3_Address.T2_ALSO)]
-        self.__t3_felso = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T3_FELSO)][PLC_Address.bit_index(Tartaly3_Address.T3_FELSO)]
-        self.__t3_also = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T3_ALSO)][PLC_Address.bit_index(Tartaly3_Address.T3_ALSO)]
-        self.__start = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.START)][PLC_Address.bit_index(Tartaly3_Address.START)]
-        self.__stop = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.STOP)][PLC_Address.bit_index(Tartaly3_Address.STOP)]
+        if self.read_pii is not None:
+            self.__t1_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T1_FELSO)
+            self.__t1_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T1_ALSO)
+            self.__t2_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T2_FELSO)
+            self.__t2_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T2_ALSO)
+            self.__t3_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T3_FELSO)
+            self.__t3_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T3_ALSO)
+            self.__start = self.get_page_bit(self.read_pii, Tartaly3_Address.START)
+            self.__stop = self.get_page_bit(self.read_pii, Tartaly3_Address.STOP)
+        else:
+            self.__t1_felso = False
+            self.__t1_also = False
+            self.__t2_felso = False
+            self.__t2_also = False
+            self.__t3_felso = False
+            self.__t3_also = False
+            self.__start = False
+            self.__stop = False
 
-        self.__t1_tolt = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T1_TOLT)][PLC_Address.bit_index(Tartaly3_Address.T1_TOLT)]
-        self.__t2_tolt = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T2_TOLT)][PLC_Address.bit_index(Tartaly3_Address.T2_TOLT)]
-        self.__t3_tolt = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.T3_TOLT)][PLC_Address.bit_index(Tartaly3_Address.T3_TOLT)]
-
-        self.__bekapcsolva = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.BEKAPCSOLVA)][PLC_Address.bit_index(Tartaly3_Address.BEKAPCSOLVA)]
-        self.__kikapcsolva = self.read_byte_data[
-            PLC_Address.byte_address(Tartaly3_Address.KIKAPCSOLVA)][PLC_Address.bit_index(Tartaly3_Address.KIKAPCSOLVA)]
+        if self.read_piq is not None:
+            self.__t1_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T1_TOLT)
+            self.__t2_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T2_TOLT)
+            self.__t3_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T3_TOLT)
+            self.__bekapcsolva = self.get_page_bit(self.read_piq, Tartaly3_Address.KIKAPCSOLVA)
+            self.__kikapcsolva = self.get_page_bit(self.read_piq, Tartaly3_Address.BEKAPCSOLVA)
+        else:
+            self.__t1_tolt = False
+            self.__t2_tolt = False
+            self.__t3_tolt = False
+            self.__bekapcsolva = False
+            self.__kikapcsolva = False
 
     def t1_felso_is_changed(self):
         if self.__t1_felso != self.__t1_felso_old:
