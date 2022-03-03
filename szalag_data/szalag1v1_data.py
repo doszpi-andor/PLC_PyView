@@ -7,25 +7,25 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 # noinspection SpellCheckingInspection,PyPep8Naming
 class Szalag1v1_Address(PLC_Address):
 
-    S1 = 'I0.0'
-    S2 = 'I0.1'
-    S3 = 'I0.2'
-    START1 = 'I0.4'
-    STOP1 = 'I0.5'
-    START2 = 'I0.6'
-    STOP2 = 'I0.7'
-    M1 = 'Q0.0'
-    M2 = 'Q0.1'
-    M3 = 'Q0.2'
-    UZEM = 'Q0.4'
-    HIBA1 = 'Q0.5'
-    HIBA2 = 'Q4.0'
-    HIBA3 = 'Q4.1'
+    S1 = 'I10.0'
+    S2 = 'I10.1'
+    S3 = 'I10.2'
+    START1 = 'I10.4'
+    STOP1 = 'I10.5'
+    START2 = 'I10.6'
+    STOP2 = 'I10.7'
+    M1 = 'Q10.0'
+    M2 = 'Q10.1'
+    M3 = 'Q10.2'
+    UZEM = 'Q10.4'
+    HIBA1 = 'Q10.5'
+    HIBA2 = 'Q14.0'
+    HIBA3 = 'Q14.1'
 
-    READ_PII_ADDRESS = 'IB0'
+    READ_PII_ADDRESS = 'IB10'
     READ_PII_SIZE = 1
 
-    READ_PIQ_ADDRESS = 'QB0'
+    READ_PIQ_ADDRESS = 'QB10'
     READ_PIQ_SIZE = 5
 
 

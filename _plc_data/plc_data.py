@@ -13,9 +13,9 @@ class PLC_Address:
     READ_PIQ_ADDRESS = None
     READ_PIQ_SIZE = None
 
-    @staticmethod
-    def byte_index(bit_address) -> int:
-        return int(bit_address[1])
+    def byte_index(self, bit_address) -> int:
+        byte_address, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
+        return byte_address - int(self.READ_PIQ_ADDRESS[2:])
 
     @staticmethod
     def bit_index(bit_address) -> int:
@@ -24,7 +24,8 @@ class PLC_Address:
         :param str bit_address: PLC but address
         :return: PLC bit index
         """
-        return int(bit_address[3])
+        byte_address, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
+        return bit_index
 
 
 # noinspection PyPep8Naming
@@ -77,6 +78,5 @@ class PLC_data:
     def write_data(self):
         pass
 
-    @staticmethod
-    def get_page_bit(page, s7_bit_address):
-        return bool(page[PLC_Address.byte_index(s7_bit_address)] & (0x01 << PLC_Address.bit_index(s7_bit_address)))
+    def get_page_bit(self,  page, s7_bit_address):
+        return bool(page[self.__plc_address.byte_index(s7_bit_address)] & (0x01 << PLC_Address.bit_index(s7_bit_address)))
