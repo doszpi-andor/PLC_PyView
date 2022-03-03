@@ -10,6 +10,7 @@ class Szalag1v0_Address(PLC_Address):
     NYUGTA = 'I0.5'
     START = 'I0.6'
     STOP = 'I0.7'
+
     M1 = 'Q0.0'
     M2 = 'Q0.1'
     UZEM = 'Q0.5'
@@ -53,16 +54,31 @@ class Szalag1v0_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.s1 = self.get_page_bit(self.read_pii, Szalag1v0_Address.S1)
-        self.s2 = self.get_page_bit(self.read_pii, Szalag1v0_Address.S2)
-        self.start = self.get_page_bit(self.read_pii, Szalag1v0_Address.START)
-        self.stop = self.get_page_bit(self.read_pii, Szalag1v0_Address.STOP)
+        if self.read_pii is not None:
+            self.s1 = self.get_page_bit(self.read_pii, Szalag1v0_Address.S1)
+            self.s2 = self.get_page_bit(self.read_pii, Szalag1v0_Address.S2)
+            self.start = self.get_page_bit(self.read_pii, Szalag1v0_Address.START)
+            self.stop = self.get_page_bit(self.read_pii, Szalag1v0_Address.STOP)
+            self.nyugta = self.get_page_bit(self.read_pii, Szalag1v0_Address.NYUGTA)
+        else:
+            self.s1 = False
+            self.s2 = False
+            self.start = False
+            self.stop = False
+            self.nyugta = False
 
-        self.m1 = self.get_page_bit(self.read_piq, Szalag1v0_Address.M1)
-        self.m2 = self.get_page_bit(self.read_piq, Szalag1v0_Address.M2)
-        self.uzem = self.get_page_bit(self.read_piq, Szalag1v0_Address.UZEM)
-        self.hiba1 = self.get_page_bit(self.read_piq, Szalag1v0_Address.HIBA1)
-        self.hiba2 = self.get_page_bit(self.read_piq, Szalag1v0_Address.HIBA2)
+        if self.read_piq is not None:
+            self.m1 = self.get_page_bit(self.read_piq, Szalag1v0_Address.M1)
+            self.m2 = self.get_page_bit(self.read_piq, Szalag1v0_Address.M2)
+            self.uzem = self.get_page_bit(self.read_piq, Szalag1v0_Address.UZEM)
+            self.hiba1 = self.get_page_bit(self.read_piq, Szalag1v0_Address.HIBA1)
+            self.hiba2 = self.get_page_bit(self.read_piq, Szalag1v0_Address.HIBA2)
+        else:
+            self.m1 = False
+            self.m2 = False
+            self.uzem = False
+            self.hiba1 = False
+            self.hiba2 = False
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:

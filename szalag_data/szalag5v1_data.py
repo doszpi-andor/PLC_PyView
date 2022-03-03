@@ -117,20 +117,37 @@ class Szalag5v1_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__s1 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S1)
-        self.__s2 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S2)
-        self.__s3 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S3)
-        self.__s4 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S4)
-        self.__start1 = self.get_page_bit(self.read_pii, Szalag5v1_Address.START1)
-        self.__start2 = self.get_page_bit(self.read_pii, Szalag5v1_Address.START2)
-        self.__stop = self.get_page_bit(self.read_pii, Szalag5v1_Address.STOP)
+        if self.read_pii is not None:
+            self.__s1 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S1)
+            self.__s2 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S2)
+            self.__s3 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S3)
+            self.__s4 = self.get_page_bit(self.read_pii, Szalag5v1_Address.S4)
+            self.__start1 = self.get_page_bit(self.read_pii, Szalag5v1_Address.START1)
+            self.__start2 = self.get_page_bit(self.read_pii, Szalag5v1_Address.START2)
+            self.__stop = self.get_page_bit(self.read_pii, Szalag5v1_Address.STOP)
+        else:
+            self.__s1 = False
+            self.__s2 = False
+            self.__s3 = False
+            self.__s4 = False
+            self.__start1 = False
+            self.__start2 = False
+            self.__stop = False
 
-        self.__m1 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M1)
-        self.__m2 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M2)
-        self.__m3 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M3)
-        self.__m4 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M4)
-        self.__uzem = self.get_page_bit(self.read_piq, Szalag5v1_Address.UZEM)
-        self.__hiba = self.get_page_bit(self.read_piq, Szalag5v1_Address.HIBA)
+        if self.read_piq is not None:
+            self.__m1 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M1)
+            self.__m2 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M2)
+            self.__m3 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M3)
+            self.__m4 = self.get_page_bit(self.read_piq, Szalag5v1_Address.M4)
+            self.__uzem = self.get_page_bit(self.read_piq, Szalag5v1_Address.UZEM)
+            self.__hiba = self.get_page_bit(self.read_piq, Szalag5v1_Address.HIBA)
+        else:
+            self.__m1 = False
+            self.__m2 = False
+            self.__m3 = False
+            self.__m4 = False
+            self.__uzem = False
+            self.__hiba = False
 
     def s1_is_changed(self):
         if self.__s1 != self.__s1_old:
