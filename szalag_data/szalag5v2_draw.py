@@ -161,7 +161,7 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("800x480")
 
-    conveyor = Szalag5v1_View(root)
+    conveyor = Szalag5v2_View(root)
     conveyor.pack()
 
     root.mainloop()
