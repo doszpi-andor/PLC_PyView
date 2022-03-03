@@ -30,6 +30,9 @@ class PLC_Address:
         byte_address, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
         return bit_index
 
+    def word_index(self, word_address):
+        return (int(word_address[2:]) - int(self.READ_AI_ADDRESS[2:])) // 2
+
 
 # noinspection PyPep8Naming
 class PLC_data:
@@ -86,6 +89,9 @@ class PLC_data:
     def write_data(self):
         pass
 
-    def get_page_bit(self,  page, s7_bit_address):
-        return bool(page[self.__plc_address.byte_index(s7_bit_address)] &
-                    (0x01 << self.__plc_address.bit_index(s7_bit_address)))
+    def get_page_bit(self, page, bit_address):
+        return bool(page[self.__plc_address.byte_index(bit_address)] &
+                    (0x01 << self.__plc_address.bit_index(bit_address)))
+
+    def get_page_int(self, page, word_address):
+        return page[self.__plc_address.word_index(word_address)]

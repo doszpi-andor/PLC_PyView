@@ -27,10 +27,11 @@ class Tartaly1_Address(PLC_Address):
     T1_HOMERSEKLET = 'IW64'
     T3_SZINT = 'IW66'
 
-    READ_WORDS_ADDRESS = ('IW64', 'IW66')
-
     T1_HOMERSEKLET_RANGE = 24000
     T3_SZINT_RANGE = 24000
+
+    READ_AI_ADDRESS = 'IW64'
+    READ_AI_SIZE = 4
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
@@ -146,8 +147,8 @@ class Tartaly1_data(PLC_data):
         self.__t3_kever = self.get_page_bit(self.read_piq, Tartaly1_Address.T3_KEVER)
         self.__t3_urit = self.get_page_bit(self.read_piq, Tartaly1_Address.T3_URIT)
 
-        self.__t1_homerseklet = self.read_word_data[Tartaly1_Address.T1_HOMERSEKLET]
-        self.__t3_szint = self.read_word_data[Tartaly1_Address.T3_SZINT]
+        self.__t1_homerseklet = self.get_page_int(self.read_ai, Tartaly1_Address.T1_HOMERSEKLET)
+        self.__t3_szint = self.get_page_int(self.read_ai, Tartaly1_Address.T3_SZINT)
 
     def t1_teli_is_changed(self):
         if self.__t1_teli != self.__t1_teli_old:
