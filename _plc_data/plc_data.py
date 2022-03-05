@@ -8,6 +8,7 @@ class PLC_Address:
     """
 
     READ_BYTES_ADDRESS = ()
+    READ_WORDS_ADDRESS = ()
 
     @staticmethod
     def byte_address(bit_address) -> str:
@@ -33,6 +34,7 @@ class PLC_Address:
 # noinspection PyPep8Naming
 class PLC_data:
     read_byte_data = {}
+    read_word_data = {}
 
     def __init__(self, plc_address, ip, rack, slot):
         self.__plc_address = plc_address
@@ -67,23 +69,37 @@ class PLC_data:
         """
 
         try:
-            for read_byte_address, read_byte_length in self.__plc_address.READ_BYTES_ADDRESS:
-                read_byte_page = self.__plc_connect.get_bytes(read_byte_address, read_byte_length)
-                read_byte_index = int(read_byte_address[2:])
-                for index in range(0, read_byte_length):
-                    self.read_byte_data[read_byte_address[:2] + str(read_byte_index + index)] = read_byte_page[index]
+            for byte_address, read_length in self.__plc_address.READ_BYTES_ADDRESS:
+                read_byte_page = self.__plc_connect.get_bytes(byte_address, read_length)
+                byte_index = int(byte_address[2:])
+                for index in range(0, read_length):
+                    self.read_byte_data[byte_address[:2] + str(byte_index + index)] = read_byte_page[index]
+
+            for word_address, read_length in self.__plc_address.READ_WORDS_ADDRESS:
+                read_word_page = self.__plc_connect.get_ints(word_address, read_length)
+                word_index = int(word_address[2:])
+                for index in range(0, read_length):
+                    self.read_word_data[word_address[:2] + str(word_index + index * 2)] = read_word_page[index]
+
         except S7ConnectFailed:
-            for read_byte_address, read_byte_length in self.__plc_address.READ_BYTES_ADDRESS:
-                read_byte_index = int(read_byte_address[2:])
-                for index in range(0, read_byte_length):
-                    self.read_byte_data[read_byte_address[:2] + str(read_byte_index + index)] = 0x00
+            for byte_address, read_length in self.__plc_address.READ_BYTES_ADDRESS:
+                byte_index = int(byte_address[2:])
+                for index in range(0, read_length):
+                    self.read_byte_data[byte_address[:2] + str(byte_index + index)] = 0x00
+
+            for word_address, read_length in self.__plc_address.READ_WORDS_ADDRESS:
+                word_index = int(word_address[2:])
+                for index in range(0, read_length):
+                    self.read_word_data[word_address[:2] + str(word_index + index * 2)] = 0
 
     def write_data(self):
         pass
 
-    def get_bit_in_page(self, byte_page, bit_address):
-        return bool(byte_page[self.__plc_address.byte_address(bit_address)]
-                    & (0x01 << self.__plc_address.bit_index(bit_address)))
+    @staticmethod
+    def get_bit_in_page(byte_page, bit_address):
+        return bool(byte_page[PLC_Address.byte_address(bit_address)]
+                    & (0x01 << PLC_Address.bit_index(bit_address)))
 
-    def get_page_int(self, page, word_address):
-        return page[self.__plc_address.word_index(word_address)]
+    @staticmethod
+    def get_int_in_page(word_page, word_address):
+        return word_page[word_address]

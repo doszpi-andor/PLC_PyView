@@ -387,13 +387,13 @@ class PLC_Connect:
 
     def __get_ints(self, area, address, length):
         try:
-            result = self.__plc.read_area(area, 0, address, length)
+            result = self.__plc.read_area(area, 0, address, length * 2)
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
         int_list = []
-        for index in (x for x in range(0, length) if x % 2 == 0):
-            int_list.append(get_int(result, index))
+        for index in range(0, length):
+            int_list.append(get_int(result, index * 2))
         return int_list
 
 
