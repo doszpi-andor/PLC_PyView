@@ -37,7 +37,7 @@ class PLC_data:
     read_word_data = {}
 
     def __init__(self, plc_address, ip, rack, slot):
-        self.__plc_address = plc_address
+        self.plc_address = plc_address
         self.__plc_connect = PLC_Connect(ip, rack, slot)
 
     @property
@@ -69,25 +69,25 @@ class PLC_data:
         """
 
         try:
-            for byte_address, read_length in self.__plc_address.READ_BYTES_ADDRESS:
+            for byte_address, read_length in self.plc_address.READ_BYTES_ADDRESS:
                 read_byte_page = self.__plc_connect.get_bytes(byte_address, read_length)
                 byte_index = int(byte_address[2:])
                 for index in range(0, read_length):
                     self.read_byte_data[byte_address[:2] + str(byte_index + index)] = read_byte_page[index]
 
-            for word_address, read_length in self.__plc_address.READ_WORDS_ADDRESS:
+            for word_address, read_length in self.plc_address.READ_WORDS_ADDRESS:
                 read_word_page = self.__plc_connect.get_ints(word_address, read_length)
                 word_index = int(word_address[2:])
                 for index in range(0, read_length):
                     self.read_word_data[word_address[:2] + str(word_index + index * 2)] = read_word_page[index]
 
         except S7ConnectFailed:
-            for byte_address, read_length in self.__plc_address.READ_BYTES_ADDRESS:
+            for byte_address, read_length in self.plc_address.READ_BYTES_ADDRESS:
                 byte_index = int(byte_address[2:])
                 for index in range(0, read_length):
                     self.read_byte_data[byte_address[:2] + str(byte_index + index)] = 0x00
 
-            for word_address, read_length in self.__plc_address.READ_WORDS_ADDRESS:
+            for word_address, read_length in self.plc_address.READ_WORDS_ADDRESS:
                 word_index = int(word_address[2:])
                 for index in range(0, read_length):
                     self.read_word_data[word_address[:2] + str(word_index + index * 2)] = 0
