@@ -16,7 +16,8 @@ class PLC_Address:
         :param str bit_address: PLC bit address
         :return: PLC byte address
         """
-        return bit_address[0] + 'B' + bit_address[1]
+        byte_index, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
+        return bit_address[0] + 'B' + str(byte_index)
 
     @staticmethod
     def bit_index(bit_address) -> int:
@@ -25,7 +26,7 @@ class PLC_Address:
         :param str bit_address: PLC but address
         :return: PLC bit index
         """
-        byte_address, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
+        byte_index, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
         return bit_index
 
 
