@@ -1,12 +1,11 @@
-from tkinter import Frame, Label, IntVar, Checkbutton, Scale, X, Tk, Toplevel, HORIZONTAL, DISABLED, NORMAL, OptionMenu, \
+from tkinter import Frame, Label, IntVar, Checkbutton, Scale, X, HORIZONTAL, DISABLED, NORMAL, OptionMenu, \
     StringVar
 
-from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
-from _threading.thread_loop import ThreadLoop
 from _view.plc_view import PLC_View
 
 
+# noinspection PyPep8Naming
 class PLC_IO_Address(PLC_Address):
 
     INPUT1 = 'I0.0'
@@ -48,6 +47,7 @@ class PLC_IO_Address(PLC_Address):
     ANALOG_CH1_MIN = 0
 
 
+# noinspection PyPep8Naming
 class PLC_IO_Data(PLC_data):
     __input1_old = False
     __input2_old = False
@@ -500,8 +500,10 @@ class PLC_IO_Data(PLC_data):
         return False
 
 
+# noinspection PyPep8Naming
 class PLC_InputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, change_direction=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         Label(self, text='Input').grid(row=1, column=1, columnspan=8)
@@ -554,8 +556,10 @@ class PLC_InputView(Frame):
         self.input8.configure(state=state)
 
 
+# noinspection PyPep8Naming
 class PLC_OutputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, change_direction=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         Label(self, text='Output').grid(row=1, column=1, columnspan=10)
@@ -618,8 +622,10 @@ class PLC_OutputView(Frame):
         self.output10.configure(state=state)
 
 
+# noinspection PyPep8Naming
 class PLC_AnalogInputView(Frame):
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, change_process=None, state=None, change_direction=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         Label(self, text='Analog').pack()
@@ -648,6 +654,7 @@ class PLC_AnalogInputView(Frame):
 
 class App(PLC_View):
 
+    # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=1, sync=0, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
@@ -678,6 +685,7 @@ class App(PLC_View):
         self.plc_data.read_data()
         self.plc_data.write_data()
 
+    # noinspection PyUnusedLocal
     def set_input_direction(self, *args):
         self.plc_data.input_direction = self.plc_input_frame.direction.get()
         if self.plc_data.input_direction == 'read':
@@ -685,6 +693,7 @@ class App(PLC_View):
         elif self.plc_data.input_direction == 'write':
             self.plc_input_frame.change_state(state=NORMAL)
 
+    # noinspection PyUnusedLocal
     def set_output_direction(self, *args):
         self.plc_data.output_direction = self.plc_output_frame.direction.get()
         if self.plc_data.output_direction == 'read':
@@ -692,6 +701,7 @@ class App(PLC_View):
         elif self.plc_data.output_direction == 'write':
             self.plc_output_frame.change_state(state=NORMAL)
 
+    # noinspection PyUnusedLocal
     def set_analog_direction(self, *args):
         self.plc_data.analog_direction = self.plc_analog_frame.direction.get()
         if self.plc_data.analog_direction == 'read':
@@ -721,6 +731,7 @@ class App(PLC_View):
         self.plc_data.output9 = bool(self.plc_output_frame.output9_var.get())
         self.plc_data.output10 = bool(self.plc_output_frame.output10_var.get())
 
+    # noinspection PyUnusedLocal
     def change_analog(self, *args):
         self.plc_data.analog_input_ch0 = self.plc_analog_frame.analog_ch0_var.get()
         self.plc_data.analog_input_ch1 = self.plc_analog_frame.analog_ch1_var.get()
@@ -770,5 +781,3 @@ if __name__ == '__main__':
     app.after(100, app.loop)
 
     app.mainloop()
-
-

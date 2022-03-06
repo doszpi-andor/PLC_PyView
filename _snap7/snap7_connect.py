@@ -1,7 +1,7 @@
 from snap7.client import Client
 from snap7.exceptions import Snap7Exception
-from snap7.types import Areas, S7WLBit, S7WLByte, S7WLWord
-from snap7.util import get_bool, set_bool, get_byte, set_byte, get_int, set_int
+from snap7.types import Areas
+from snap7.util import get_byte, set_byte, get_int, set_int
 
 
 class S7AddressException(Exception):

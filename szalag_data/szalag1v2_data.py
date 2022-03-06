@@ -1,6 +1,7 @@
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
+# noinspection PyPep8Naming,SpellCheckingInspection
 class Szalag1v2_Address(PLC_Address):
 
     S1 = 'I0.0'
@@ -23,6 +24,7 @@ class Szalag1v2_Address(PLC_Address):
     READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
+# noinspection PyPep8Naming,SpellCheckingInspection
 class Szalag1v2_data(PLC_data):
 
     __s1_old = False

@@ -1,6 +1,4 @@
-from snap7.util import get_bool
 
-from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
