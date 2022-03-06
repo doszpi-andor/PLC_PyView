@@ -17,18 +17,10 @@ class Tartaly3_Address(PLC_Address):
     T1_TOLT = 'Q0.0'
     T2_TOLT = 'Q0.1'
     T3_TOLT = 'Q0.2'
-<<<<<<< HEAD
-
     BEKAPCSOLVA = 'Q0.6'
     KIKAPCSOLVA = 'Q0.7'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0')
-=======
-    BEKAPCSOLVA = 'Q4.0'
-    KIKAPCSOLVA = 'Q4.1'
-
     READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
->>>>>>> main
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
