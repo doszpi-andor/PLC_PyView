@@ -64,21 +64,21 @@ class Szalag1v1_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.s1 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.S1)
-        self.s2 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.S2)
-        self.s3 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.S3)
-        self.start1 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.START1)
-        self.stop1 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.STOP1)
-        self.start2 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.START2)
-        self.stop2 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.STOP2)
+        self.s1 = self.get_bit_in_page(Szalag1v1_Address.S1)
+        self.s2 = self.get_bit_in_page(Szalag1v1_Address.S2)
+        self.s3 = self.get_bit_in_page(Szalag1v1_Address.S3)
+        self.start1 = self.get_bit_in_page(Szalag1v1_Address.START1)
+        self.stop1 = self.get_bit_in_page(Szalag1v1_Address.STOP1)
+        self.start2 = self.get_bit_in_page(Szalag1v1_Address.START2)
+        self.stop2 = self.get_bit_in_page(Szalag1v1_Address.STOP2)
 
-        self.m1 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.M1)
-        self.m2 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.M2)
-        self.m3 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.M3)
-        self.uzem = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.UZEM)
-        self.hiba1 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.HIBA1)
-        self.hiba2 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.HIBA2)
-        self.hiba3 = self.get_bit_in_page(self.read_byte_data, Szalag1v1_Address.HIBA3)
+        self.m1 = self.get_bit_in_page(Szalag1v1_Address.M1)
+        self.m2 = self.get_bit_in_page(Szalag1v1_Address.M2)
+        self.m3 = self.get_bit_in_page(Szalag1v1_Address.M3)
+        self.uzem = self.get_bit_in_page(Szalag1v1_Address.UZEM)
+        self.hiba1 = self.get_bit_in_page(Szalag1v1_Address.HIBA1)
+        self.hiba2 = self.get_bit_in_page(Szalag1v1_Address.HIBA2)
+        self.hiba3 = self.get_bit_in_page(Szalag1v1_Address.HIBA3)
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:

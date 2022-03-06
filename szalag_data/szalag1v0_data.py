@@ -1,4 +1,3 @@
-from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
@@ -50,17 +49,17 @@ class Szalag1v0_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.s1 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.S1)
-        self.s2 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.S2)
-        self.start = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.START)
-        self.stop = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.STOP)
-        self.nyugta = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.NYUGTA)
+        self.s1 = self.get_bit_in_page(Szalag1v0_Address.S1)
+        self.s2 = self.get_bit_in_page(Szalag1v0_Address.S2)
+        self.start = self.get_bit_in_page(Szalag1v0_Address.START)
+        self.stop = self.get_bit_in_page(Szalag1v0_Address.STOP)
+        self.nyugta = self.get_bit_in_page(Szalag1v0_Address.NYUGTA)
 
-        self.m1 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.M1)
-        self.m2 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.M2)
-        self.uzem = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.UZEM)
-        self.hiba1 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.HIBA1)
-        self.hiba2 = self.get_bit_in_page(self.read_byte_data, Szalag1v0_Address.HIBA2)
+        self.m1 = self.get_bit_in_page(Szalag1v0_Address.M1)
+        self.m2 = self.get_bit_in_page(Szalag1v0_Address.M2)
+        self.uzem = self.get_bit_in_page(Szalag1v0_Address.UZEM)
+        self.hiba1 = self.get_bit_in_page(Szalag1v0_Address.HIBA1)
+        self.hiba2 = self.get_bit_in_page(Szalag1v0_Address.HIBA2)
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:
