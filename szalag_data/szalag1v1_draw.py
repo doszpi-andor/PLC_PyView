@@ -144,8 +144,8 @@ class Szalag1v1_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
         self.create_conveyor(self.CONVEYOR2_X_POSITION,
                              self.CONVEYOR2_Y_POSITION,
                              length=self.CONVEYOR2_LENGTH, name='Szalag 2',
-                             circle1_name='S2\n[%s]' % Szalag1v1_Address.S2, circle1_color=self.conveyor2_motor_color,
-                             circle2_name='M2\n[%s]' % Szalag1v1_Address.M2, circle2_color=self.conveyor2_sensor_color)
+                             circle1_name='S2\n[%s]' % Szalag1v1_Address.S2, circle1_color=self.conveyor2_sensor_color,
+                             circle2_name='M2\n[%s]' % Szalag1v1_Address.M2, circle2_color=self.conveyor2_motor_color)
         self.create_conveyor(self.CONVEYOR3_X_POSITION,
                              self.CONVEYOR3_Y_POSITION,
                              length=self.CONVEYOR3_LENGTH, name='Szalag 3',

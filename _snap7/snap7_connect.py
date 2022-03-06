@@ -57,63 +57,7 @@ class PLC_Connect:
         self.__connected = False
         self.__plc.disconnect()
 
-    def get_bit(self, s7_address) -> bool:
-        # noinspection SpellCheckingInspection
-        """
-        Get bit (1 bit)
-        :param str s7_address: Simatic Step 7 PLC address
-        :return: return get bit
-        """
-        if len(s7_address) < 4 or s7_address[0] not in ('I', 'Q', 'M'):
-            raise S7AddressException
-        try:
-            address, bit_index = (int(x) for x in s7_address[1:].split(sep='.'))
-        except ValueError:
-            raise S7AddressException
-        if bit_index > 7:
-            raise S7AddressException
-
-        if self.__connect():
-            if s7_address[0] == 'I':
-                return self.__get_bit(Areas.PE, address, bit_index)
-            elif s7_address[0] == 'Q':
-                return self.__get_bit(Areas.PA, address, bit_index)
-            elif s7_address[0] == 'M':
-                return self.__get_bit(Areas.MK, address, bit_index)
-        else:
-            return False
-
-    # noinspection SpellCheckingInspection
-    def set_bit(self, s7_address, bit_value) -> None:
-        """
-        Set bit (1 bit)
-        :param str s7_address: Simatic Step 7 PLC address
-        :param bool bit_value: set bit value
-        """
-        if len(s7_address) < 4 or s7_address[0] not in ('I', 'Q', 'M'):
-            raise S7AddressException
-        try:
-            address, bit_index = (int(x) for x in s7_address[1:].split(sep='.'))
-        except ValueError:
-            raise S7AddressException
-        if bit_index > 7:
-            raise S7AddressException
-
-        if self.__connect():
-            if s7_address[0] == 'I':
-                self.__set_bit(Areas.PE, address, bit_index, bit_value)
-            elif s7_address[0] == 'Q':
-                self.__set_bit(Areas.PA, address, bit_index, bit_value)
-            elif s7_address[0] == 'M':
-                self.__set_bit(Areas.MK, address, bit_index, bit_value)
-
-    # noinspection SpellCheckingInspection
-    def get_bits(self, s7_address) -> list[bool]:
-        """
-        Get bits (8 bit)
-        :param str s7_address: Simatic Step 7 PLC address
-        :return: return get bits (bool list)
-        """
+    def get_byte(self, s7_address, length):
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
             raise S7AddressException
         try:
@@ -123,65 +67,15 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                return self.__get_bits(Areas.PE, address)
+                return self.__get_byte(Areas.PE, address, length)
             elif s7_address[0] == 'Q':
-                return self.__get_bits(Areas.PA, address)
+                return self.__get_byte(Areas.PA, address, length)
             elif s7_address[0] == 'M':
-                return self.__get_bits(Areas.MK, address)
-
-    # noinspection SpellCheckingInspection
-    def set_bits(self, s7_address, bits_value) -> None:
-        """
-        Set bits (8 bit)
-        :param str s7_address: Simatic Step 7 PLC address
-        :param list[bool] bits_value: set bits value (bool list)
-        """
-        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
-            raise S7AddressException
-        try:
-            address = int(s7_address[2:])
-        except ValueError:
-            raise S7AddressException
-
-        if self.__connect():
-            if s7_address[0] == 'I':
-                self.__set_bits(Areas.PE, address, bits_value)
-            elif s7_address[0] == 'Q':
-                self.__set_bits(Areas.PA, address, bits_value)
-            elif s7_address[0] == 'M':
-                self.__set_bits(Areas.MK, address, bits_value)
-
-    # noinspection SpellCheckingInspection
-    def get_byte(self, s7_address) -> int:
-        """
-        Get byte (1 byte)
-        :param str s7_address: Simatic Step 7 PLC address
-        :return: return get byte (hex)
-        """
-        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
-            raise S7AddressException
-        try:
-            address = int(s7_address[2:])
-        except ValueError:
-            raise S7AddressException
-
-        if self.__connect():
-            if s7_address[0] == 'I':
-                return self.__get_byte(Areas.PE, address)
-            elif s7_address[0] == 'Q':
-                return self.__get_byte(Areas.PA, address)
-            elif s7_address[0] == 'M':
-                return self.__get_byte(Areas.MK, address)
+                return self.__get_byte(Areas.MK, address, length)
         else:
             return 0
 
-    # noinspection SpellCheckingInspection
-    def set_byte(self, s7_address, byte_value) -> None:
-        """
-        Set byte (1 byte)
-        :param str s7_address: Simatic Step 7 PLC address
-        :param int byte_value: set byte value (hex)
-        """
+    def set_byte(self, s7_address, length, byte_page) -> None:
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
             raise S7AddressException
         try:
@@ -191,37 +85,13 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                self.__set_byte(Areas.PE, address, byte_value)
+                self.__set_byte(Areas.PE, address, length, byte_page)
             elif s7_address[0] == 'Q':
-                self.__set_byte(Areas.PA, address, byte_value)
+                self.__set_byte(Areas.PA, address, length, byte_page)
             elif s7_address[0] == 'M':
-                self.__set_byte(Areas.MK, address, byte_value)
+                self.__set_byte(Areas.MK, address, length, byte_page)
 
-    def get_bytes(self, s7_address, length):
-        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
-            raise S7AddressException
-        try:
-            address = int(s7_address[2:])
-        except ValueError:
-            raise S7AddressException
-
-        if self.__connect():
-            if s7_address[0] == 'I':
-                return self.__get_bytes(Areas.PE, address, length)
-            elif s7_address[0] == 'Q':
-                return self.__get_bytes(Areas.PA, address, length)
-            elif s7_address[0] == 'M':
-                return self.__get_bytes(Areas.MK, address, length)
-        else:
-            return 0
-
-    # noinspection SpellCheckingInspection
-    def get_int(self, s7_address) -> int:
-        """
-        Get (signed) integer [2 byte]
-        :param str s7_address: Simatic Step 7 PLC address
-        :return: return get integer
-        """
+    def get_int(self, s7_address, length):
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
             raise S7AddressException
         try:
@@ -231,20 +101,14 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                return self.__get_int(Areas.PE, address)
+                return self.__get_int(Areas.PE, address, length)
             elif s7_address[0] == 'Q':
-                return self.__get_int(Areas.PA, address)
+                return self.__get_int(Areas.PA, address, length)
             elif s7_address[0] == 'M':
-                return self.__get_int(Areas.MK, address)
+                return self.__get_int(Areas.MK, address, length)
         return 0
 
-    # noinspection SpellCheckingInspection
-    def set_int(self, s7_address, int_value) -> None:
-        """
-        Set (signed) integer [2 byte]
-        :param str s7_address: Simatic Step 7 PLC address
-        :param int int_value: set integer value
-        """
+    def set_int(self, s7_address, length, int_page) -> None:
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
             raise S7AddressException
         try:
@@ -254,11 +118,53 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                self.__set_int(Areas.PE, address, int_value)
+                self.__set_int(Areas.PE, address, length, int_page)
             elif s7_address[0] == 'Q':
-                self.__set_int(Areas.PA, address, int_value)
+                self.__set_int(Areas.PA, address, length, int_page)
             elif s7_address[0] == 'M':
-                self.__set_int(Areas.MK, address, int_value)
+                self.__set_int(Areas.MK, address, length, int_page)
+
+    def __get_byte(self, area, address, length):
+        try:
+            result = self.__plc.read_area(area, 0, address, length)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+        byte_list = []
+        for index in range(0, length):
+            byte_list.append(get_byte(result, index))
+        return byte_list
+
+    def __set_byte(self, area, address, length, data):
+        try:
+            result = self.__plc.read_area(area, 0, address, length)
+            for index in range(0, length):
+                set_byte(result, index, data[index])
+            self.__plc.write_area(area, 0, address, result)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+
+    def __get_int(self, area, address, length):
+        try:
+            result = self.__plc.read_area(area, 0, address, length * 2)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+        int_list = []
+        for index in range(0, length):
+            int_list.append(get_int(result, index * 2))
+        return int_list
+
+    def __set_int(self, area, address, length, data):
+        try:
+            result = self.__plc.read_area(area, 0, address, length * 2)
+            for index in range(0, length):
+                set_int(result, index * 2, data[index])
+            self.__plc.write_area(area, 0, address, result)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
 
     def __connect(self):
         if not self.__connected:
@@ -273,103 +179,9 @@ class PLC_Connect:
             self.__connected = True
         return True
 
-    def __get_bit(self, area, address, bit_index):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLBit)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-        return get_bool(result, 0, bit_index)
-
-    def __set_bit(self, area, address, bit_index, bit_value):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLBit)
-            set_bool(result, 0, bit_index, bit_value)
-            self.__plc.write_area(area, 0, address, result)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-
-    def __get_bits(self, area, address):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLBit)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-        return [get_bool(result, 0, 0),
-                get_bool(result, 0, 1),
-                get_bool(result, 0, 2),
-                get_bool(result, 0, 3),
-                get_bool(result, 0, 4),
-                get_bool(result, 0, 5),
-                get_bool(result, 0, 6),
-                get_bool(result, 0, 7)]
-
-    def __set_bits(self, area, address, bits_value):
-        if len(bits_value) != 8:
-            raise ValueError
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLBit)
-            set_bool(result, 0, 0, bits_value[0])
-            set_bool(result, 0, 1, bits_value[1])
-            set_bool(result, 0, 2, bits_value[2])
-            set_bool(result, 0, 3, bits_value[3])
-            set_bool(result, 0, 4, bits_value[4])
-            set_bool(result, 0, 5, bits_value[5])
-            set_bool(result, 0, 6, bits_value[6])
-            set_bool(result, 0, 7, bits_value[7])
-            self.__plc.write_area(area, 0, address, result)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-
-    def __get_byte(self, area, address):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLByte)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-        return get_byte(result, 0)
-
-    def __set_byte(self, area, address, byte_value):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLByte)
-            set_byte(result, 0, byte_value)
-            self.__plc.write_area(area, 0, address, result)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-
-    def __get_bytes(self, area, address, length):
-        try:
-            result = self.__plc.read_area(area, 0, address, length)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-        return result
-
-    def __get_int(self, area, address):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLWord)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-        return get_int(result, 0)
-
-    def __set_int(self, area, address, int_value):
-        try:
-            result = self.__plc.read_area(area, 0, address, S7WLWord)
-            set_int(result, 0, int_value)
-            self.__plc.write_area(area, 0, address, result)
-        except Snap7Exception:
-            self.disconnect()
-            raise S7ConnectFailed
-
 
 if __name__ == '__main__':
     # plc = PLC_Connect('172.16.65.1', 0, 2)
-    plc = PLC_Connect('172.17.1.1', 0, 1)
+    plc = PLC_Connect('192.168.90.2', 0, 1)
 
-    byte_array = plc.get_bytes('QB0', 1024)
-    print(get_bool(byte_array, 4, 0))
-
+    print(plc.get_int('IW64', 4))

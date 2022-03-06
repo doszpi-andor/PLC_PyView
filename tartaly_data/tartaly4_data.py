@@ -20,15 +20,26 @@ class Tartaly4_Address(PLC_Address):
     T2_TOLT = 'Q0.3'
     T2_FUT = 'Q0.4'
     T2_URIT = 'Q0.5'
+<<<<<<< HEAD
     T3_KEVER = 'Q1.0'
     T3_URIT = 'Q1.1'
 
     READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB1')
+=======
+    T3_KEVER = 'Q4.0'
+    T3_URIT = 'Q4.1'
+
+    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+>>>>>>> main
 
     T1_HOMERSEKLET = 'IW64'
     T2_HOMERSEKLET = 'IW66'
 
+<<<<<<< HEAD
     READ_WORDS_ADDRESS = ('IW64', 'IW66')
+=======
+    READ_WORDS_ADDRESS = (('IW64', 2),)
+>>>>>>> main
 
     T1_HOMERSEKLET_RANGE = 24000
     T2_HOMERSEKLET_RANGE = 24000
@@ -164,6 +175,7 @@ class Tartaly4_data(PLC_data):
     def read_data(self):
         super().read_data()
 
+<<<<<<< HEAD
         self.__t1_teli = self.read_byte_data[
             PLC_Address.byte_address(Tartaly4_Address.T1_TELI)][PLC_Address.bit_index(Tartaly4_Address.T1_TELI)]
         self.__t2_teli = self.read_byte_data[
@@ -200,6 +212,28 @@ class Tartaly4_data(PLC_data):
 
         self.__t1_homerseklet = self.read_word_data[Tartaly4_Address.T1_HOMERSEKLET]
         self.__t2_homerseklet = self.read_word_data[Tartaly4_Address.T2_HOMERSEKLET]
+=======
+        self.__t1_teli = self.get_bit_in_page(Tartaly4_Address.T1_TELI)
+        self.__t2_teli = self.get_bit_in_page(Tartaly4_Address.T2_TELI)
+        self.__t3_felso = self.get_bit_in_page(Tartaly4_Address.T3_FELSO)
+        self.__t3_kozep = self.get_bit_in_page(Tartaly4_Address.T3_KOZEP)
+        self.__t3_also = self.get_bit_in_page(Tartaly4_Address.T3_ALSO)
+        self.__start_urit = self.get_bit_in_page(Tartaly4_Address.START_URIT)
+        self.__start = self.get_bit_in_page(Tartaly4_Address.START)
+        self.__stop = self.get_bit_in_page(Tartaly4_Address.STOP)
+
+        self.__t1_tolt = self.get_bit_in_page(Tartaly4_Address.T1_TOLT)
+        self.__t1_fut = self.get_bit_in_page(Tartaly4_Address.T1_FUT)
+        self.__t1_urit = self.get_bit_in_page(Tartaly4_Address.T1_URIT)
+        self.__t2_tolt = self.get_bit_in_page(Tartaly4_Address.T2_TOLT)
+        self.__t2_fut = self.get_bit_in_page(Tartaly4_Address.T2_FUT)
+        self.__t2_urit = self.get_bit_in_page(Tartaly4_Address.T2_URIT)
+        self.__t3_kever = self.get_bit_in_page(Tartaly4_Address.T3_KEVER)
+        self.__t3_urit = self.get_bit_in_page(Tartaly4_Address.T3_URIT)
+
+        self.__t1_homerseklet = self.get_int_in_page(Tartaly4_Address.T1_HOMERSEKLET)
+        self.__t2_homerseklet = self.get_int_in_page(Tartaly4_Address.T2_HOMERSEKLET)
+>>>>>>> main
 
     def t1_teli_is_changed(self):
         if self.__t1_teli != self.__t1_teli_old:

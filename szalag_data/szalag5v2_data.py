@@ -20,7 +20,7 @@ class Szalag5v2_Address(PLC_Address):
     UZEM2 = 'Q0.6'
     HIBA = 'Q0.7'
 
-    READ_BYTES_ADDRESS = ('IB0', 'QB0', 'QB4')
+    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
@@ -120,34 +120,21 @@ class Szalag5v2_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__s1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.S1)][PLC_Address.bit_index(Szalag5v2_Address.S1)]
-        self.__s2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.S2)][PLC_Address.bit_index(Szalag5v2_Address.S2)]
-        self.__s3 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.S3)][PLC_Address.bit_index(Szalag5v2_Address.S3)]
-        self.__s4 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.S4)][PLC_Address.bit_index(Szalag5v2_Address.S4)]
-        self.__start1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.START1)][PLC_Address.bit_index(Szalag5v2_Address.START1)]
-        self.__start2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.START2)][PLC_Address.bit_index(Szalag5v2_Address.START2)]
-        self.__stop = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.STOP)][PLC_Address.bit_index(Szalag5v2_Address.STOP)]
-        self.__m1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.M1)][PLC_Address.bit_index(Szalag5v2_Address.M1)]
-        self.__m2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.M2)][PLC_Address.bit_index(Szalag5v2_Address.M2)]
-        self.__m3 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.M3)][PLC_Address.bit_index(Szalag5v2_Address.M3)]
-        self.__m4 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.M4)][PLC_Address.bit_index(Szalag5v2_Address.M4)]
-        self.__uzem1 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.UZEM1)][PLC_Address.bit_index(Szalag5v2_Address.UZEM1)]
-        self.__uzem2 = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.UZEM2)][PLC_Address.bit_index(Szalag5v2_Address.UZEM2)]
-        self.__hiba = self.read_byte_data[
-            PLC_Address.byte_address(Szalag5v2_Address.HIBA)][PLC_Address.bit_index(Szalag5v2_Address.HIBA)]
+        self.__s1 = self.get_bit_in_page(Szalag5v2_Address.S1)
+        self.__s2 = self.get_bit_in_page(Szalag5v2_Address.S2)
+        self.__s3 = self.get_bit_in_page(Szalag5v2_Address.S3)
+        self.__s4 = self.get_bit_in_page(Szalag5v2_Address.S4)
+        self.__start1 = self.get_bit_in_page(Szalag5v2_Address.START1)
+        self.__start2 = self.get_bit_in_page(Szalag5v2_Address.START2)
+        self.__stop = self.get_bit_in_page(Szalag5v2_Address.STOP)
+
+        self.__m1 = self.get_bit_in_page(Szalag5v2_Address.M1)
+        self.__m2 = self.get_bit_in_page(Szalag5v2_Address.M2)
+        self.__m3 = self.get_bit_in_page(Szalag5v2_Address.M3)
+        self.__m4 = self.get_bit_in_page(Szalag5v2_Address.M4)
+        self.__uzem1 = self.get_bit_in_page(Szalag5v2_Address.UZEM1)
+        self.__uzem2 = self.get_bit_in_page(Szalag5v2_Address.UZEM2)
+        self.__hiba = self.get_bit_in_page(Szalag5v2_Address.HIBA)
 
     def s1_is_changed(self):
         if self.__s1 != self.__s1_old:
