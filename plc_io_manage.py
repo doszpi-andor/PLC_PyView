@@ -27,13 +27,13 @@ class PLC_IO_Address(PLC_Address):
     OUTPUT4 = 'Q0.3'
     OUTPUT5 = 'Q0.4'
     OUTPUT6 = 'Q0.5'
-    OUTPUT7 = 'Q4.0'
-    OUTPUT8 = 'Q4.1'
-    OUTPUT9 = 'Q4.2'
-    OUTPUT10 = 'Q4.3'
+    OUTPUT7 = 'Q0.6'
+    OUTPUT8 = 'Q0.7'
+    OUTPUT9 = 'Q1.0'
+    OUTPUT10 = 'Q1.1'
 
     OUTPUT_DIRECTION = 'read'
-    OUTPUT_ADDRESS = ('QB0', 5)
+    OUTPUT_ADDRESS = ('QB0', 2)
 
     ANALOG_INPUT_CH0 = 'IW64'
     ANALOG_INPUT_CH1 = 'IW66'
