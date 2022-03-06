@@ -129,21 +129,21 @@ class Tartaly1_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.__t1_teli = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T1_TELI)
-        self.__t2_teli = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T2_TELI)
-        self.__start = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.START)
-        self.__stop = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.STOP)
+        self.__t1_teli = self.get_bit_in_page(Tartaly1_Address.T1_TELI)
+        self.__t2_teli = self.get_bit_in_page(Tartaly1_Address.T2_TELI)
+        self.__start = self.get_bit_in_page(Tartaly1_Address.START)
+        self.__stop = self.get_bit_in_page(Tartaly1_Address.STOP)
 
-        self.__t1_tolt = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T1_TOLT)
-        self.__t1_fut = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T1_FUT)
-        self.__t1_urit = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T1_URIT)
-        self.__t2_tolt = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T2_TOLT)
-        self.__t2_urit = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T2_URIT)
-        self.__t3_kever = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T3_KEVER)
-        self.__t3_urit = self.get_bit_in_page(self.read_byte_data, Tartaly1_Address.T3_URIT)
+        self.__t1_tolt = self.get_bit_in_page(Tartaly1_Address.T1_TOLT)
+        self.__t1_fut = self.get_bit_in_page(Tartaly1_Address.T1_FUT)
+        self.__t1_urit = self.get_bit_in_page(Tartaly1_Address.T1_URIT)
+        self.__t2_tolt = self.get_bit_in_page(Tartaly1_Address.T2_TOLT)
+        self.__t2_urit = self.get_bit_in_page(Tartaly1_Address.T2_URIT)
+        self.__t3_kever = self.get_bit_in_page(Tartaly1_Address.T3_KEVER)
+        self.__t3_urit = self.get_bit_in_page(Tartaly1_Address.T3_URIT)
 
-        self.__t1_homerseklet = self.get_int_in_page(self.read_word_data, Tartaly1_Address.T1_HOMERSEKLET)
-        self.__t3_szint = self.get_int_in_page(self.read_word_data, Tartaly1_Address.T3_SZINT)
+        self.__t1_homerseklet = self.get_int_in_page(Tartaly1_Address.T1_HOMERSEKLET)
+        self.__t3_szint = self.get_int_in_page(Tartaly1_Address.T3_SZINT)
 
     def t1_teli_is_changed(self):
         if self.__t1_teli != self.__t1_teli_old:

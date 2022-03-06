@@ -20,11 +20,7 @@ class Tartaly3_Address(PLC_Address):
     BEKAPCSOLVA = 'Q4.0'
     KIKAPCSOLVA = 'Q4.1'
 
-    READ_PII_ADDRESS = 'IB0'
-    READ_PII_SIZE = 1
-
-    READ_PIQ_ADDRESS = 'QB0'
-    READ_PIQ_SIZE = 5
+    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
@@ -117,37 +113,20 @@ class Tartaly3_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        if self.read_pii is not None:
-            self.__t1_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T1_FELSO)
-            self.__t1_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T1_ALSO)
-            self.__t2_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T2_FELSO)
-            self.__t2_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T2_ALSO)
-            self.__t3_felso = self.get_page_bit(self.read_pii, Tartaly3_Address.T3_FELSO)
-            self.__t3_also = self.get_page_bit(self.read_pii, Tartaly3_Address.T3_ALSO)
-            self.__start = self.get_page_bit(self.read_pii, Tartaly3_Address.START)
-            self.__stop = self.get_page_bit(self.read_pii, Tartaly3_Address.STOP)
-        else:
-            self.__t1_felso = False
-            self.__t1_also = False
-            self.__t2_felso = False
-            self.__t2_also = False
-            self.__t3_felso = False
-            self.__t3_also = False
-            self.__start = False
-            self.__stop = False
+        self.__t1_felso = self.get_bit_in_page(Tartaly3_Address.T1_FELSO)
+        self.__t1_also = self.get_bit_in_page(Tartaly3_Address.T1_ALSO)
+        self.__t2_felso = self.get_bit_in_page(Tartaly3_Address.T2_FELSO)
+        self.__t2_also = self.get_bit_in_page(Tartaly3_Address.T2_ALSO)
+        self.__t3_felso = self.get_bit_in_page(Tartaly3_Address.T3_FELSO)
+        self.__t3_also = self.get_bit_in_page(Tartaly3_Address.T3_ALSO)
+        self.__start = self.get_bit_in_page(Tartaly3_Address.START)
+        self.__stop = self.get_bit_in_page(Tartaly3_Address.STOP)
 
-        if self.read_piq is not None:
-            self.__t1_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T1_TOLT)
-            self.__t2_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T2_TOLT)
-            self.__t3_tolt = self.get_page_bit(self.read_piq, Tartaly3_Address.T3_TOLT)
-            self.__bekapcsolva = self.get_page_bit(self.read_piq, Tartaly3_Address.KIKAPCSOLVA)
-            self.__kikapcsolva = self.get_page_bit(self.read_piq, Tartaly3_Address.BEKAPCSOLVA)
-        else:
-            self.__t1_tolt = False
-            self.__t2_tolt = False
-            self.__t3_tolt = False
-            self.__bekapcsolva = False
-            self.__kikapcsolva = False
+        self.__t1_tolt = self.get_bit_in_page(Tartaly3_Address.T1_TOLT)
+        self.__t2_tolt = self.get_bit_in_page(Tartaly3_Address.T2_TOLT)
+        self.__t3_tolt = self.get_bit_in_page(Tartaly3_Address.T3_TOLT)
+        self.__bekapcsolva = self.get_bit_in_page(Tartaly3_Address.BEKAPCSOLVA)
+        self.__kikapcsolva = self.get_bit_in_page(Tartaly3_Address.KIKAPCSOLVA)
 
     def t1_felso_is_changed(self):
         if self.__t1_felso != self.__t1_felso_old:
