@@ -41,6 +41,7 @@ if __name__ == "__main__":
     root = Tk()
 
     silo = ConveyorCanvas(root)
+    # noinspection SpellCheckingInspection
     silo.create_conveyor(5, 5, length=300, name='Szalag 1', circle1_name='M1\n[Q0.0]', circle2_name='S1\n[I0.0]')
     silo.pack()
 
