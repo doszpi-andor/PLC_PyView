@@ -17,7 +17,7 @@ class PLC_IO_Address(PLC_Address):
     INPUT7 = 'I0.6'
     INPUT8 = 'I0.7'
 
-    INPUT_DIRECTION = 'read'
+    INPUT_DIRECTION = 'write'
     INPUT_ADDRESS = ('IB0', 1)
 
     OUTPUT1 = 'Q0.0'
@@ -31,13 +31,13 @@ class PLC_IO_Address(PLC_Address):
     OUTPUT9 = 'Q4.2'
     OUTPUT10 = 'Q4.3'
 
-    OUTPUT_DIRECTION = 'read'
+    OUTPUT_DIRECTION = 'write'
     OUTPUT_ADDRESS = ('QB0', 5)
 
     ANALOG_INPUT_CH0 = 'IW64'
     ANALOG_INPUT_CH1 = 'IW66'
 
-    ANALOG_DIRECTION = 'read'
+    ANALOG_DIRECTION = 'write'
     ANALOG_ADDRESS = ('IW64', 2)
 
     ANALOG_CH0_MAX = 27648
@@ -363,6 +363,49 @@ class PLC_IO_Data(PLC_data):
             self.__analog_ch1 = self.get_int_in_page(self.read_word_data, PLC_IO_Address.ANALOG_INPUT_CH1)
 
     def write_data(self):
+        write_byte_address_list = []
+        write_word_address_list = []
+
+        if PLC_IO_Address.INPUT_DIRECTION == 'write':
+            write_byte_address_list.append(PLC_IO_Address.INPUT_ADDRESS)
+
+        if PLC_IO_Address.OUTPUT_DIRECTION == 'write':
+            write_byte_address_list.append(PLC_IO_Address.OUTPUT_ADDRESS)
+
+        if PLC_IO_Address.ANALOG_DIRECTION == 'write':
+            write_word_address_list.append(PLC_IO_Address.ANALOG_ADDRESS)
+
+        self.plc_address.WRITE_BYTES_ADDRESS = write_byte_address_list
+        self.plc_address.WRITE_WORDS_ADDRESS = write_word_address_list
+
+        self.write_data_clear()
+
+        if PLC_IO_Address.INPUT_DIRECTION == 'write':
+            self.set_bit_in_page(PLC_IO_Address.INPUT1, self.__input1)
+            self.set_bit_in_page(PLC_IO_Address.INPUT2, self.__input2)
+            self.set_bit_in_page(PLC_IO_Address.INPUT3, self.__input3)
+            self.set_bit_in_page(PLC_IO_Address.INPUT4, self.__input4)
+            self.set_bit_in_page(PLC_IO_Address.INPUT5, self.__input5)
+            self.set_bit_in_page(PLC_IO_Address.INPUT6, self.__input6)
+            self.set_bit_in_page(PLC_IO_Address.INPUT7, self.__input7)
+            self.set_bit_in_page(PLC_IO_Address.INPUT8, self.__input8)
+
+        if PLC_IO_Address.OUTPUT_DIRECTION == 'write':
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT1, self.__output1)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT2, self.__output2)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT3, self.__output3)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT4, self.__output4)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT5, self.__output5)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT6, self.__output6)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT7, self.__output7)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT8, self.__output8)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT9, self.__output9)
+            self.set_bit_in_page(PLC_IO_Address.OUTPUT10, self.__output10)
+
+        if PLC_IO_Address.ANALOG_DIRECTION == 'write':
+            self.set_int_in_page(PLC_IO_Address.ANALOG_INPUT_CH0, self.__analog_ch0)
+            self.set_int_in_page(PLC_IO_Address.ANALOG_INPUT_CH1, self.__analog_ch1)
+
         super().write_data()
 
     def input_is_change(self):

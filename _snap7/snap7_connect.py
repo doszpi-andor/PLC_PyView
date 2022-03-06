@@ -215,6 +215,22 @@ class PLC_Connect:
         else:
             return 0
 
+    def set_bytes(self, s7_address, length, bytes_value) -> None:
+        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
+            raise S7AddressException
+        try:
+            address = int(s7_address[2:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            if s7_address[0] == 'I':
+                self.__set_bytes(Areas.PE, address, length, bytes_value)
+            elif s7_address[0] == 'Q':
+                self.__set_bytes(Areas.PA, address, length, bytes_value)
+            elif s7_address[0] == 'M':
+                self.__set_bytes(Areas.MK, address, length, bytes_value)
+
     # noinspection SpellCheckingInspection
     def get_int(self, s7_address) -> int:
         """
@@ -276,6 +292,22 @@ class PLC_Connect:
             elif s7_address[0] == 'M':
                 return self.__get_ints(Areas.MK, address, length)
         return 0
+
+    def set_ints(self, s7_address, length, ints_value) -> None:
+        if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
+            raise S7AddressException
+        try:
+            address = int(s7_address[2:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            if s7_address[0] == 'I':
+                self.__set_ints(Areas.PE, address, length, ints_value)
+            elif s7_address[0] == 'Q':
+                self.__set_ints(Areas.PA, address, length, ints_value)
+            elif s7_address[0] == 'M':
+                self.__set_ints(Areas.MK, address, length, ints_value)
 
     def __connect(self):
         if not self.__connected:
@@ -368,6 +400,16 @@ class PLC_Connect:
             byte_list.append(get_byte(result, index))
         return byte_list
 
+    def __set_bytes(self, area, address, length, bytes_value):
+        try:
+            result = self.__plc.read_area(area, 0, address, length)
+            for index in range(0, length):
+                set_byte(result, index, bytes_value[index])
+            self.__plc.write_area(area, 0, address, result)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
+
     def __get_int(self, area, address):
         try:
             result = self.__plc.read_area(area, 0, address, S7WLWord)
@@ -395,6 +437,16 @@ class PLC_Connect:
         for index in range(0, length):
             int_list.append(get_int(result, index * 2))
         return int_list
+
+    def __set_ints(self, area, address, length, ints_value):
+        try:
+            result = self.__plc.read_area(area, 0, address, length * 2)
+            for index in range(0, length):
+                set_int(result, index *2, ints_value[index])
+            self.__plc.write_area(area, 0, address, result)
+        except Snap7Exception:
+            self.disconnect()
+            raise S7ConnectFailed
 
 
 if __name__ == '__main__':
