@@ -337,30 +337,30 @@ class PLC_IO_Data(PLC_data):
         super().read_data()
 
         if PLC_IO_Address.INPUT_DIRECTION == 'read':
-            self.__input1 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT1)
-            self.__input2 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT2)
-            self.__input3 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT3)
-            self.__input4 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT4)
-            self.__input5 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT5)
-            self.__input6 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT6)
-            self.__input7 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT7)
-            self.__input8 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.INPUT8)
+            self.__input1 = self.get_bit_in_page(PLC_IO_Address.INPUT1)
+            self.__input2 = self.get_bit_in_page(PLC_IO_Address.INPUT2)
+            self.__input3 = self.get_bit_in_page(PLC_IO_Address.INPUT3)
+            self.__input4 = self.get_bit_in_page(PLC_IO_Address.INPUT4)
+            self.__input5 = self.get_bit_in_page(PLC_IO_Address.INPUT5)
+            self.__input6 = self.get_bit_in_page(PLC_IO_Address.INPUT6)
+            self.__input7 = self.get_bit_in_page(PLC_IO_Address.INPUT7)
+            self.__input8 = self.get_bit_in_page(PLC_IO_Address.INPUT8)
 
         if PLC_IO_Address.OUTPUT_DIRECTION == 'read':
-            self.__output1 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT1)
-            self.__output2 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT2)
-            self.__output3 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT3)
-            self.__output4 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT4)
-            self.__output5 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT5)
-            self.__output6 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT6)
-            self.__output7 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT7)
-            self.__output8 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT8)
-            self.__output9 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT9)
-            self.__output10 = self.get_bit_in_page(self.read_byte_data, PLC_IO_Address.OUTPUT10)
+            self.__output1 = self.get_bit_in_page(PLC_IO_Address.OUTPUT1)
+            self.__output2 = self.get_bit_in_page(PLC_IO_Address.OUTPUT2)
+            self.__output3 = self.get_bit_in_page(PLC_IO_Address.OUTPUT3)
+            self.__output4 = self.get_bit_in_page(PLC_IO_Address.OUTPUT4)
+            self.__output5 = self.get_bit_in_page(PLC_IO_Address.OUTPUT5)
+            self.__output6 = self.get_bit_in_page(PLC_IO_Address.OUTPUT6)
+            self.__output7 = self.get_bit_in_page(PLC_IO_Address.OUTPUT7)
+            self.__output8 = self.get_bit_in_page(PLC_IO_Address.OUTPUT8)
+            self.__output9 = self.get_bit_in_page(PLC_IO_Address.OUTPUT9)
+            self.__output10 = self.get_bit_in_page(PLC_IO_Address.OUTPUT10)
 
         if PLC_IO_Address.ANALOG_DIRECTION == 'read':
-            self.__analog_ch0 = self.get_int_in_page(self.read_word_data, PLC_IO_Address.ANALOG_INPUT_CH0)
-            self.__analog_ch1 = self.get_int_in_page(self.read_word_data, PLC_IO_Address.ANALOG_INPUT_CH1)
+            self.__analog_ch0 = self.get_int_in_page(PLC_IO_Address.ANALOG_INPUT_CH0)
+            self.__analog_ch1 = self.get_int_in_page(PLC_IO_Address.ANALOG_INPUT_CH1)
 
     def write_data(self):
         write_byte_address_list = []
