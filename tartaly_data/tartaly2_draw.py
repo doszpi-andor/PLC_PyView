@@ -1,12 +1,13 @@
 from tkinter import Tk
 
+from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas, AnalogCanvas
 from _view.tank_canvas import TankCanvas, ValveCanvas, HeatingCanvas, PipeCanvas
 from tartaly_data.tartaly2_data import Tartaly2_Address
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
-class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, PipeCanvas):
+class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, PipeCanvas, IndicatorCanvas):
     TANK_WIDTH = 55
     TANK_HEIGHT = 120
     VALVE_WIDTH = 15
@@ -19,6 +20,7 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     HEATING_HEIGHT = 30
     ROTOR_WIDTH = 40
     PIPE_WIDTH = 6
+    INDICATOR_WIDTH = 20
 
     T1_TANK_X_POSITION = 100
     T1_TANK_THERMO_SENSOR_POSITION = T1_TANK_X_POSITION + 65
@@ -31,6 +33,8 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     T4_ADDITIVE_VALVE_X_POSITION = 500
     T4_TANK_X_POSITION = T3_TANK_X_POSITION + (T4_ADDITIVE_VALVE_X_POSITION - (
             T3_TANK_X_POSITION + TANK_WIDTH // 2)) // 2
+
+    INDICATOR_COLUMN1_X_POSITION = T4_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 10
 
     T1_TOP_VALVE_Y_POSITION = 10
     T1_TANK_Y_POSITION = T1_TOP_VALVE_Y_POSITION + VALVE_HEIGHT + 5
@@ -59,6 +63,9 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     T4_TANK_Y_POSITION = T3_BOTTOM_VALVE_Y_POSITION + VALVE_HEIGHT + 60
     T4_BOTTOM_VALVE_Y_POSITION = T4_TANK_Y_POSITION + TANK_HEIGHT + 5
     T4_LEVEL_SENSOR_Y_POSITION = T4_TANK_Y_POSITION + TANK_HEIGHT // 8
+
+    INDICATOR_ROW1_Y_POSITION = T4_TANK_Y_POSITION
+    INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
 
     FULL_WIDTH = T4_ADDITIVE_VALVE_X_POSITION + 200
     FULL_HEIGHT = T2_TANK_Y_POSITION + TANK_HEIGHT + VALVE_HEIGHT + 80
@@ -90,6 +97,9 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__tank4_add_valve_color = 'gray'
         self.__tank4_bottom_valve_color = 'gray'
 
+        self.__start_color = 'gray'
+        self.__stop_color = 'gray'
+
         self.__tank4_level_percent = 0
 
         self.__pipe12_drawing()
@@ -98,6 +108,13 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__tank2_drawing()
         self.__tank3_drawing()
         self.__tank4_drawing()
+        self.__buttons_drawing()
+
+    def button_change_color(self, start_color, stop_color):
+        if self.__stop_color != start_color or self.__stop_color != stop_color:
+            self.__start_color = start_color
+            self.__stop_color = stop_color
+            self.__buttons_drawing()
 
     def tank1_change_color(self, top_valve_color, bottom_valve_color, heating_color):
         if self.__tank1_top_valve_color != top_valve_color or\
@@ -156,6 +173,14 @@ class Tartaly2_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         if self.__tank4_level_percent != level_percent:
             self.__tank4_level_percent = level_percent
             self.__tank4_drawing()
+
+    def __buttons_drawing(self):
+        self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
+                                     self.INDICATOR_ROW1_Y_POSITION,
+                                     name='Start [%s]' % Tartaly2_Address.START, color=self.__start_color)
+        self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
+                                     self.INDICATOR_ROW2_Y_POSITION,
+                                     name='Stop [%s]' % Tartaly2_Address.STOP, color=self.__stop_color)
 
     def __pipe12_drawing(self):
 

@@ -102,7 +102,7 @@ class Tartaly4_data(PLC_data):
         return self.__t3_also
 
     @property
-    def stert_urit(self):
+    def start_urit(self):
         return self.__start_urit
 
     @property
