@@ -1,4 +1,4 @@
-from tkinter import Canvas, Tk, W
+from tkinter import Canvas, Tk, W, RIGHT
 
 
 class IndicatorCanvas(Canvas):
@@ -30,13 +30,19 @@ class IndicatorCanvas(Canvas):
                          font=("Arial", self.INDICATOR_FONT_SIZE),
                          anchor=W, text=name)
 
-    def create_delta_indicator(self, x_position, y_position, direction='right', color='gray'):
+    def create_delta_indicator(self, x_position, y_position, name='', direction='right', color='gray'):
         if direction == 'right':
-            self.create_polygon(x_position,
+            name_text = self.create_text(x_position,
+                                         y_position + self.INDICATOR_WIDTH // 2,
+                                         font=("Arial", self.INDICATOR_FONT_SIZE),
+                                         justify=RIGHT,
+                                         anchor=W, text=name)
+            text_x_end = self.bbox(name_text)[2]
+            self.create_polygon(text_x_end + self.INDICATOR_TEXT_SHIFT,
                                 y_position,
-                                x_position,
+                                text_x_end + self.INDICATOR_TEXT_SHIFT,
                                 y_position + self.INDICATOR_WIDTH,
-                                x_position + self.INDICATOR_WIDTH,
+                                text_x_end + self.INDICATOR_TEXT_SHIFT + self.INDICATOR_WIDTH,
                                 y_position + self.INDICATOR_WIDTH // 2,
                                 fill=color, outline='black')
         elif direction == 'left':
@@ -47,6 +53,10 @@ class IndicatorCanvas(Canvas):
                                 x_position,
                                 y_position + self.INDICATOR_WIDTH // 2,
                                 fill=color, outline='black')
+            self.create_text(x_position + self.INDICATOR_WIDTH + self.INDICATOR_TEXT_SHIFT,
+                             y_position + self.INDICATOR_WIDTH // 2,
+                             font=("Arial", self.INDICATOR_FONT_SIZE),
+                             anchor=W, text=name)
 
 
 if __name__ == "__main__":
