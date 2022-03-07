@@ -1,10 +1,7 @@
 
-from tkinter import Frame, RIGHT, W
-
 from _view.plc_view import PLC_View
-from tartaly_data.tartaly3_data import Tartaly3_Address, Tartaly3_data
+from tartaly_data.tartaly3_data import Tartaly3_data
 from tartaly_data.tartaly3_draw import Tartaly3_View
-from _view.indicator_view import IndicatorSquare, IndicatorOval
 
 
 class App(PLC_View):
