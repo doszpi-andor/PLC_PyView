@@ -46,8 +46,8 @@ class Szalag4v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
     INDICATOR_ROW3_Y_POSITION = INDICATOR_ROW2_Y_POSITION + INDICATOR_WIDTH + 10
 
-    FULL_WIDTH = 800
-    FULL_HEIGHT = 480
+    FULL_WIDTH = CONVEYOR3_X_POSITION + CONVEYOR3_LENGTH
+    FULL_HEIGHT = CONVEYOR3_Y_POSITION + CONVEYOR_WIDTH
 
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
