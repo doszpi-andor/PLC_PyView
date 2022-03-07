@@ -1,21 +1,8 @@
-from tkinter import Frame, W, RIGHT, Y, LEFT, TOP
+from tkinter import RIGHT, Y, LEFT, TOP
 
-from _view.indicator_view import IndicatorSquare
 from _view.plc_view import PLC_View
-from tartaly_data.tartaly1_data import Tartaly1_data, Tartaly1_Address
+from tartaly_data.tartaly1_data import Tartaly1_data
 from tartaly_data.tartaly1_draw import Tartaly1_View
-
-
-class Indicators(Frame):
-
-    # noinspection PyDefaultArgument
-    def __init__(self, master=None, cnf={}, **kw):
-        super().__init__(master, cnf, **kw)
-        self.start = IndicatorSquare(self, text='Start [%s]' % Tartaly1_Address.START)
-        self.stop = IndicatorSquare(self, text='Stop [%s]' % Tartaly1_Address.STOP)
-
-        self.start.grid(row=1, column=1, sticky=W)
-        self.stop.grid(row=2, column=1, sticky=W)
 
 
 class App(PLC_View):
@@ -31,11 +18,9 @@ class App(PLC_View):
         self.name_label.config(text='Tartály-1', wraplength=1)
         self.connect_label.config(wraplength=1)
 
-        self.indicators = Indicators(self.process_frame)
         self.tanks = Tartaly1_View(self.process_frame)
 
         self.close_button.pack(side=TOP)
-        self.indicators.pack(side=RIGHT)
         self.tanks.pack()
 
         self.name_frame.pack(side=RIGHT, fill=Y)
@@ -45,11 +30,8 @@ class App(PLC_View):
 
     def loop(self):
 
-        if self.plc_data.start_is_changed():
-            self.start_refresh()
-
-        if self.plc_data.stop_is_changed():
-            self.stop_refresh()
+        if self.plc_data.start_is_changed() or self.plc_data.stop_is_changed():
+            self.button_refresh()
 
         if self.plc_data.t1_teli_is_changed() or self.plc_data.t1_fut_is_changed():
             self.tank1_refresh()
@@ -72,17 +54,19 @@ class App(PLC_View):
 
         super().loop()
 
-    def start_refresh(self):
-        if self.plc_data.start:
-            self.indicators.start.change_color('green')
+    def button_refresh(self):
+        # 1 1
+        if self.plc_data.start and self.plc_data.stop:
+            self.tanks.button_change_color(start_color='green', stop_color='red')
+        # 0 1
+        elif not self.plc_data.start and self.plc_data.stop:
+            self.tanks.button_change_color(start_color='gray', stop_color='red')
+        # 1 0
+        elif self.plc_data.start and not self.plc_data.stop:
+            self.tanks.button_change_color(start_color='green', stop_color='gray')
+        # 0 0
         else:
-            self.indicators.start.change_color('gray')
-
-    def stop_refresh(self):
-        if self.plc_data.stop:
-            self.indicators.stop.change_color('red')
-        else:
-            self.indicators.stop.change_color('gray')
+            self.tanks.button_change_color(start_color='gray', stop_color='gray')
 
     def tank1_refresh(self):
         # 1 1

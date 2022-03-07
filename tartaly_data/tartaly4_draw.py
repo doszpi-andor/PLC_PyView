@@ -1,12 +1,14 @@
 from tkinter import Tk
 
+from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas, AnalogCanvas
 from _view.tank_canvas import TankCanvas, ValveCanvas, HeatingCanvas, RotorCanvas, PipeCanvas
 from tartaly_data.tartaly4_data import Tartaly4_Address
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
-class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, RotorCanvas, PipeCanvas):
+class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, HeatingCanvas, RotorCanvas, PipeCanvas,
+                    IndicatorCanvas):
     TANK_WIDTH = 60
     TANK_HEIGHT = 130
     VALVE_WIDTH = 20
@@ -19,12 +21,15 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     HEATING_HEIGHT = 30
     ROTOR_WIDTH = 40
     PIPE_WIDTH = 7
+    INDICATOR_WIDTH = 20
 
     T1_TANK_X_POSITION = 100
     T1_THERMOMETER_X_POSITION = T1_TANK_X_POSITION - ANALOG_SENSOR_WIDTH - 10
     T2_TANK_X_POSITION = T1_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 50
     T2_THERMOMETER_X_POSITION = T2_TANK_X_POSITION - ANALOG_SENSOR_WIDTH - 10
     T3_TANK_X_POSITION = T1_TANK_X_POSITION + (TANK_WIDTH * 2 + SENSOR_TEXT_LENGTH + 50) // 2 - TANK_WIDTH // 2
+
+    INDICATOR_COLUMN1_X_POSITION = T3_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 10
 
     T1_TOP_VALVE_Y_POSITION = 10
     T1_TANK_Y_POSITION = T1_TOP_VALVE_Y_POSITION + VALVE_HEIGHT + 10
@@ -46,6 +51,10 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     T3_TOP_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT // 8
     T3_HALF_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT // 2
     T3_BOTTOM_SENSOR_Y_POSITION = T3_TANK_Y_POSITION + TANK_HEIGHT * 7 // 8
+
+    INDICATOR_ROW1_Y_POSITION = T3_TANK_Y_POSITION
+    INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
+    INDICATOR_ROW3_Y_POSITION = INDICATOR_ROW2_Y_POSITION + INDICATOR_WIDTH + 10
 
     FULL_WIDTH = T2_TANK_X_POSITION + TANK_WIDTH + SENSOR_TEXT_LENGTH + 50
     FULL_HEIGHT = T3_BOTTOM_VALVE_Y_POSITION + VALVE_HEIGHT + 10
@@ -71,6 +80,10 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__tank3_half_sensor_color = 'gray'
         self.__tank3_bottom_sensor_color = 'gray'
 
+        self.__start_color = 'gray'
+        self.__stop_color = 'gray'
+        self.__dump_color = 'gray'
+
         self.__tank1_temperature_percent = 0
         self.__tank2_temperature_percent = 0
 
@@ -78,6 +91,14 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__tank1_drawing()
         self.__tank2_drawing()
         self.__tank3_drawing()
+        self.__buttons_drawing()
+
+    def button_change_color(self, start_color, stop_color, dulp_color):
+        if self.__stop_color != start_color or self.__stop_color != stop_color or self.__dump_color != dulp_color:
+            self.__start_color = start_color
+            self.__stop_color = stop_color
+            self.__dump_color = dulp_color
+            self.__buttons_drawing()
 
     def tank1_change_color(self, sensor_color, heating_color):
         if self.__tank1_sensor_color != sensor_color or self.__tank1_heating_color != heating_color:
@@ -127,6 +148,17 @@ class Tartaly4_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         if self.__tank2_temperature_percent != temperature_percent:
             self.__tank2_temperature_percent = temperature_percent
             self.__tank2_drawing()
+
+    def __buttons_drawing(self):
+        self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
+                                     self.INDICATOR_ROW1_Y_POSITION,
+                                     name='Start [%s]' % Tartaly4_Address.START, color=self.__start_color)
+        self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
+                                     self.INDICATOR_ROW2_Y_POSITION,
+                                     name='Stop [%s]' % Tartaly4_Address.STOP, color=self.__stop_color)
+        self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
+                                     self.INDICATOR_ROW3_Y_POSITION,
+                                     name='Start ürit [%s]' % Tartaly4_Address.START_URIT, color=self.__dump_color)
 
     def __pipe_drawing(self):
 
