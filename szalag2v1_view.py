@@ -1,9 +1,9 @@
-from _view.plc_view import PLC_View
+from _view.plc_viewa import PLC_ViewA
 from szalag_data.szalag2v1_data import Szalag2v1_data
 from szalag_data.szalag2v1_draw import Szalag2v1_View
 
 
-class App(PLC_View):
+class App(PLC_ViewA):
 
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):

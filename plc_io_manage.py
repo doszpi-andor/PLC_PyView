@@ -2,7 +2,7 @@ from tkinter import Frame, Label, IntVar, Checkbutton, Scale, X, HORIZONTAL, DIS
     StringVar
 
 from _plc_data.plc_data import PLC_Address, PLC_data
-from _view.plc_view import PLC_View
+from _view.plc_viewa import PLC_ViewA
 
 
 # noinspection PyPep8Naming
@@ -652,7 +652,7 @@ class PLC_AnalogInputView(Frame):
         self.analog_ch1_scale.configure(state=state)
 
 
-class App(PLC_View):
+class App(PLC_ViewA):
 
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=1, sync=0, use=None):

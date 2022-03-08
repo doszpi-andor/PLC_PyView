@@ -1,9 +1,9 @@
-from _view.plc_view import PLC_View
+from _view.plc_viewa import PLC_ViewA
 from szalag_data.szalag1v0_data import Szalag1v0_data
 from szalag_data.szalag1v0_draw import Szalag1v0_View
 
 
-class App(PLC_View):
+class App(PLC_ViewA):
 
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
@@ -11,7 +11,6 @@ class App(PLC_View):
 
         # noinspection SpellCheckingInspection
         self.title('Szalag 1v0')
-
         # noinspection SpellCheckingInspection
         self.name_label.config(text='Szalag 1v0')
 

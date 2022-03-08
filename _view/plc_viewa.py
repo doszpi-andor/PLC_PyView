@@ -1,5 +1,5 @@
 from platform import system
-from tkinter import Tk, Frame, Label, Button, RIGHT, Y, Toplevel, BOTTOM, X
+from tkinter import Tk, Frame, Label, Button, RIGHT, Y, Toplevel, BOTTOM, X, TOP, LEFT
 
 from _config.plc_config_read import PLC_Config
 from _plc_data.plc_data import PLC_data, PLC_Address
@@ -42,22 +42,11 @@ class PLC_View(Tk):
         # noinspection SpellCheckingInspection
         self.close_button = Button(self.name_frame, text='Bezárás', command=self.close)
 
-        self.close_button.pack(side=RIGHT)
-        self.name_label.pack()
-
         self.connect_label = Label(self.connect_frame, text='--')
         self.ip_select = SelectIP(self.connect_frame,
                                   default_ip=self.plc_default_ip,
                                   ip_list=self.plc_ip_list,
                                   change_process=self.ip_selected)
-
-        self.ip_select.pack()
-        self.connect_label.pack()
-
-        self.name_frame.pack(fill=X)
-        # self.process_frame.pack()
-        self.connect_frame.pack(side=BOTTOM, fill=Y)
-        self.process_frame.pack()
 
         self.plc_data = PLC_data(PLC_Address(), self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
@@ -93,19 +82,65 @@ class PLC_View(Tk):
         self.plc_data.read_data()
 
     def loop(self):
-        if self.plc_data.connected:
-            self.connect_label.configure(text='PLC connected', fg='black')
-        else:
-            self.connect_label.configure(text='PLC not connected', fg='red')
-
         if self.__closed and not self.data_transfer.is_alive():
             self.destroy()
 
         self.after(100, self.loop)
 
 
+class PLC_ViewA(PLC_View):
+
+    # noinspection PyPep8Naming
+    def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
+        super().__init__(screenName, baseName, className, useTk, sync, use)
+
+        self.close_button.pack(side=RIGHT)
+        self.name_label.pack()
+        self.ip_select.pack()
+        self.connect_label.pack()
+
+        self.name_frame.pack(fill=X)
+        self.connect_frame.pack(side=BOTTOM, fill=Y)
+        self.process_frame.pack()
+
+    def loop(self):
+        if self.plc_data.connected:
+            self.connect_label.configure(text='PLC connected', fg='black')
+        else:
+            self.connect_label.configure(text='PLC not connected', fg='red')
+
+        super().loop()
+
+
+class PLC_ViewB(PLC_View):
+
+    # noinspection PyPep8Naming
+    def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
+        super().__init__(screenName, baseName, className, useTk, sync, use)
+
+        self.name_label.config(wraplength=1)
+        self.connect_label.config(wraplength=1)
+
+        self.close_button.pack(side=TOP)
+        self.name_label.pack()
+        self.ip_select.pack()
+        self.connect_label.pack()
+
+        self.name_frame.pack(side=RIGHT, fill=Y)
+        self.connect_frame.pack(side=LEFT, fill=Y)
+        self.process_frame.pack()
+
+    def loop(self):
+        if self.plc_data.connected:
+            self.connect_label.configure(text='PLC-connected', fg='black')
+        else:
+            self.connect_label.configure(text='PLC-not-connected', fg='red')
+
+        super().loop()
+
+
 if __name__ == '__main__':
-    app = PLC_View()
+    app = PLC_ViewB()
 
     app.after(100, app.loop)
 
