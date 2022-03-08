@@ -1,6 +1,6 @@
 # Szalag 1v0
 
-<img src="/jpg/Szalag_1v0.png" title="S7-1214" />
+<img src="Szalag1v0.png" title="S7-1214" />
 
 ### Elvárt működés:
 * Szalag rendszer indítása *Start* gomb hatására történik (*M1* és *M2* bekapcsol).
