@@ -14,7 +14,7 @@ class Szalag4v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
 
     INDICATOR_WIDTH = 25
 
-    CONVEYOR_WIDTH = 40
+    CONVEYOR_WIDTH = 45
 
     CONVEYOR1_LENGTH = 300
     CONVEYOR2_LENGTH = 300

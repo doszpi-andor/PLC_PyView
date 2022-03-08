@@ -12,7 +12,7 @@ from szalag_data.szalag2v1_data import Szalag2v1_Address
 class Szalag2v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, WagonCanvas):
     SILO_WIDTH = 100
     SILO_HEIGHT = 150
-    CONVEYOR_WIDTH = 40
+    CONVEYOR_WIDTH = 45
     WAGON_WIDTH = 200
     WAGON_HEIGHT = 80
     SENSOR_SQUARE = 20
@@ -41,7 +41,7 @@ class Szalag2v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, 
     INDICATOR_ROW1_Y_POSITION = SILO_Y_POSITION + 10
     INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
 
-    FULL_WIDTH = WAGON_X_POSITION + WAGON_WIDTH + 30
+    FULL_WIDTH = WAGON_X_POSITION + WAGON_WIDTH + 40
     FULL_HEIGHT = WIGHT_SENSOR_Y_POSITION + SENSOR_SQUARE
 
     # noinspection PyDefaultArgument

@@ -25,7 +25,7 @@ class Szalag1v0_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
     INDICATOR_COLUMN2_X_POSITION = INDICATOR_COLUMN1_X_POSITION + 150
 
     INDICATOR_COLUMN4_X_POSITION = CONVEYOR2_X_POSITION + CONVEYOR2_LENGTH - 110
-    INDICATOR_COLUMN3_X_POSITION = INDICATOR_COLUMN4_X_POSITION - 150
+    INDICATOR_COLUMN3_X_POSITION = INDICATOR_COLUMN4_X_POSITION - 160
 
     INDICATOR_ROW1_Y_POSITION = 5
     INDICATOR_ROW2_Y_POSITION = INDICATOR_ROW1_Y_POSITION + INDICATOR_WIDTH + 10
@@ -87,7 +87,7 @@ class Szalag1v0_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas):
     def __buttons_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Start %s]' % Szalag1v0_Address.START, color=self.start_color)
+                                     name='Start [%s]' % Szalag1v0_Address.START, color=self.start_color)
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
                                      name='Stop [%s]' % Szalag1v0_Address.STOP, color=self.stop_color)
