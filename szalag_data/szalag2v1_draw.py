@@ -8,6 +8,7 @@ from _view.wagon_canvas import WagonCanvas
 from szalag_data.szalag2v1_data import Szalag2v1_Address
 
 
+# noinspection PyPep8Naming,SpellCheckingInspection
 class Szalag2v1_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, WagonCanvas):
     SILO_WIDTH = 100
     SILO_HEIGHT = 150
