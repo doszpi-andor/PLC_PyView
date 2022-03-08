@@ -1,10 +1,10 @@
 
-from _view.plc_view import PLC_View
+from _view.plc_viewa import PLC_ViewA
 from tartaly_data.tartaly3_data import Tartaly3_data
 from tartaly_data.tartaly3_draw import Tartaly3_View
 
 
-class App(PLC_View):
+class App(PLC_ViewA):
     __closed = False
 
     # noinspection PyPep8Naming
@@ -17,7 +17,6 @@ class App(PLC_View):
         self.name_label.config(text='Tartály 3')
 
         self.tanks = Tartaly3_View(self.process_frame)
-
         self.tanks.pack()
 
         self.plc_data = Tartaly3_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)

@@ -1,11 +1,10 @@
-from tkinter import TOP, RIGHT, LEFT, Y
 
-from _view.plc_view import PLC_View
+from _view.plc_viewa import PLC_ViewB
 from tartaly_data.tartaly4_data import Tartaly4_data
 from tartaly_data.tartaly4_draw import Tartaly4_View
 
 
-class App(PLC_View):
+class App(PLC_ViewB):
 
     # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
@@ -14,16 +13,10 @@ class App(PLC_View):
         # noinspection SpellCheckingInspection
         self.title('Tartaly 4')
         # noinspection SpellCheckingInspection
-        self.name_label.config(text='Tartály-4', wraplength=1)
-        self.connect_label.config(wraplength=1)
+        self.name_label.config(text='Tartály-4')
 
         self.tanks = Tartaly4_View(self.process_frame)
-
-        self.close_button.pack(side=TOP)
         self.tanks.pack()
-
-        self.name_frame.pack(side=RIGHT, fill=Y)
-        self.connect_frame.pack(side=LEFT, fill=Y)
 
         self.plc_data = Tartaly4_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
