@@ -1,6 +1,6 @@
 from _view.plc_viewa import PLC_ViewA
-from szalag_data.szalag2v1_data import Szalag2v1_data
-from szalag_data.szalag2v1_draw import Szalag2v1_View
+from szalag_data.szalag2v2_data import Szalag2v2_data
+from szalag_data.szalag2v2_draw import Szalag2v2_View
 
 
 class App(PLC_ViewA):
@@ -10,15 +10,15 @@ class App(PLC_ViewA):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
         # noinspection SpellCheckingInspection
-        self.title('Szalag 2v1')
+        self.title('Szalag 2v2')
 
         # noinspection SpellCheckingInspection
-        self.name_label.config(text='Szalag 2v1')
+        self.name_label.config(text='Szalag 2v2')
 
-        self.conveyors = Szalag2v1_View(self.process_frame)
+        self.conveyors = Szalag2v2_View(self.process_frame)
         self.conveyors.pack()
 
-        self.plc_data = Szalag2v1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
+        self.plc_data = Szalag2v2_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
     def loop(self):
         super().loop()
@@ -35,8 +35,11 @@ class App(PLC_ViewA):
         if self.plc_data.m2_is_changed() or self.plc_data.s2_is_changed():
             self.conveyor_refresh()
 
-        if self.plc_data.kp1_is_changed() or self.plc_data.kp2_is_changed() or self.plc_data.ks_is_changed():
+        if self.plc_data.kp1_is_changed() or self.plc_data.kp2_is_changed():
             self.wagon_refresh()
+
+        if self.plc_data.ks_is_changed(threshold=1000):
+            self.wagon_wight_refresh()
 
     def button_refresh(self):
         # 1 1
@@ -95,29 +98,20 @@ class App(PLC_ViewA):
 
     def wagon_refresh(self):
         # 1 1 1
-        if self.plc_data.kp1 and self.plc_data.kp2 and self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='red', wight_color='red')
+        if self.plc_data.kp1 and self.plc_data.kp2:
+            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='red')
         # 0 1 1
-        elif not self.plc_data.kp1 and self.plc_data.kp2 and self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='red', wight_color='red')
+        elif not self.plc_data.kp1 and self.plc_data.kp2:
+            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='red')
         # 1 0 1
-        elif self.plc_data.kp1 and not self.plc_data.kp2 and self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='gray', wight_color='red')
+        elif self.plc_data.kp1 and not self.plc_data.kp2:
+            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='gray')
         # 0 0 1
-        elif not self.plc_data.kp1 and not self.plc_data.kp2 and self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='gray', wight_color='red')
-        # 1 1 0
-        elif self.plc_data.kp1 and self.plc_data.kp2 and not self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='red', wight_color='gray')
-        # 0 1 0
-        elif not self.plc_data.kp1 and self.plc_data.kp2 and not self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='red', wight_color='gray')
-        # 1 0 0
-        elif self.plc_data.kp1 and not self.plc_data.kp2 and not self.plc_data.ks:
-            self.conveyors.wagon_change_color(sensor1_color='red', sensor2_color='gray', wight_color='gray')
-        # 0 0 0
         else:
-            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='gray', wight_color='gray')
+            self.conveyors.wagon_change_color(sensor1_color='gray', sensor2_color='gray')
+
+    def wagon_wight_refresh(self):
+        self.conveyors.wagon_wight_change(wight_percent=self.plc_data.ks_percent)
 
 
 if __name__ == '__main__':
