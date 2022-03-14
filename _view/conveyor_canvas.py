@@ -5,7 +5,7 @@ class ConveyorCanvas(Canvas):
     CONVEYOR_WIDTH = 50
     NAME_FONT_SIZE = 12
 
-    def create_conveyor(self, x_position, y_position, length, name='', circle1_name='',
+    def create_conveyor(self, x_position, y_position, length, name='', name_color='black', circle1_name='',
                         circle1_color='gray', circle2_name='', circle2_color='gray'):
         self.create_line(x_position + self.CONVEYOR_WIDTH // 2,
                          y_position,
@@ -18,7 +18,7 @@ class ConveyorCanvas(Canvas):
         self.create_text(x_position + length // 2,
                          y_position + self.CONVEYOR_WIDTH // 2,
                          font=("Arial", self.NAME_FONT_SIZE),
-                         text=name)
+                         text=name, fill=name_color)
         self.create_oval(x_position,
                          y_position,
                          x_position + self.CONVEYOR_WIDTH,
