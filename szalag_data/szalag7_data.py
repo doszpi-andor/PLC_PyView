@@ -10,8 +10,8 @@ class Szalag7_Address(PLC_Address):
     M2 = 'Q0.1'
     M3 = 'Q0.2'
     M4 = 'Q0.3'
-    UZEM = 'Q4.0'
-    HIBA = 'Q4.1'
+    UZEM = 'Q0.6'
+    HIBA = 'Q0.7'
 
     S1 = 'I2.0'
     S2 = 'I2.1'
