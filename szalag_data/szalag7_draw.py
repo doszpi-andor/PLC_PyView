@@ -2,10 +2,11 @@ from tkinter import Tk
 
 from _view.conveyor_canvas import ConveyorCanvas
 from _view.indicator_canvas import IndicatorCanvas
+from _view.sensor_canvas import SensorCanvas
 from szalag_data.szalag7_data import Szalag7_Address
 
 
-class Szalag7_View(ConveyorCanvas, IndicatorCanvas):
+class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
     CONVEYOR_WIDTH = 45
     INDICATOR_WIDTH = 30
 
@@ -32,6 +33,11 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas):
 
     FULL_WIDTH = CONVEYOR4_X_POSITION + CONVEYOR4_LENGTH + 5
     FULL_HEIGHT = CONVEYOR4_Y_POSITION + CONVEYOR_WIDTH + 10
+
+    conveyor1_id = None
+    conveyor2_id = None
+    conveyor3_id = None
+    conveyor4_id = None
 
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
@@ -133,26 +139,42 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas):
                                      name='Hiba [%s]' % Szalag7_Address.HIBA, color=self.error_color)
 
     def __conveyors_drawing(self):
-        self.create_conveyor(self.CONVEYOR1_X_POSITION,
-                             self.CONVEYOR1_Y_POSITION,
-                             length=self.CONVEYOR1_LENGTH, name='Szalag 1', name_color=self.conveyor1_name_color,
-                             circle1_name='M1\n[%s]' % Szalag7_Address.M1, circle1_color=self.conveyor1_motor_color,
-                             circle2_name='S1\n[%s]' % Szalag7_Address.S1, circle2_color=self.conveyor1_sensor_color)
-        self.create_conveyor(self.CONVEYOR2_X_POSITION,
-                             self.CONVEYOR2_Y_POSITION,
-                             length=self.CONVEYOR2_LENGTH, name='Szalag 2', name_color=self.conveyor2_name_color,
-                             circle1_name='M2\n[%s]' % Szalag7_Address.M2, circle1_color=self.conveyor2_motor_color,
-                             circle2_name='S2\n[%s]' % Szalag7_Address.S2, circle2_color=self.conveyor2_sensor_color)
-        self.create_conveyor(self.CONVEYOR3_X_POSITION,
-                             self.CONVEYOR3_Y_POSITION,
-                             length=self.CONVEYOR3_LENGTH, name='Szalag 3', name_color=self.conveyor3_name_color,
-                             circle1_name='M3\n[%s]' % Szalag7_Address.M3, circle1_color=self.conveyor3_motor_color,
-                             circle2_name='S3\n[%s]' % Szalag7_Address.S3, circle2_color=self.conveyor3_sensor_color)
-        self.create_conveyor(self.CONVEYOR4_X_POSITION,
-                             self.CONVEYOR4_Y_POSITION,
-                             length=self.CONVEYOR4_LENGTH, name='Szalag 4', name_color=self.conveyor4_name_color,
-                             circle1_name='M4\n[%s]' % Szalag7_Address.M4, circle1_color=self.conveyor4_motor_color,
-                             circle2_name='S4\n[%s]' % Szalag7_Address.S4, circle2_color=self.conveyor4_sensor_color)
+        self.delete(self.conveyor1_id)
+        self.conveyor1_id = self.create_conveyor(self.CONVEYOR1_X_POSITION,
+                                                 self.CONVEYOR1_Y_POSITION,
+                                                 length=self.CONVEYOR1_LENGTH,
+                                                 name='Szalag 1', name_color=self.conveyor1_name_color,
+                                                 circle1_name='M1\n[%s]' % Szalag7_Address.M1,
+                                                 circle1_color=self.conveyor1_motor_color,
+                                                 circle2_name='S1\n[%s]' % Szalag7_Address.S1,
+                                                 circle2_color=self.conveyor1_sensor_color)
+        self.delete(self.conveyor2_id)
+        self.conveyor2_id = self.create_conveyor(self.CONVEYOR2_X_POSITION,
+                                                 self.CONVEYOR2_Y_POSITION,
+                                                 length=self.CONVEYOR2_LENGTH,
+                                                 name='Szalag 2', name_color=self.conveyor2_name_color,
+                                                 circle1_name='M2\n[%s]' % Szalag7_Address.M2,
+                                                 circle1_color=self.conveyor2_motor_color,
+                                                 circle2_name='S2\n[%s]' % Szalag7_Address.S2,
+                                                 circle2_color=self.conveyor2_sensor_color)
+        self.delete(self.conveyor3_id)
+        self.conveyor3_id = self.create_conveyor(self.CONVEYOR3_X_POSITION,
+                                                 self.CONVEYOR3_Y_POSITION,
+                                                 length=self.CONVEYOR3_LENGTH,
+                                                 name='Szalag 3', name_color=self.conveyor3_name_color,
+                                                 circle1_name='M3\n[%s]' % Szalag7_Address.M3,
+                                                 circle1_color=self.conveyor3_motor_color,
+                                                 circle2_name='S3\n[%s]' % Szalag7_Address.S3,
+                                                 circle2_color=self.conveyor3_sensor_color)
+        self.delete(self.conveyor4_id)
+        self.conveyor4_id = self.create_conveyor(self.CONVEYOR4_X_POSITION,
+                                                 self.CONVEYOR4_Y_POSITION,
+                                                 length=self.CONVEYOR4_LENGTH,
+                                                 name='Szalag 4', name_color=self.conveyor4_name_color,
+                                                 circle1_name='M4\n[%s]' % Szalag7_Address.M4,
+                                                 circle1_color=self.conveyor4_motor_color,
+                                                 circle2_name='S4\n[%s]' % Szalag7_Address.S4,
+                                                 circle2_color=self.conveyor4_sensor_color)
 
 
 if __name__ == "__main__":
