@@ -15,10 +15,10 @@ class ConveyorCanvas(Canvas):
                          y_position + self.CONVEYOR_WIDTH,
                          x_position + length - self.CONVEYOR_WIDTH // 2,
                          y_position + self.CONVEYOR_WIDTH)
-        self.create_text(x_position + length // 2,
-                         y_position + self.CONVEYOR_WIDTH // 2,
-                         font=("Arial", self.NAME_FONT_SIZE),
-                         text=name, fill=name_color)
+        text_id = self.create_text(x_position + length // 2,
+                                   y_position + self.CONVEYOR_WIDTH // 2,
+                                   font=("Arial", self.NAME_FONT_SIZE),
+                                   text=name, fill=name_color)
         self.create_oval(x_position,
                          y_position,
                          x_position + self.CONVEYOR_WIDTH,
@@ -35,6 +35,8 @@ class ConveyorCanvas(Canvas):
         self.create_text(x_position + length - self.CONVEYOR_WIDTH // 2,
                          y_position + self.CONVEYOR_WIDTH // 2,
                          justify=CENTER, text=circle2_name)
+
+        return text_id
 
 
 if __name__ == "__main__":
