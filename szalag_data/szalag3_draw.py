@@ -5,7 +5,7 @@ from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas, AnalogCanvas
 from _view.silo_camvas import SiloCanvas
 from _view.wagon_canvas import WagonCanvas
-from szalag_data.szalag3v1_data import Szalag3_Address
+from szalag_data.szalag3_data import Szalag3_Address
 
 
 class Szalag3_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, WagonCanvas, AnalogCanvas):

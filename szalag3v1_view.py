@@ -1,6 +1,6 @@
 from _view.plc_viewa import PLC_ViewA
-from szalag_data.szalag3v1_data import Szalag3_data
-from szalag_data.szalag3v1_draw import Szalag3_View
+from szalag_data.szalag3_data import Szalag3_data
+from szalag_data.szalag3_draw import Szalag3_View
 
 
 class App(PLC_ViewA):
