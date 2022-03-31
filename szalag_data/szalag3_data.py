@@ -18,12 +18,12 @@ class Szalag3_Address(PLC_Address):
     M4 = 'Q0.3'
     M5 = 'Q0.4'
     SZALAG_HIBA = 'Q0.5'
-    KOCSI_HOBA = 'Q4.0'
-    UZEM = 'Q4.1'
-    SILO1_URES = 'Q4.2'
-    SILO2_URES = 'Q4.3'
+    KOCSI_HOBA = 'Q0.6'
+    UZEM = 'Q0.7'
+    SILO1_URES = 'Q1.0'
+    SILO2_URES = 'Q1.1'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 2))
 
     KS = 'IW64'
 
