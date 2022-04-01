@@ -8,7 +8,7 @@ from _view.wagon_canvas import WagonCanvas
 from szalag_data.szalag3_data import Szalag3_Address
 
 
-class Szalag3_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, WagonCanvas, AnalogCanvas):
+class Szalag3v2_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas, WagonCanvas, AnalogCanvas):
     SILO_WIDTH = 100
     SILO_HEIGHT = 150
     CONVEYOR_WIDTH = 45
