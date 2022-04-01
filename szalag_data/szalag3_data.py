@@ -17,9 +17,9 @@ class Szalag3_Address(PLC_Address):
     M3 = 'Q0.2'
     M4 = 'Q0.3'
     M5 = 'Q0.4'
-    SZALAG_HIBA = 'Q0.5'
-    KOCSI_HOBA = 'Q4.0'
-    UZEM = 'Q4.1'
+    UZEM = 'Q0.5'
+    SZALAG_HIBA = 'Q4.0'
+    KOCSI_HOBA = 'Q4.1'
     SILO1_URES = 'Q4.2'
     SILO2_URES = 'Q4.3'
 
@@ -48,9 +48,9 @@ class Szalag3_data(PLC_data):
     __m3_old = False
     __m4_old = False
     __m5_old = False
+    __uzem_old = False
     __szalag_hiba_old = False
     __kocsi_hiba_old = False
-    __uzem_old = False
     __silo1_ures_old = False
     __silo2_ures_old = False
 
@@ -73,9 +73,9 @@ class Szalag3_data(PLC_data):
         self.__m3 = False
         self.__m4 = False
         self.__m5 = False
+        self.__uzem = False
         self.__szalag_hiba = False
         self.__kocsi_hiba = False
-        self.__uzem = False
         self.__silo1_ures = False
         self.__silo2_ures = False
 
@@ -134,16 +134,16 @@ class Szalag3_data(PLC_data):
         return self.__m5
 
     @property
+    def uzem(self):
+        return self.__uzem
+
+    @property
     def szalag_hiba(self):
         return self.__szalag_hiba
 
     @property
     def kocsi_hiba(self):
         return self.__kocsi_hiba
-
-    @property
-    def uzem(self):
-        return self.__uzem
 
     @property
     def silo1_ures(self):
@@ -178,9 +178,9 @@ class Szalag3_data(PLC_data):
         self.__m3 = self.get_bit_in_page(Szalag3_Address.M3)
         self.__m4 = self.get_bit_in_page(Szalag3_Address.M4)
         self.__m5 = self.get_bit_in_page(Szalag3_Address.M5)
+        self.__uzem = self.get_bit_in_page(Szalag3_Address.UZEM)
         self.__szalag_hiba = self.get_bit_in_page(Szalag3_Address.SZALAG_HIBA)
         self.__kocsi_hiba = self.get_bit_in_page(Szalag3_Address.KOCSI_HOBA)
-        self.__uzem = self.get_bit_in_page(Szalag3_Address.UZEM)
         self.__silo1_ures = self.get_bit_in_page(Szalag3_Address.SILO1_URES)
         self.__silo2_ures = self.get_bit_in_page(Szalag3_Address.SILO2_URES)
 
@@ -264,6 +264,12 @@ class Szalag3_data(PLC_data):
             return True
         return False
 
+    def uzem_is_changed(self):
+        if self.__uzem != self.__uzem_old:
+            self.__uzem_old = self.__uzem
+            return True
+        return False
+
     def szalag_hiba_is_changed(self):
         if self.__szalag_hiba != self.__szalag_hiba_old:
             self.__szalag_hiba_old = self.__szalag_hiba
@@ -273,12 +279,6 @@ class Szalag3_data(PLC_data):
     def kocsi_hiba_is_changed(self):
         if self.__kocsi_hiba != self.__kocsi_hiba_old:
             self.__kocsi_hiba_old = self.__kocsi_hiba
-            return True
-        return False
-
-    def uzem_is_changed(self):
-        if self.__uzem != self.__uzem_old:
-            self.__uzem_old = self.__uzem
             return True
         return False
 
