@@ -1,6 +1,6 @@
 from _view.plc_viewa import PLC_ViewA
 from szalag_data.szalag3_data import Szalag3_data
-from szalag_data.szalag3v1_draw import Szalag3v1_View
+from szalag_data.szalag3v2_draw import Szalag3v2_View
 
 
 class App(PLC_ViewA):
@@ -10,12 +10,12 @@ class App(PLC_ViewA):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
         # noinspection SpellCheckingInspection
-        self.title('Szalag 3v1')
+        self.title('Szalag 3v2')
 
         # noinspection SpellCheckingInspection
-        self.name_label.config(text='Szalag 3v1')
+        self.name_label.config(text='Szalag 3v2')
 
-        self.conveyors = Szalag3v1_View(self.process_frame)
+        self.conveyors = Szalag3v2_View(self.process_frame)
         self.conveyors.pack()
 
         self.plc_data = Szalag3_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
