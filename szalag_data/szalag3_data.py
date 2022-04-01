@@ -29,7 +29,7 @@ class Szalag3_Address(PLC_Address):
 
     READ_WORDS_ADDRESS = (('IW64', 1), )
 
-    KS_RANGE = 27648
+    KS_RANGE = 25000
 
 
 class Szalag3_data(PLC_data):
