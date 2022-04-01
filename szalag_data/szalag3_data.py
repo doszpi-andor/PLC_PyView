@@ -21,7 +21,7 @@ class Szalag3_Address(PLC_Address):
     SZALAG_HIBA = 'Q0.6'
     KOCSI_HOBA = 'Q0.7'
     SILO1_URES = 'Q1.0'
-    SILO2_URES = 'Q1.2'
+    SILO2_URES = 'Q1.1'
 
     READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 2))
 
