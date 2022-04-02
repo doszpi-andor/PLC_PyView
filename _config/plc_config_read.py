@@ -48,7 +48,7 @@ class PLC_ConfigXML_Exception(Exception):
 class PLC_Config:
 
     @staticmethod
-    def read_plc_config(filename) -> tuple[list, int, int]:
+    def read_plc_config(filename):
         """
         PLC config read
         :param str filename: file name string
