@@ -9,8 +9,14 @@ class PLC_Address:
     READ_BYTES_TAG_ADDRESS = ()
     READ_WORDS_TAG_ADDRESS = ()
 
+    READ_BYTES_DB_ADDRESS = ()
+    READ_WORDS_DB_ADDRESS = ()
+
     WRITE_BYTES_TAG_ADDRESS = ()
     WRITE_WORDS_TAG_ADDRESS = ()
+
+    WRITE_BYTES_DB_ADDRESS = ()
+    WRITE_WORDS_DB_ADDRESS = ()
 
     @staticmethod
     def byte_tag_address(bit_address) -> str:
@@ -38,8 +44,14 @@ class PLC_data:
     read_byte_tag = {}
     read_word_tag = {}
 
+    read_byte_db = {}
+    read_word_db = {}
+
     write_byte_tag = {}
     write_word_tag = {}
+
+    write_byte_db = {}
+    write_word_db = {}
 
     def __init__(self, plc_address, ip, rack, slot):
         self.plc_address = plc_address
@@ -73,12 +85,23 @@ class PLC_data:
         Data to read_byte_data
         """
         try:
+            # read byte tag
             for byte_address, length in self.plc_address.READ_BYTES_TAG_ADDRESS:
                 read_byte_page = self.__plc_connect.get_tag_byte(byte_address, length)
                 byte_index = int(byte_address[2:])
                 for index in range(0, length):
                     self.read_byte_tag[byte_address[:2] + str(byte_index + index)] = read_byte_page[index]
 
+            # read byte db
+            for db_byte_address, length in self.plc_address.READ_BYTES_DB_ADDRESS:
+                read_byte_page = self.__plc_connect.get_db_byte(db_byte_address, length)
+                db_address, byte_address = db_byte_address.split(sep='.')
+                byte_index = int(byte_address[3:])
+                for index in range(0, length):
+                    self.read_byte_db[db_address + '.' + byte_address[:3] +
+                                      str(byte_index + index)] = read_byte_page[index]
+
+            # read word tag
             for word_address, length in self.plc_address.READ_WORDS_TAG_ADDRESS:
                 read_word_page = self.__plc_connect.get_tag_int(word_address, length)
                 word_index = int(word_address[2:])
@@ -91,15 +114,20 @@ class PLC_data:
                 for index in range(0, length):
                     self.read_byte_tag[byte_address[:2] + str(byte_index + index)] = 0x00
 
+            for db_byte_address, length in self.plc_address.READ_BYTES_DB_ADDRESS:
+                db_address, byte_address = db_byte_address.split(sep='.')
+                byte_index = int(byte_address[3:])
+                for index in range(0, length):
+                    self.read_byte_db[db_address + '.' + byte_address[:3] + str(byte_index + index)] = 0x00
+
             for word_address, length in self.plc_address.READ_WORDS_TAG_ADDRESS:
                 word_index = int(word_address[2:])
                 for index in range(0, length):
                     self.read_word_tag[word_address[:2] + str(word_index + index * 2)] = 0
 
-        print(self.read_byte_tag)
-
     def write_data(self):
         try:
+            # writ byte tag
             for byte_address, length in self.plc_address.WRITE_BYTES_TAG_ADDRESS:
                 byte_index = int(byte_address[2:])
                 data = []
@@ -107,6 +135,16 @@ class PLC_data:
                     data.append(self.write_byte_tag[byte_address[:2] + str(byte_index + index)])
                 self.__plc_connect.set_tag_byte(byte_address, length, data)
 
+            # writ byte db
+            for db_byte_address, length in self.plc_address.WRITE_BYTES_DB_ADDRESS:
+                db_address, byte_address = db_byte_address.split(sep='.')
+                byte_index = int(byte_address[3:])
+                data = []
+                for index in range(0, length):
+                    data.append(self.write_byte_db[db_address + '.' + byte_address[:3] + str(byte_index + index)])
+                self.__plc_connect.set_db_byte(db_byte_address, length, data)
+
+            # writ word tag
             for word_address, length in self.plc_address.WRITE_WORDS_TAG_ADDRESS:
                 word_index = int(word_address[2:])
                 data = []
