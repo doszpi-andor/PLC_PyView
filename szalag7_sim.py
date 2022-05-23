@@ -1,7 +1,7 @@
 from threading import Timer
 from tkinter import Frame, Checkbutton, IntVar
 
-from _view.plc_viewa import PLC_ViewA
+from _view.plc_view import PLC_ViewA
 from szalag_data.szalag7_data import Szalag7_data
 from szalag_data.szalag7_draw import Szalag7_View
 

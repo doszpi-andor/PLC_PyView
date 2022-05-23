@@ -1,4 +1,4 @@
-from _view.plc_viewa import PLC_ViewA
+from _view.plc_view import PLC_ViewA
 from szalag_data.szalag3_data import Szalag3_data
 from szalag_data.szalag3v2_draw import Szalag3v2_View
 

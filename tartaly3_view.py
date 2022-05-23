@@ -1,5 +1,5 @@
 
-from _view.plc_viewa import PLC_ViewA
+from _view.plc_view import PLC_ViewA
 from tartaly_data.tartaly3_data import Tartaly3_data
 from tartaly_data.tartaly3_draw import Tartaly3_View
 
