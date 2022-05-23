@@ -67,11 +67,34 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                return self.__get_byte(Areas.PE, address, length)
+                return self.__get_byte(Areas.PE, 0, address, length)
             elif s7_address[0] == 'Q':
-                return self.__get_byte(Areas.PA, address, length)
+                return self.__get_byte(Areas.PA, 0, address, length)
             elif s7_address[0] == 'M':
-                return self.__get_byte(Areas.MK, address, length)
+                return self.__get_byte(Areas.MK, 0, address, length)
+        else:
+            return 0
+
+    def get_db_byte(self, s7_address, length):
+        try:
+            db_address, byte_address = s7_address.split(sep='.')
+        except ValueError:
+            raise S7AddressException
+
+        if len(db_address) < 3 or db_address[0:2] != 'DB':
+            raise S7AddressException
+
+        if len(byte_address) < 4 or byte_address[0:3] != 'DBB':
+            raise S7AddressException
+
+        try:
+            db_number = int(db_address[2:])
+            byte_number = int(byte_address[3:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            return self.__get_byte(Areas.DB, db_number, byte_number, length)
         else:
             return 0
 
@@ -85,11 +108,32 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                self.__set_byte(Areas.PE, address, length, byte_page)
+                self.__set_byte(Areas.PE, 0, address, length, byte_page)
             elif s7_address[0] == 'Q':
-                self.__set_byte(Areas.PA, address, length, byte_page)
+                self.__set_byte(Areas.PA, 0, address, length, byte_page)
             elif s7_address[0] == 'M':
-                self.__set_byte(Areas.MK, address, length, byte_page)
+                self.__set_byte(Areas.MK, 0, address, length, byte_page)
+
+    def set_db_byte(self, s7_address, length, byte_page):
+        try:
+            db_address, byte_address = s7_address.split(sep='.')
+        except ValueError:
+            raise S7AddressException
+
+        if len(db_address) < 3 or db_address[0:2] != 'DB':
+            raise S7AddressException
+
+        if len(byte_address) < 4 or byte_address[0:3] != 'DBB':
+            raise S7AddressException
+
+        try:
+            db_number = int(db_address[2:])
+            byte_number = int(byte_address[3:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            self.__set_byte(Areas.DB, db_number, byte_number, length, byte_page)
 
     def get_tag_int(self, s7_address, length):
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
@@ -101,12 +145,35 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                return self.__get_int(Areas.PE, address, length)
+                return self.__get_int(Areas.PE, 0, address, length)
             elif s7_address[0] == 'Q':
-                return self.__get_int(Areas.PA, address, length)
+                return self.__get_int(Areas.PA, 0, address, length)
             elif s7_address[0] == 'M':
-                return self.__get_int(Areas.MK, address, length)
+                return self.__get_int(Areas.MK, 0, address, length)
         return 0
+
+    def get_db_int(self, s7_address, length):
+        try:
+            db_address, byte_address = s7_address.split(sep='.')
+        except ValueError:
+            raise S7AddressException
+
+        if len(db_address) < 3 or db_address[0:2] != 'DB':
+            raise S7AddressException
+
+        if len(byte_address) < 4 or byte_address[0:3] != 'DBW':
+            raise S7AddressException
+
+        try:
+            db_number = int(db_address[2:])
+            byte_number = int(byte_address[3:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            return self.__get_int(Areas.DB, db_number, byte_number, length)
+        else:
+            return 0
 
     def set_tag_int(self, s7_address, length, int_page) -> None:
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
@@ -118,15 +185,36 @@ class PLC_Connect:
 
         if self.__connect():
             if s7_address[0] == 'I':
-                self.__set_int(Areas.PE, address, length, int_page)
+                self.__set_int(Areas.PE, 0, address, length, int_page)
             elif s7_address[0] == 'Q':
-                self.__set_int(Areas.PA, address, length, int_page)
+                self.__set_int(Areas.PA, 0, address, length, int_page)
             elif s7_address[0] == 'M':
-                self.__set_int(Areas.MK, address, length, int_page)
+                self.__set_int(Areas.MK, 0, address, length, int_page)
 
-    def __get_byte(self, area, address, length):
+    def set_db_int(self, s7_address, length, int_page):
         try:
-            result = self.__plc.read_area(area, 0, address, length)
+            db_address, byte_address = s7_address.split(sep='.')
+        except ValueError:
+            raise S7AddressException
+
+        if len(db_address) < 3 or db_address[0:2] != 'DB':
+            raise S7AddressException
+
+        if len(byte_address) < 4 or byte_address[0:3] != 'DBW':
+            raise S7AddressException
+
+        try:
+            db_number = int(db_address[2:])
+            byte_number = int(byte_address[3:])
+        except ValueError:
+            raise S7AddressException
+
+        if self.__connect():
+            self.__set_int(Areas.DB, db_number, byte_number, length, int_page)
+
+    def __get_byte(self, area, db_number, address, length):
+        try:
+            result = self.__plc.read_area(area, db_number, address, length)
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
@@ -135,19 +223,19 @@ class PLC_Connect:
             byte_list.append(get_byte(result, index))
         return byte_list
 
-    def __set_byte(self, area, address, length, data):
+    def __set_byte(self, area, db_number, address, length, data):
         try:
-            result = self.__plc.read_area(area, 0, address, length)
+            result = self.__plc.read_area(area, db_number, address, length)
             for index in range(0, length):
                 set_byte(result, index, data[index])
-            self.__plc.write_area(area, 0, address, result)
+            self.__plc.write_area(area, db_number, address, result)
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
 
-    def __get_int(self, area, address, length):
+    def __get_int(self, area, db_number, address, length):
         try:
-            result = self.__plc.read_area(area, 0, address, length * 2)
+            result = self.__plc.read_area(area, db_number, address, length * 2)
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
@@ -156,12 +244,12 @@ class PLC_Connect:
             int_list.append(get_int(result, index * 2))
         return int_list
 
-    def __set_int(self, area, address, length, data):
+    def __set_int(self, area, db_number, address, length, data):
         try:
-            result = self.__plc.read_area(area, 0, address, length * 2)
+            result = self.__plc.read_area(area, db_number, address, length * 2)
             for index in range(0, length):
                 set_int(result, index * 2, data[index])
-            self.__plc.write_area(area, 0, address, result)
+            self.__plc.write_area(area, db_number, address, result)
         except Snap7Exception:
             self.disconnect()
             raise S7ConnectFailed
