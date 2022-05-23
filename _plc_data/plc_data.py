@@ -78,13 +78,13 @@ class PLC_data:
         """
         try:
             for byte_address, length in self.plc_address.READ_BYTES_ADDRESS:
-                read_byte_page = self.__plc_connect.get_byte(byte_address, length)
+                read_byte_page = self.__plc_connect.get_tag_byte(byte_address, length)
                 byte_index = int(byte_address[2:])
                 for index in range(0, length):
                     self.read_byte_data[byte_address[:2] + str(byte_index + index)] = read_byte_page[index]
 
             for word_address, length in self.plc_address.READ_WORDS_ADDRESS:
-                read_word_page = self.__plc_connect.get_int(word_address, length)
+                read_word_page = self.__plc_connect.get_tag_int(word_address, length)
                 word_index = int(word_address[2:])
                 for index in range(0, length):
                     self.read_word_data[word_address[:2] + str(word_index + index * 2)] = read_word_page[index]
@@ -111,14 +111,14 @@ class PLC_data:
                 data = []
                 for index in range(0, length):
                     data.append(self.write_byte_data[byte_address[:2] + str(byte_index + index)])
-                self.__plc_connect.set_byte(byte_address, length, data)
+                self.__plc_connect.set_tag_byte(byte_address, length, data)
 
             for word_address, length in self.plc_address.WRITE_WORDS_ADDRESS:
                 word_index = int(word_address[2:])
                 data = []
                 for index in range(0, length):
                     data.append(self.write_word_data[word_address[:2] + str(word_index + index * 2)])
-                self.__plc_connect.set_int(word_address, length, data)
+                self.__plc_connect.set_tag_int(word_address, length, data)
         except S7ConnectFailed:
             pass
 

@@ -57,7 +57,7 @@ class PLC_Connect:
         self.__connected = False
         self.__plc.disconnect()
 
-    def get_byte(self, s7_address, length):
+    def get_tag_byte(self, s7_address, length):
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
             raise S7AddressException
         try:
@@ -75,7 +75,7 @@ class PLC_Connect:
         else:
             return 0
 
-    def set_byte(self, s7_address, length, byte_page) -> None:
+    def set_tag_byte(self, s7_address, length, byte_page) -> None:
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'B':
             raise S7AddressException
         try:
@@ -91,7 +91,7 @@ class PLC_Connect:
             elif s7_address[0] == 'M':
                 self.__set_byte(Areas.MK, address, length, byte_page)
 
-    def get_int(self, s7_address, length):
+    def get_tag_int(self, s7_address, length):
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
             raise S7AddressException
         try:
@@ -108,7 +108,7 @@ class PLC_Connect:
                 return self.__get_int(Areas.MK, address, length)
         return 0
 
-    def set_int(self, s7_address, length, int_page) -> None:
+    def set_tag_int(self, s7_address, length, int_page) -> None:
         if len(s7_address) < 3 or s7_address[0] not in ('I', 'Q', 'M') or s7_address[1] != 'W':
             raise S7AddressException
         try:
@@ -184,4 +184,4 @@ if __name__ == '__main__':
     # plc = PLC_Connect('172.16.65.1', 0, 2)
     plc = PLC_Connect('192.168.90.2', 0, 1)
 
-    print(plc.get_int('IW64', 4))
+    print(plc.get_tag_int('IW64', 4))
