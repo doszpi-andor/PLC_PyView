@@ -23,10 +23,6 @@ class PLC_Address:
         return bit_address[0] + 'B' + str(byte_index)
 
     @staticmethod
-    def byte_index(bit_address) -> int:
-        return int(bit_address[1])
-
-    @staticmethod
     def bit_index(bit_address) -> int:
         """
         PLC bit index create
@@ -101,10 +97,6 @@ class PLC_data:
                     self.read_word_data[word_address[:2] + str(word_index + index * 2)] = 0
 
     def write_data(self):
-        """
-            Write PLC data bytes
-            Data to read_byte_data
-        """
         try:
             for byte_address, length in self.plc_address.WRITE_BYTES_ADDRESS:
                 byte_index = int(byte_address[2:])
