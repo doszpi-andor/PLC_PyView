@@ -20,7 +20,7 @@ class Tartaly3_Address(PLC_Address):
     BEKAPCSOLVA = 'Q4.0'
     KIKAPCSOLVA = 'Q4.1'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
@@ -113,20 +113,20 @@ class Tartaly3_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.__t1_felso = self.get_bit_in_page(Tartaly3_Address.T1_FELSO)
-        self.__t1_also = self.get_bit_in_page(Tartaly3_Address.T1_ALSO)
-        self.__t2_felso = self.get_bit_in_page(Tartaly3_Address.T2_FELSO)
-        self.__t2_also = self.get_bit_in_page(Tartaly3_Address.T2_ALSO)
-        self.__t3_felso = self.get_bit_in_page(Tartaly3_Address.T3_FELSO)
-        self.__t3_also = self.get_bit_in_page(Tartaly3_Address.T3_ALSO)
-        self.__start = self.get_bit_in_page(Tartaly3_Address.START)
-        self.__stop = self.get_bit_in_page(Tartaly3_Address.STOP)
+        self.__t1_felso = self.get_bit_tag_page(Tartaly3_Address.T1_FELSO)
+        self.__t1_also = self.get_bit_tag_page(Tartaly3_Address.T1_ALSO)
+        self.__t2_felso = self.get_bit_tag_page(Tartaly3_Address.T2_FELSO)
+        self.__t2_also = self.get_bit_tag_page(Tartaly3_Address.T2_ALSO)
+        self.__t3_felso = self.get_bit_tag_page(Tartaly3_Address.T3_FELSO)
+        self.__t3_also = self.get_bit_tag_page(Tartaly3_Address.T3_ALSO)
+        self.__start = self.get_bit_tag_page(Tartaly3_Address.START)
+        self.__stop = self.get_bit_tag_page(Tartaly3_Address.STOP)
 
-        self.__t1_tolt = self.get_bit_in_page(Tartaly3_Address.T1_TOLT)
-        self.__t2_tolt = self.get_bit_in_page(Tartaly3_Address.T2_TOLT)
-        self.__t3_tolt = self.get_bit_in_page(Tartaly3_Address.T3_TOLT)
-        self.__bekapcsolva = self.get_bit_in_page(Tartaly3_Address.BEKAPCSOLVA)
-        self.__kikapcsolva = self.get_bit_in_page(Tartaly3_Address.KIKAPCSOLVA)
+        self.__t1_tolt = self.get_bit_tag_page(Tartaly3_Address.T1_TOLT)
+        self.__t2_tolt = self.get_bit_tag_page(Tartaly3_Address.T2_TOLT)
+        self.__t3_tolt = self.get_bit_tag_page(Tartaly3_Address.T3_TOLT)
+        self.__bekapcsolva = self.get_bit_tag_page(Tartaly3_Address.BEKAPCSOLVA)
+        self.__kikapcsolva = self.get_bit_tag_page(Tartaly3_Address.KIKAPCSOLVA)
 
     def t1_felso_is_changed(self):
         if self.__t1_felso != self.__t1_felso_old:

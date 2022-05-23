@@ -18,8 +18,8 @@ class Szalag7_Address(PLC_Address):
     S3 = 'I2.2'
     S4 = 'I2.3'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
-    WRITE_BYTES_ADDRESS = (('IB2', 1), )
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
+    WRITE_BYTES_TAG_ADDRESS = (('IB2', 1),)
 
 
 class Szalag7_data(PLC_data):
@@ -130,23 +130,23 @@ class Szalag7_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__start = self.get_bit_in_page(Szalag7_Address.START)
-        self.__stop = self.get_bit_in_page(Szalag7_Address.STOP)
+        self.__start = self.get_bit_tag_page(Szalag7_Address.START)
+        self.__stop = self.get_bit_tag_page(Szalag7_Address.STOP)
 
-        self.__m1 = self.get_bit_in_page(Szalag7_Address.M1)
-        self.__m2 = self.get_bit_in_page(Szalag7_Address.M2)
-        self.__m3 = self.get_bit_in_page(Szalag7_Address.M3)
-        self.__m4 = self.get_bit_in_page(Szalag7_Address.M4)
-        self.__uzem = self.get_bit_in_page(Szalag7_Address.UZEM)
-        self.__hiba = self.get_bit_in_page(Szalag7_Address.HIBA)
+        self.__m1 = self.get_bit_tag_page(Szalag7_Address.M1)
+        self.__m2 = self.get_bit_tag_page(Szalag7_Address.M2)
+        self.__m3 = self.get_bit_tag_page(Szalag7_Address.M3)
+        self.__m4 = self.get_bit_tag_page(Szalag7_Address.M4)
+        self.__uzem = self.get_bit_tag_page(Szalag7_Address.UZEM)
+        self.__hiba = self.get_bit_tag_page(Szalag7_Address.HIBA)
 
     def write_data(self):
-        self.write_data_clear()
+        self.write_tag_page_clear()
 
-        self.set_bit_in_page(Szalag7_Address.S1, self.__s1)
-        self.set_bit_in_page(Szalag7_Address.S2, self.__s2)
-        self.set_bit_in_page(Szalag7_Address.S3, self.__s3)
-        self.set_bit_in_page(Szalag7_Address.S4, self.__s4)
+        self.set_bit_tag_page(Szalag7_Address.S1, self.__s1)
+        self.set_bit_tag_page(Szalag7_Address.S2, self.__s2)
+        self.set_bit_tag_page(Szalag7_Address.S3, self.__s3)
+        self.set_bit_tag_page(Szalag7_Address.S4, self.__s4)
 
         super().write_data()
 

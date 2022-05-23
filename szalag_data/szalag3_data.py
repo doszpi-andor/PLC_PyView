@@ -23,11 +23,11 @@ class Szalag3_Address(PLC_Address):
     SILO1_URES = 'Q4.2'
     SILO2_URES = 'Q4.3'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
     KS = 'IW64'
 
-    READ_WORDS_ADDRESS = (('IW64', 1), )
+    READ_WORDS_TAG_ADDRESS = (('IW64', 1),)
 
     KS_RANGE = 25000
 
@@ -164,27 +164,27 @@ class Szalag3_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__s1 = self.get_bit_in_page(Szalag3_Address.S1)
-        self.__s2 = self.get_bit_in_page(Szalag3_Address.S2)
-        self.__s3 = self.get_bit_in_page(Szalag3_Address.S3)
-        self.__s4 = self.get_bit_in_page(Szalag3_Address.S4)
-        self.__s5 = self.get_bit_in_page(Szalag3_Address.S5)
-        self.__kp = self.get_bit_in_page(Szalag3_Address.KP)
-        self.__start = self.get_bit_in_page(Szalag3_Address.START)
-        self.__stop = self.get_bit_in_page(Szalag3_Address.STOP)
+        self.__s1 = self.get_bit_tag_page(Szalag3_Address.S1)
+        self.__s2 = self.get_bit_tag_page(Szalag3_Address.S2)
+        self.__s3 = self.get_bit_tag_page(Szalag3_Address.S3)
+        self.__s4 = self.get_bit_tag_page(Szalag3_Address.S4)
+        self.__s5 = self.get_bit_tag_page(Szalag3_Address.S5)
+        self.__kp = self.get_bit_tag_page(Szalag3_Address.KP)
+        self.__start = self.get_bit_tag_page(Szalag3_Address.START)
+        self.__stop = self.get_bit_tag_page(Szalag3_Address.STOP)
 
-        self.__m1 = self.get_bit_in_page(Szalag3_Address.M1)
-        self.__m2 = self.get_bit_in_page(Szalag3_Address.M2)
-        self.__m3 = self.get_bit_in_page(Szalag3_Address.M3)
-        self.__m4 = self.get_bit_in_page(Szalag3_Address.M4)
-        self.__m5 = self.get_bit_in_page(Szalag3_Address.M5)
-        self.__uzem = self.get_bit_in_page(Szalag3_Address.UZEM)
-        self.__szalag_hiba = self.get_bit_in_page(Szalag3_Address.SZALAG_HIBA)
-        self.__kocsi_hiba = self.get_bit_in_page(Szalag3_Address.KOCSI_HOBA)
-        self.__silo1_ures = self.get_bit_in_page(Szalag3_Address.SILO1_URES)
-        self.__silo2_ures = self.get_bit_in_page(Szalag3_Address.SILO2_URES)
+        self.__m1 = self.get_bit_tag_page(Szalag3_Address.M1)
+        self.__m2 = self.get_bit_tag_page(Szalag3_Address.M2)
+        self.__m3 = self.get_bit_tag_page(Szalag3_Address.M3)
+        self.__m4 = self.get_bit_tag_page(Szalag3_Address.M4)
+        self.__m5 = self.get_bit_tag_page(Szalag3_Address.M5)
+        self.__uzem = self.get_bit_tag_page(Szalag3_Address.UZEM)
+        self.__szalag_hiba = self.get_bit_tag_page(Szalag3_Address.SZALAG_HIBA)
+        self.__kocsi_hiba = self.get_bit_tag_page(Szalag3_Address.KOCSI_HOBA)
+        self.__silo1_ures = self.get_bit_tag_page(Szalag3_Address.SILO1_URES)
+        self.__silo2_ures = self.get_bit_tag_page(Szalag3_Address.SILO2_URES)
 
-        self.__ks = self.get_int_in_page(Szalag3_Address.KS)
+        self.__ks = self.get_int_tag_page(Szalag3_Address.KS)
 
     def s1_is_changed(self):
         if self.__s1 != self.__s1_old:
