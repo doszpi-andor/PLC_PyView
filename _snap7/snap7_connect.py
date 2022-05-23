@@ -185,3 +185,4 @@ if __name__ == '__main__':
     plc = PLC_Connect('192.168.90.2', 0, 1)
 
     print(plc.get_tag_int('IW64', 4))
+
