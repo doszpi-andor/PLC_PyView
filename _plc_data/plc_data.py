@@ -108,6 +108,14 @@ class PLC_data:
                 for index in range(0, length):
                     self.read_word_tag[word_address[:2] + str(word_index + index * 2)] = read_word_page[index]
 
+            for db_word_address, length in self.plc_address.READ_WORDS_DB_ADDRESS:
+                read_word_page = self.__plc_connect.get_db_int(db_word_address, length)
+                db_address, word_address = db_word_address.split(sep='.')
+                byte_index = int(word_address[3:])
+                for index in range(0, length):
+                    self.read_word_db[db_address + '.' + word_address[:3] +
+                                      str(byte_index + index * 2)] = read_word_page[index]
+
         except S7ConnectFailed:
             for byte_address, length in self.plc_address.READ_BYTES_TAG_ADDRESS:
                 byte_index = int(byte_address[2:])
@@ -124,6 +132,13 @@ class PLC_data:
                 word_index = int(word_address[2:])
                 for index in range(0, length):
                     self.read_word_tag[word_address[:2] + str(word_index + index * 2)] = 0
+
+            for db_word_address, length in self.plc_address.READ_WORDS_DB_ADDRESS:
+                db_address, word_address = db_word_address.split(sep='.')
+                byte_index = int(word_address[3:])
+                for index in range(0, length):
+                    self.read_word_db[db_address + '.' + word_address[:3] +
+                                      str(byte_index + index * 2)] = 0
 
     def write_data(self):
         try:
@@ -151,6 +166,17 @@ class PLC_data:
                 for index in range(0, length):
                     data.append(self.write_word_tag[word_address[:2] + str(word_index + index * 2)])
                 self.__plc_connect.set_tag_int(word_address, length, data)
+
+            # writ word db
+            for db_word_address, length in self.plc_address.WRITE_WORDS_DB_ADDRESS:
+                db_address, word_address = db_word_address.split(sep='.')
+                word_index = int(word_address[3:])
+                data = []
+                for index in range(0, length):
+                    print(db_address + '.' + word_address[:3] + str(word_index + index * 2))
+                    data.append(self.write_word_db[db_address + '.' + word_address[:3] + str(word_index + index * 2)])
+                print(data)
+                self.__plc_connect.set_db_int(db_word_address, length, data)
         except S7ConnectFailed:
             pass
 
