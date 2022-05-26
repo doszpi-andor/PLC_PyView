@@ -29,13 +29,23 @@ class PLC_Address:
         return bit_address[0] + 'B' + str(byte_index)
 
     @staticmethod
-    def bit_tag_index(bit_address) -> int:
+    def byte_db_address(db_bit_address):
+        db_address, byte_address, bit_address = db_bit_address.split(sep='.')
+        return db_address + '.' + 'DBB' + byte_address[3:]
+
+    @staticmethod
+    def tag_bit_index(bit_address) -> int:
         """
         PLC bit index create
         :param str bit_address: PLC but address
         :return: PLC bit index
         """
         byte_index, bit_index = (int(x) for x in bit_address[1:].split(sep='.'))
+        return bit_index
+
+    @staticmethod
+    def db_bit_index(db_bit_address):
+        byte_index, bit_index = (int(x) for x in db_bit_address[7:].split(sep='.'))
         return bit_index
 
 
@@ -173,9 +183,7 @@ class PLC_data:
                 word_index = int(word_address[3:])
                 data = []
                 for index in range(0, length):
-                    print(db_address + '.' + word_address[:3] + str(word_index + index * 2))
                     data.append(self.write_word_db[db_address + '.' + word_address[:3] + str(word_index + index * 2)])
-                print(data)
                 self.__plc_connect.set_db_int(db_word_address, length, data)
         except S7ConnectFailed:
             pass
@@ -186,20 +194,45 @@ class PLC_data:
             for index in range(0, read_length):
                 self.write_byte_tag[byte_address[:2] + str(byte_index + index)] = 0x00
 
+    def write_db_page_clear(self):
+        for db_byte_address, length in self.plc_address.WRITE_BYTES_DB_ADDRESS:
+            db_address, byte_address = db_byte_address.split(sep='.')
+            byte_index = int(byte_address[3:])
+            for index in range(0, length):
+                self.write_byte_db[db_address + '.' + byte_address[:3] + str(byte_index + index)] = 0x00
+
     def set_bit_tag_page(self, bit_address, data):
         old_data = self.write_byte_tag[PLC_Address.byte_tag_address(bit_address)]
-        clear_mask = 255 - (0x01 << PLC_Address.bit_tag_index(bit_address))
+        clear_mask = 255 - (0x01 << PLC_Address.tag_bit_index(bit_address))
         old_data = old_data & clear_mask
         if data:
-            old_data = old_data + (0x01 << PLC_Address.bit_tag_index(bit_address))
+            old_data = old_data + (0x01 << PLC_Address.tag_bit_index(bit_address))
         self.write_byte_tag[PLC_Address.byte_tag_address(bit_address)] = old_data
+
+    def set_bit_db_page(self, db_bit_address, data):
+        old_data = self.write_byte_db[PLC_Address.byte_db_address(db_bit_address)]
+        clear_mask = 255 - (0x01 << PLC_Address.db_bit_index(db_bit_address))
+        old_data = old_data & clear_mask
+        if data:
+            old_data = old_data + (0x01 << PLC_Address.db_bit_index(db_bit_address))
+        self.write_byte_db[PLC_Address.byte_db_address(db_bit_address)] = old_data
 
     def set_int_tag_page(self, word_address, data):
         self.write_word_tag[word_address] = data
 
+    def set_int_db_page(self, db_word_address, data):
+        self.write_word_db[db_word_address] = data
+
     def get_bit_tag_page(self, bit_address):
         return bool(self.read_byte_tag[PLC_Address.byte_tag_address(bit_address)]
-                    & (0x01 << PLC_Address.bit_tag_index(bit_address)))
+                    & (0x01 << PLC_Address.tag_bit_index(bit_address)))
+
+    def get_bit_db_page(self, db_bit_address):
+        return bool(self.read_byte_db[PLC_Address.byte_db_address(db_bit_address)]
+                    & (0x01 << PLC_Address.db_bit_index(db_bit_address)))
 
     def get_int_tag_page(self, word_address):
         return self.read_word_tag[word_address]
+
+    def get_int_db_page(self, db_word_address):
+        return self.read_word_db[db_word_address]
