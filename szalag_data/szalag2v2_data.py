@@ -16,11 +16,11 @@ class Szalag2v2_Address(PLC_Address):
     UZEM = 'Q0.6'
     HIBA = 'Q0.7'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
     KS = 'IW64'
 
-    READ_WORDS_ADDRESS = (('IW64', 1), )
+    READ_WORDS_TAG_ADDRESS = (('IW64', 1),)
 
     KS_RANGE = 27648
 
@@ -110,19 +110,19 @@ class Szalag2v2_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__s1 = self.get_bit_in_page(Szalag2v2_Address.S1)
-        self.__s2 = self.get_bit_in_page(Szalag2v2_Address.S2)
-        self.__kp1 = self.get_bit_in_page(Szalag2v2_Address.KP1)
-        self.__kp2 = self.get_bit_in_page(Szalag2v2_Address.KP2)
-        self.__start = self.get_bit_in_page(Szalag2v2_Address.START)
-        self.__stop = self.get_bit_in_page(Szalag2v2_Address.STOP)
+        self.__s1 = self.get_bit_tag_page(Szalag2v2_Address.S1)
+        self.__s2 = self.get_bit_tag_page(Szalag2v2_Address.S2)
+        self.__kp1 = self.get_bit_tag_page(Szalag2v2_Address.KP1)
+        self.__kp2 = self.get_bit_tag_page(Szalag2v2_Address.KP2)
+        self.__start = self.get_bit_tag_page(Szalag2v2_Address.START)
+        self.__stop = self.get_bit_tag_page(Szalag2v2_Address.STOP)
 
-        self.__m1 = self.get_bit_in_page(Szalag2v2_Address.M1)
-        self.__m2 = self.get_bit_in_page(Szalag2v2_Address.M2)
-        self.__uzem = self.get_bit_in_page(Szalag2v2_Address.UZEM)
-        self.__hiba = self.get_bit_in_page(Szalag2v2_Address.HIBA)
+        self.__m1 = self.get_bit_tag_page(Szalag2v2_Address.M1)
+        self.__m2 = self.get_bit_tag_page(Szalag2v2_Address.M2)
+        self.__uzem = self.get_bit_tag_page(Szalag2v2_Address.UZEM)
+        self.__hiba = self.get_bit_tag_page(Szalag2v2_Address.HIBA)
 
-        self.__ks = self.get_int_in_page(Szalag2v2_Address.KS)
+        self.__ks = self.get_int_tag_page(Szalag2v2_Address.KS)
 
     def s1_is_changed(self):
         if self.__s1 != self.__s1_old:

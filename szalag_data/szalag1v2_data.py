@@ -21,7 +21,7 @@ class Szalag1v2_Address(PLC_Address):
     HIBA2 = 'Q0.6'
     HIBA3 = 'Q0.7'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
@@ -64,22 +64,22 @@ class Szalag1v2_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.s1 = self.get_bit_in_page(Szalag1v2_Address.S1)
-        self.s2 = self.get_bit_in_page(Szalag1v2_Address.S2)
-        self.s3 = self.get_bit_in_page(Szalag1v2_Address.S3)
-        self.start1 = self.get_bit_in_page(Szalag1v2_Address.START1)
-        self.stop1 = self.get_bit_in_page(Szalag1v2_Address.STOP1)
-        self.start2 = self.get_bit_in_page(Szalag1v2_Address.START2)
-        self.stop2 = self.get_bit_in_page(Szalag1v2_Address.STOP2)
+        self.s1 = self.get_bit_tag_page(Szalag1v2_Address.S1)
+        self.s2 = self.get_bit_tag_page(Szalag1v2_Address.S2)
+        self.s3 = self.get_bit_tag_page(Szalag1v2_Address.S3)
+        self.start1 = self.get_bit_tag_page(Szalag1v2_Address.START1)
+        self.stop1 = self.get_bit_tag_page(Szalag1v2_Address.STOP1)
+        self.start2 = self.get_bit_tag_page(Szalag1v2_Address.START2)
+        self.stop2 = self.get_bit_tag_page(Szalag1v2_Address.STOP2)
 
-        self.m1 = self.get_bit_in_page(Szalag1v2_Address.M1)
-        self.m2 = self.get_bit_in_page(Szalag1v2_Address.M2)
-        self.m3 = self.get_bit_in_page(Szalag1v2_Address.M3)
-        self.uzem1 = self.get_bit_in_page(Szalag1v2_Address.UZEM1)
-        self.uzem2 = self.get_bit_in_page(Szalag1v2_Address.UZEM2)
-        self.hiba1 = self.get_bit_in_page(Szalag1v2_Address.HIBA1)
-        self.hiba2 = self.get_bit_in_page(Szalag1v2_Address.HIBA2)
-        self.hiba3 = self.get_bit_in_page(Szalag1v2_Address.HIBA3)
+        self.m1 = self.get_bit_tag_page(Szalag1v2_Address.M1)
+        self.m2 = self.get_bit_tag_page(Szalag1v2_Address.M2)
+        self.m3 = self.get_bit_tag_page(Szalag1v2_Address.M3)
+        self.uzem1 = self.get_bit_tag_page(Szalag1v2_Address.UZEM1)
+        self.uzem2 = self.get_bit_tag_page(Szalag1v2_Address.UZEM2)
+        self.hiba1 = self.get_bit_tag_page(Szalag1v2_Address.HIBA1)
+        self.hiba2 = self.get_bit_tag_page(Szalag1v2_Address.HIBA2)
+        self.hiba3 = self.get_bit_tag_page(Szalag1v2_Address.HIBA3)
 
     def s1_is_changed(self):
         if self.s1 != self.__s1_old:

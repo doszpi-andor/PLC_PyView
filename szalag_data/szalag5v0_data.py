@@ -17,7 +17,7 @@ class Szalag5v0_Address(PLC_Address):
     UZEM = 'Q0.6'
     HIBA = 'Q0.7'
 
-    READ_BYTES_ADDRESS = (('IB0', 1), ('QB0', 1))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
@@ -99,18 +99,18 @@ class Szalag5v0_data(PLC_data):
     def read_data(self) -> None:
         super().read_data()
 
-        self.__s1 = self.get_bit_in_page(Szalag5v0_Address.S1)
-        self.__s2 = self.get_bit_in_page(Szalag5v0_Address.S2)
-        self.__s3 = self.get_bit_in_page(Szalag5v0_Address.S3)
-        self.__nyugta = self.get_bit_in_page(Szalag5v0_Address.NYUGTA)
-        self.__start = self.get_bit_in_page(Szalag5v0_Address.START)
-        self.__stop = self.get_bit_in_page(Szalag5v0_Address.STOP)
+        self.__s1 = self.get_bit_tag_page(Szalag5v0_Address.S1)
+        self.__s2 = self.get_bit_tag_page(Szalag5v0_Address.S2)
+        self.__s3 = self.get_bit_tag_page(Szalag5v0_Address.S3)
+        self.__nyugta = self.get_bit_tag_page(Szalag5v0_Address.NYUGTA)
+        self.__start = self.get_bit_tag_page(Szalag5v0_Address.START)
+        self.__stop = self.get_bit_tag_page(Szalag5v0_Address.STOP)
 
-        self.__m1 = self.get_bit_in_page(Szalag5v0_Address.M1)
-        self.__m2 = self.get_bit_in_page(Szalag5v0_Address.M2)
-        self.__m3 = self.get_bit_in_page(Szalag5v0_Address.M3)
-        self.__uzem = self.get_bit_in_page(Szalag5v0_Address.UZEM)
-        self.__hiba = self.get_bit_in_page(Szalag5v0_Address.HIBA)
+        self.__m1 = self.get_bit_tag_page(Szalag5v0_Address.M1)
+        self.__m2 = self.get_bit_tag_page(Szalag5v0_Address.M2)
+        self.__m3 = self.get_bit_tag_page(Szalag5v0_Address.M3)
+        self.__uzem = self.get_bit_tag_page(Szalag5v0_Address.UZEM)
+        self.__hiba = self.get_bit_tag_page(Szalag5v0_Address.HIBA)
 
     def s1_is_changed(self):
         if self.__s1 != self.__s1_old:
