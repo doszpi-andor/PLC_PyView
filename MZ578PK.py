@@ -15,6 +15,11 @@ class App(PLC_ViewA):
         # noinspection SpellCheckingInspection
         self.name_label.config(text='Modulzaro 578PK')
 
+        # noinspection SpellCheckingInspection
+        self.attributes("-fullscreen", True)
+
+        self.ip_select.pack_forget()
+
         self.conveyors = Szalag5v0_View(self.process_frame)
         self.conveyors.pack()
 
@@ -22,6 +27,8 @@ class App(PLC_ViewA):
 
     def loop(self):
         super().loop()
+
+        self.connect_label.configure(text=self.plc_default_ip)
 
         if self.plc_data.nyugta_is_changed() or self.plc_data.start_is_changed() or self.plc_data.stop_is_changed():
             self.button_refresh()
