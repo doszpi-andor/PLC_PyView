@@ -20,6 +20,11 @@ class App(PLC_ViewA):
 
         self.plc_data = Szalag2v1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
+        self.transfer_loop.start()
+
+    def data_transfer(self):
+        self.plc_data.read_data()
+
     def loop(self):
         super().loop()
 

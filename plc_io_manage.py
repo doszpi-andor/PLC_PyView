@@ -683,6 +683,8 @@ class App(PLC_ViewA):
         self.plc_data.analog_direction = PLC_IO_Address.ANALOG_DIRECTION
         self.set_analog_direction()
 
+        self.transfer_loop.start()
+
     def data_transfer(self):
         self.plc_data.read_data()
         self.plc_data.write_data()
