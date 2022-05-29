@@ -21,6 +21,11 @@ class App(PLC_ViewB):
 
         self.plc_data = Tartaly1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
+        self.transfer_loop.start()
+
+    def data_transfer(self):
+        self.plc_data.read_data()
+
     def loop(self):
 
         if self.plc_data.start_is_changed() or self.plc_data.stop_is_changed():

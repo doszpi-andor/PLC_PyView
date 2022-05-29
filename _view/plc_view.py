@@ -2,7 +2,7 @@ from platform import system
 from tkinter import Tk, Frame, Label, Button, RIGHT, Y, Toplevel, BOTTOM, X, TOP, LEFT
 
 from _config.plc_config_read import PLC_Config
-from _plc_data.plc_data import PLC_data, PLC_Address
+from _plc_data.plc_data import PLC_data
 from _plc_data.plc_ip_select import SelectIP
 from _threading.thread_loop import ThreadLoop
 
@@ -11,7 +11,7 @@ from _threading.thread_loop import ThreadLoop
 class PLC_View(Tk):
     __closed = False
 
-    # noinspection PyPep8Naming
+    # noinspection PyPep8Naming, PyTypeChecker
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
@@ -48,10 +48,9 @@ class PLC_View(Tk):
                                   ip_list=self.plc_ip_list,
                                   change_process=self.ip_selected)
 
-        self.plc_data = PLC_data(PLC_Address(), self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
+        self.plc_data: PLC_data = None
 
-        self.data_transfer = ThreadLoop(loop=self.data_transfer)
-        self.data_transfer.start()
+        self.transfer_loop = ThreadLoop(loop=self.data_transfer)
 
         self.protocol('WM_DELETE_WINDOW', self.close)
 
@@ -70,24 +69,25 @@ class PLC_View(Tk):
                                            (self.winfo_rootx() + self.winfo_width() // 2) - toplevel_width // 2,
                                            (self.winfo_y() + self.winfo_height() // 2) - toplevel_height // 2))
         toplevel.grab_set()
-        self.data_transfer.stop()
+        self.transfer_loop.stop()
         self.__closed = True
 
     def destroy(self):
-        self.data_transfer.stop()
-        self.data_transfer.join()
+        self.transfer_loop.stop()
+        self.transfer_loop.join()
         super().destroy()
 
     def data_transfer(self):
-        self.plc_data.read_data()
+        pass
 
     def loop(self):
-        if self.__closed and not self.data_transfer.is_alive():
+        if self.__closed and not self.transfer_loop.is_alive():
             self.destroy()
 
         self.after(100, self.loop)
 
 
+# noinspection PyPep8Naming
 class PLC_ViewA(PLC_View):
 
     # noinspection PyPep8Naming
@@ -112,6 +112,7 @@ class PLC_ViewA(PLC_View):
         super().loop()
 
 
+# noinspection PyPep8Naming
 class PLC_ViewB(PLC_View):
 
     # noinspection PyPep8Naming
