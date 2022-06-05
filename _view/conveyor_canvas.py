@@ -3,7 +3,8 @@ from tkinter import Canvas, Tk, CENTER
 
 class ConveyorCanvas(Canvas):
     CONVEYOR_WIDTH = 50
-    NAME_FONT_SIZE = 12
+    CONVEYOR_NAME_FONT_SIZE = 12
+    CONVEYOR_CIRCLE_FONT_SIZE = 10
 
     def create_conveyor(self, x_position, y_position, length, name='', conveyor_color='light gray', name_color='black',
                         circle1_name='', circle1_color='gray', circle2_name='', circle2_color='gray'):
@@ -16,7 +17,7 @@ class ConveyorCanvas(Canvas):
 
         text_id = self.create_text(x_position + length // 2,
                                    y_position + self.CONVEYOR_WIDTH // 2,
-                                   font=("Arial", self.NAME_FONT_SIZE),
+                                   font=("Arial", self.CONVEYOR_NAME_FONT_SIZE),
                                    text=name, fill=name_color)
         self.create_oval(x_position,
                          y_position,
@@ -25,6 +26,7 @@ class ConveyorCanvas(Canvas):
                          fill=circle1_color)
         self.create_text(x_position + self.CONVEYOR_WIDTH // 2,
                          y_position + self.CONVEYOR_WIDTH // 2,
+                         font=("Arial", self.CONVEYOR_CIRCLE_FONT_SIZE),
                          justify=CENTER, text=circle1_name)
         self.create_oval(x_position + length - self.CONVEYOR_WIDTH,
                          y_position,
@@ -33,6 +35,7 @@ class ConveyorCanvas(Canvas):
                          fill=circle2_color)
         self.create_text(x_position + length - self.CONVEYOR_WIDTH // 2,
                          y_position + self.CONVEYOR_WIDTH // 2,
+                         font=("Arial", self.CONVEYOR_CIRCLE_FONT_SIZE),
                          justify=CENTER, text=circle2_name)
 
         return text_id

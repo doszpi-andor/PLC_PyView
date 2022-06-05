@@ -4,7 +4,8 @@ from tkinter import Canvas, Tk
 class SiloCanvas(Canvas):
     SILO_WIDTH = 100
     SILO_HEIGHT = 160
-    NAME_FONT_SIZE = 12
+    SILO_NAME_FONT_SIZE = 12
+    SILO_MOTOR_FONT_SIZE = 10
 
     def create_silo(self, x_position, y_position, silo_name='', silo_color='gray', motor_name='', motor_color='gray'):
         self.create_rectangle(x_position,
@@ -50,6 +51,7 @@ class SiloCanvas(Canvas):
                               fill=motor_color)
         self.create_text(x_position + self.SILO_WIDTH * 5 // 10,
                          y_position + self.SILO_HEIGHT * 1 // 20,
+                         font=("Arial", self.SILO_MOTOR_FONT_SIZE),
                          text=motor_name)
 
         self.create_line(x_position + self.SILO_WIDTH * 2 // 5,
@@ -131,7 +133,7 @@ class SiloCanvas(Canvas):
         # noinspection PyArgumentList
         self.create_text(x_position + self.SILO_WIDTH // 5,
                          y_position + self.SILO_HEIGHT // 2,
-                         font=("Arial", self.NAME_FONT_SIZE),
+                         font=("Arial", self.SILO_NAME_FONT_SIZE),
                          angle=90, text=silo_name)
 
 
