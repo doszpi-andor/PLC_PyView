@@ -11,6 +11,7 @@ class SensorCanvas(Canvas):
     SENSOR_SQUARE = 20
     SENSOR_LINE_LENGTH = 10
     SENSOR_TEXT_LENGTH = 80
+    SENSOR_FONT_SIZE = 10
 
     def create_sensor(self, x_position, y_position, name, color, line_length=0) -> None:
         """
@@ -33,6 +34,7 @@ class SensorCanvas(Canvas):
                               fill=color)
         self.create_text(x_position + line_length + self.SENSOR_SQUARE + 4,
                          y_position,
+                         font=("Arial", self.SENSOR_FONT_SIZE),
                          anchor=W, text=name)
 
 
@@ -42,6 +44,7 @@ class AnalogCanvas(Canvas):
     :var int ANALOG_INDICATOR_WIDTH: analog indicator bar size
     """
     ANALOG_SENSOR_WIDTH = 20
+    ANALOG_SENSOR_FONT_SIZE = 10
 
     def create_analog(self, x_position, y_position, height, name, active_color, active_level=0, activ_level_print=False,
                       background_color='gray', line_length=0, name_position='right', marks_position=None) -> int:
@@ -102,11 +105,13 @@ class AnalogCanvas(Canvas):
             # noinspection PyArgumentList
             text_id = self.create_text(x_position + line_length + self.ANALOG_SENSOR_WIDTH,
                                        y_position + height // 2,
+                                       font=("Arial", self.ANALOG_SENSOR_FONT_SIZE),
                                        angle=90, anchor=N, text=name)
         elif name_position == 'left':
             # noinspection PyArgumentList
             text_id = self.create_text(x_position,
                                        y_position + height // 2,
+                                       font=("Arial", self.ANALOG_SENSOR_FONT_SIZE),
                                        angle=90, anchor=S, text=name)
 
         return text_id

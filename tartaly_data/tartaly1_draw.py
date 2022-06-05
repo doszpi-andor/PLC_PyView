@@ -14,9 +14,11 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
     VALVE_WIDTH = 20
     VALVE_HEIGHT = 30
     SENSOR_SQUARE = 15
+    SENSOR_FONT_SIZE = 9
     SENSOR_LINE_LENGTH = TANK_WIDTH + 10
     SENSOR_TEXT_LENGTH = 80
     ANALOG_SENSOR_WIDTH = 15
+    ANALOG_SENSOR_FONT_SIZE = 9
     HEATING_WIDTH = 30
     HEATING_HEIGHT = 30
     ROTOR_WIDTH = 40

@@ -10,7 +10,7 @@ class TankCanvas(Canvas):
     """
     TANK_WIDTH = 90
     TANK_HEIGHT = 220
-    NAME_FONT_SIZE = 15
+    TANK_NAME_FONT_SIZE = 15
 
     def create_tank(self, x_position, y_position, tank_name, tank_color) -> None:
         """
@@ -57,7 +57,7 @@ class TankCanvas(Canvas):
 
         self.create_text(x_position + self.TANK_WIDTH // 2,
                          y_position + self.TANK_HEIGHT // 2,
-                         font=("Arial", self.NAME_FONT_SIZE), text=tank_name)
+                         font=("Arial", self.TANK_NAME_FONT_SIZE), text=tank_name)
 
 
 class ValveCanvas(Canvas):
@@ -68,6 +68,7 @@ class ValveCanvas(Canvas):
     """
     VALVE_WIDTH = 30
     VALVE_HEIGHT = 40
+    VALVE_NAME_FONT_SIZE = 10
 
     def create_valve(self, x_position, y_position, name, color) -> None:
         """
@@ -96,6 +97,7 @@ class ValveCanvas(Canvas):
 
         self.create_text(x_position + self.VALVE_WIDTH,
                          y_position + self.VALVE_HEIGHT // 2,
+                         font=("Arial", self.VALVE_NAME_FONT_SIZE),
                          anchor=W, text=name)
 
 
@@ -165,6 +167,7 @@ class HeatingCanvas(Canvas):
     """
     HEATING_WIDTH = 50
     HEATING_HEIGHT = 50
+    HEATING_NAME_FONT_SIZE = 10
 
     def create_heating(self, x_position, y_position, name, color='black') -> None:
         """
@@ -237,6 +240,7 @@ class HeatingCanvas(Canvas):
         # noinspection PyArgumentList
         self.create_text(x_position,
                          y_position + self.HEATING_HEIGHT // 2,
+                         font=("Arial", self.HEATING_NAME_FONT_SIZE),
                          angle=90, justify=CENTER, anchor=S, text=name)
 
 
@@ -246,6 +250,7 @@ class RotorCanvas(Canvas):
     :var int ROTOR_WIDTH: rotor width
     """
     ROTOR_WIDTH = 45
+    ROTOR_NAME_FONT_SIZE = 10
 
     def create_rotor(self, x_position, y_position, name, color) -> None:
         """
@@ -296,6 +301,7 @@ class RotorCanvas(Canvas):
         # noinspection PyArgumentList
         self.create_text(x_position - 10,
                          y_position + int(arc_diameter * 0.433),
+                         font=("Arial", self.ROTOR_NAME_FONT_SIZE),
                          angle=90, justify=CENTER, anchor=S, text=name)
 
     @property
