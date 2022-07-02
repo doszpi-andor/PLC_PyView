@@ -6,26 +6,26 @@ class IndicatorCanvas(Canvas):
     INDICATOR_TEXT_SHIFT = 5
     INDICATOR_FONT_SIZE = 10
 
-    def create_square_indicator(self, x_position, y_position, name='', color='gray'):
+    def create_square_indicator(self, x_position, y_position, name='', color='gray', name_x_shift=INDICATOR_TEXT_SHIFT):
 
         self.create_rectangle(x_position,
                               y_position,
                               x_position + self.INDICATOR_WIDTH,
                               y_position + self.INDICATOR_WIDTH,
                               fill=color)
-        self.create_text(x_position + self.INDICATOR_WIDTH + self.INDICATOR_TEXT_SHIFT,
+        self.create_text(x_position + self.INDICATOR_WIDTH + name_x_shift,
                          y_position + self.INDICATOR_WIDTH // 2,
                          font=("Arial", self.INDICATOR_FONT_SIZE),
                          anchor=W, text=name)
 
-    def create_circle_indicator(self, x_position, y_position, name='', color='gray'):
+    def create_circle_indicator(self, x_position, y_position, name='', color='gray', name_x_shift=INDICATOR_TEXT_SHIFT):
 
         self.create_oval(x_position,
                          y_position,
                          x_position + self.INDICATOR_WIDTH,
                          y_position + self.INDICATOR_WIDTH,
                          fill=color)
-        self.create_text(x_position + self.INDICATOR_WIDTH + self.INDICATOR_TEXT_SHIFT,
+        self.create_text(x_position + self.INDICATOR_WIDTH + name_x_shift,
                          y_position + self.INDICATOR_WIDTH // 2,
                          font=("Arial", self.INDICATOR_FONT_SIZE),
                          anchor=W, text=name)
@@ -63,10 +63,10 @@ if __name__ == "__main__":
     root = Tk()
 
     indicators = IndicatorCanvas(root)
-    indicators.create_square_indicator(5, 5, name='Start', color='green')
-    indicators.create_circle_indicator(5, 30, name='Error', color='red')
-    indicators.create_delta_indicator(5, 60, direction='left')
-    indicators.create_delta_indicator(30, 60, direction='right')
+    indicators.create_square_indicator(55, 5, name='Start', color='green')
+    indicators.create_circle_indicator(55, 30, name='Error', color='red', name_x_shift=-55)
+    indicators.create_delta_indicator(55, 60, direction='left')
+    indicators.create_delta_indicator(80, 60, direction='right')
     indicators.pack()
 
     root.mainloop()
