@@ -19,4 +19,5 @@ class SelectIP(Frame):
         self.ip_address.set(default_ip)
         self.ip_list = ip_list
         self.ip_menu = OptionMenu(self, self.ip_address, *self.ip_list, command=change_process)
+        self.ip_menu.config(width=15)
         self.ip_menu.pack()
