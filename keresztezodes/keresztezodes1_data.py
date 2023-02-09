@@ -12,7 +12,7 @@ class Keresztezodes1_Address(PLC_Address):
 
     READ_BYTES_TAG_ADDRESS = (('QB0', 1), )
 
-class Keresztezodes_data(PLC_data):
+class Keresztezodes1_data(PLC_data):
 
     __a_piros_old = False
     __a_sarga_old = False
@@ -58,4 +58,21 @@ class Keresztezodes_data(PLC_data):
             self.__a_zold_old = self.a_zold
             return True
         return False
-    
+
+    def b_piros_is_changed(self):
+        if self.b_piros != self.__b_piros_old:
+            self.__b_piros_old = self.b_piros
+            return True
+        return False
+
+    def b_sarga_is_changed(self):
+        if self.b_sarga != self.__b_sarga_old:
+            self.__b_sarga_old = self.b_sarga
+            return True
+        return False
+
+    def b_zold_is_changed(self):
+        if self.b_zold != self.__b_zold_old:
+            self.__b_zold_old = self.b_zold
+            return True
+        return False

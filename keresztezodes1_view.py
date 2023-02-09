@@ -1,6 +1,6 @@
 from _view.plc_view import PLC_ViewA
-from szalag_data.keresztezodes1_draw import Keresztezodes1_View
-from szalag_data.keresztezodes_1_data import Keresztezodes1_data
+from keresztezodes.keresztezodes1_draw import Keresztezodes1_View
+from keresztezodes.keresztezodes1_data import Keresztezodes1_data
 
 
 class App(PLC_ViewA):
