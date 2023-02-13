@@ -261,7 +261,7 @@ class PLC_Connect:
                 raise S7ConnectFailed
             try:
                 self.__plc.connect(self.__ip, self.__rack, self.__slot)
-            except Snap7Exception:
+            except (Snap7Exception, RuntimeError):
                 self.__connected = False
                 raise S7ConnectFailed
             self.__connected = True
