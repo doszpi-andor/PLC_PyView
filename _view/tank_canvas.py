@@ -313,11 +313,34 @@ class RotorCanvas(Canvas):
         return int(self.ROTOR_WIDTH * 1.155)
 
 
+class PumpCanvas(Canvas):
+
+    PUMP_WIDTH = 40
+    PUMP_FONT_SIZE = 10
+    PUMP_NAME_SHIFT = 10
+
+    def create_pump(self, x_position, y_position, name='', name_color='black', color='gray'):
+
+        self.create_oval(x_position,
+                         y_position,
+                         x_position + self.PUMP_WIDTH,
+                         y_position + self.PUMP_WIDTH,
+                         fill=color)
+        self.create_text(x_position + self.PUMP_WIDTH // 2,
+                         y_position + self.PUMP_WIDTH + self.PUMP_NAME_SHIFT,
+                         font=("Arial", self.PUMP_FONT_SIZE),
+                         text=name, fill=name_color)
+
+
 if __name__ == "__main__":
     root = Tk()
 
-    tank = TankCanvas(root)
-    tank.create_tank(5, 5, tank_name='T1', tank_color='gray')
-    tank.pack()
+    # tank = TankCanvas(root)
+    # tank.create_tank(5, 5, tank_name='T1', tank_color='gray')
+    # tank.pack()
+
+    pump = PumpCanvas(root)
+    pump.create_pump(10, 10, name='Motor')
+    pump.pack()
 
     root.mainloop()
