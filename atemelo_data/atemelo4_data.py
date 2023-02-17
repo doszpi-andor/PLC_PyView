@@ -14,7 +14,7 @@ class Atemelo4_Address(PLC_Address):
     MOTOR_B = 'Q0.1'
     HIBA_LAMPA = 'Q0.7'
 
-    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB136', 1))
 
 
 class Atemelo4_data(PLC_data):
