@@ -1,4 +1,4 @@
-from tkinter import Canvas, ARC, W, CHORD, CENTER, S
+from tkinter import Canvas, ARC, W, CHORD, CENTER, S, Tk
 
 
 class TankCanvas(Canvas):
@@ -311,3 +311,13 @@ class RotorCanvas(Canvas):
         :return: rotor indicator height
         """
         return int(self.ROTOR_WIDTH * 1.155)
+
+
+if __name__ == "__main__":
+    root = Tk()
+
+    tank = TankCanvas(root)
+    tank.create_tank(5, 5, tank_name='T1', tank_color='gray')
+    tank.pack()
+
+    root.mainloop()
