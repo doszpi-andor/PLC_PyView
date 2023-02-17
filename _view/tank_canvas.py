@@ -118,8 +118,8 @@ class PipeCanvas(Canvas):
         """
         self.create_rectangle(x_position,
                               y_position,
-                              length,
-                              self.PIPE_WIDTH,
+                              x_position + length,
+                              y_position + self.PIPE_WIDTH,
                               outline=color,
                               fill=color)
 

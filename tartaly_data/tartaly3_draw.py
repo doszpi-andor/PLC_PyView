@@ -39,7 +39,7 @@ class Tartaly3_View(TankCanvas, SensorCanvas, ValveCanvas, PipeCanvas, Indicator
     FULL_WIDTH = INDICATOR_COLUMN1_X_POSITION + 150
     FULL_HEIGHT = BOTTOM_VALVE_Y_POSITION + ValveCanvas.VALVE_HEIGHT + BOTTOM_SHIFT
 
-    HORIZONTAL_PIPE_LENGTH = TANK3_X_POSITION + TANK_WIDTH // 2 + PipeCanvas.PIPE_WIDTH // 2
+    HORIZONTAL_PIPE_LENGTH = TANK3_X_POSITION + TANK_WIDTH // 2 + PipeCanvas.PIPE_WIDTH // 2 - 1
 
     # noinspection PyDefaultArgument
     def __init__(self, master=None, cnf={}, **kw):
