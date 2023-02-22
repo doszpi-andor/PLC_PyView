@@ -11,7 +11,7 @@ class Szalag6v0_Address(PLC_Address):
     M1 = 'Q0.0'
     M2 = 'Q0.1'
     M3 = 'Q0.2'
-    UZEM = 'Q4.0'
+    UZEM = 'Q0.7'
 
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
