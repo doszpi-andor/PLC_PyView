@@ -104,6 +104,10 @@ class Szalag6v0_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
                          self.SILO_Y_POSITION,
                          silo_name='Siló',
                          motor_name='M1[%s]' % Szalag6v0_Address.M1, motor_color=self.silo_motor_color)
+        self.create_sensor(self.SILO_SENSOR_X_POSITION,
+                           self.SILO_SENSOR_Y_POSITION,
+                           line_length=self.SILO_WIDTH,
+                           name='S1\n[%s]' % Szalag6v0_Address.S1, color=self.silo_sensor_color)
 
     def __conveyors_drawing(self):
         self.create_conveyor(self.CONVEYOR1_X_POSITION,
