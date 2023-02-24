@@ -41,38 +41,38 @@ class App(PLC_ViewA):
     def sensor_refresh(self):
         # 1 1 1
         if self.plc_data.jelado_1 and self.plc_data.jelado_2 and self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='red', sensor_2_color='red', sensor_3_color='red')
+            self.tank.tank_change_color(sensor_1_color='blue', sensor_2_color='blue', sensor_3_color='blue')
         # 0 1 1
         elif not self.plc_data.jelado_1 and self.plc_data.jelado_2 and self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='red', sensor_3_color='red')
+            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='blue', sensor_3_color='blue')
         # 1 0 1
         elif self.plc_data.jelado_1 and not self.plc_data.jelado_2 and self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='red', sensor_2_color='gray', sensor_3_color='red')
+            self.tank.tank_change_color(sensor_1_color='blue', sensor_2_color='gray', sensor_3_color='blue')
         # 0 0 1
         elif not self.plc_data.jelado_1 and not self.plc_data.jelado_2 and self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='gray', sensor_3_color='red')
+            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='gray', sensor_3_color='blue')
         # 1 1 0
         elif self.plc_data.jelado_1 and self.plc_data.jelado_2 and not self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='red', sensor_2_color='red', sensor_3_color='gray')
+            self.tank.tank_change_color(sensor_1_color='blue', sensor_2_color='blue', sensor_3_color='gray')
         # 0 1 0
         elif not self.plc_data.jelado_1 and self.plc_data.jelado_2 and not self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='red', sensor_3_color='gray')
+            self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='blue', sensor_3_color='gray')
         # 1 0 0
         elif self.plc_data.jelado_1 and not self.plc_data.jelado_2 and not self.plc_data.jelado_3:
-            self.tank.tank_change_color(sensor_1_color='red', sensor_2_color='gray', sensor_3_color='gray')
+            self.tank.tank_change_color(sensor_1_color='blue', sensor_2_color='gray', sensor_3_color='gray')
         else:
             self.tank.tank_change_color(sensor_1_color='gray', sensor_2_color='gray', sensor_3_color='gray')
 
     def pump_a_refresh(self):
         # 1 1
         if self.plc_data.motor_a and self.plc_data.aramlas_a:
-            self.tank.pump_a_change_color(motor_color='green', flow_sensor_color='yellow')
+            self.tank.pump_a_change_color(motor_color='green', flow_sensor_color='green')
         # 0 1
         elif not self.plc_data.motor_a and self.plc_data.aramlas_a:
             self.tank.pump_a_change_color(motor_color='gray', flow_sensor_color='yellow')
         # 1 0
         elif self.plc_data.motor_a and not self.plc_data.aramlas_a:
-            self.tank.pump_a_change_color(motor_color='green', flow_sensor_color='gray')
+            self.tank.pump_a_change_color(motor_color='green', flow_sensor_color='red')
         # 0 0
         else:
             self.tank.pump_a_change_color(motor_color='gray', flow_sensor_color='gray')
@@ -80,13 +80,13 @@ class App(PLC_ViewA):
     def pump_b_refresh(self):
         # 1 1
         if self.plc_data.motor_b and self.plc_data.aramlas_b:
-            self.tank.pump_b_change_color(motor_color='green', flow_sensor_color='yellow')
+            self.tank.pump_b_change_color(motor_color='green', flow_sensor_color='green')
         # 0 1
         elif not self.plc_data.motor_b and self.plc_data.aramlas_b:
             self.tank.pump_b_change_color(motor_color='gray', flow_sensor_color='yellow')
         # 1 0
         elif self.plc_data.motor_b and not self.plc_data.aramlas_b:
-            self.tank.pump_b_change_color(motor_color='green', flow_sensor_color='gray')
+            self.tank.pump_b_change_color(motor_color='green', flow_sensor_color='red')
         # 0 0
         else:
             self.tank.pump_b_change_color(motor_color='gray', flow_sensor_color='gray')
