@@ -11,6 +11,14 @@ class IO_View_Address(PLC_Address):
     INPUT6 = 'I0.5'
     INPUT7 = 'I0.6'
     INPUT8 = 'I0.7'
+    INPUT9 = 'I1.0'
+    INPUT10 = 'I1.1'
+    INPUT11 = 'I1.2'
+    INPUT12 = 'I1.3'
+    INPUT13 = 'I1.4'
+    INPUT14 = 'I1.5'
+    INPUT15 = 'I1.6'
+    INPUT16 = 'I1.7'
 
     OUTPUT1 = 'Q0.0'
     OUTPUT2 = 'Q0.1'
@@ -23,7 +31,7 @@ class IO_View_Address(PLC_Address):
     OUTPUT9 = 'Q1.0'
     OUTPUT10 = 'Q1.1'
 
-    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 2), ('QB0', 2))
 
     ANALOG_IN_CH0 = 'IW64'
     ANALOG_IN_CH1 = 'IW66'
@@ -44,6 +52,14 @@ class IO_View_Data(PLC_data):
     __input6_old = False
     __input7_old = False
     __input8_old = False
+    __input9_old = False
+    __input10_old = False
+    __input11_old = False
+    __input12_old = False
+    __input13_old = False
+    __input14_old = False
+    __input15_old = False
+    __input16_old = False
 
     __output1_old = False
     __output2_old = False
@@ -70,6 +86,14 @@ class IO_View_Data(PLC_data):
         self.__input6 = False
         self.__input7 = False
         self.__input8 = False
+        self.__input9 = False
+        self.__input10 = False
+        self.__input11 = False
+        self.__input12 = False
+        self.__input13 = False
+        self.__input14 = False
+        self.__input15 = False
+        self.__input16 = False
 
         self.__output1 = False
         self.__output2 = False
@@ -116,6 +140,38 @@ class IO_View_Data(PLC_data):
     @property
     def input8(self):
         return self.__input8
+
+    @property
+    def input9(self):
+        return self.__input9
+
+    @property
+    def input10(self):
+        return self.__input10
+
+    @property
+    def input11(self):
+        return self.__input11
+
+    @property
+    def input12(self):
+        return self.__input12
+
+    @property
+    def input13(self):
+        return self.__input13
+
+    @property
+    def input14(self):
+        return self.__input14
+
+    @property
+    def input15(self):
+        return self.__input15
+
+    @property
+    def input16(self):
+        return self.__input16
 
     @property
     def output1(self):
@@ -184,6 +240,14 @@ class IO_View_Data(PLC_data):
         self.__input6 = self.get_bit_tag_page(IO_View_Address.INPUT6)
         self.__input7 = self.get_bit_tag_page(IO_View_Address.INPUT7)
         self.__input8 = self.get_bit_tag_page(IO_View_Address.INPUT8)
+        self.__input9 = self.get_bit_tag_page(IO_View_Address.INPUT9)
+        self.__input10 = self.get_bit_tag_page(IO_View_Address.INPUT10)
+        self.__input11 = self.get_bit_tag_page(IO_View_Address.INPUT11)
+        self.__input12 = self.get_bit_tag_page(IO_View_Address.INPUT12)
+        self.__input13 = self.get_bit_tag_page(IO_View_Address.INPUT13)
+        self.__input14 = self.get_bit_tag_page(IO_View_Address.INPUT14)
+        self.__input15 = self.get_bit_tag_page(IO_View_Address.INPUT15)
+        self.__input16 = self.get_bit_tag_page(IO_View_Address.INPUT16)
 
         self.__output1 = self.get_bit_tag_page(IO_View_Address.OUTPUT1)
         self.__output2 = self.get_bit_tag_page(IO_View_Address.OUTPUT2)
@@ -199,7 +263,7 @@ class IO_View_Data(PLC_data):
         self.__analog_in_ch0 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH0)
         self.__analog_in_ch1 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH1)
 
-    def input_is_changed(self):
+    def input1b_is_changed(self):
         if self.__input1 != self.__input1_old or self.__input2 != self.__input2_old or \
                 self.__input3 != self.__input3_old or self.__input4 != self.__input4_old or \
                 self.__input5 != self.__input5_old or self.__input6 != self.__input6_old or \
@@ -212,6 +276,22 @@ class IO_View_Data(PLC_data):
             self.__input6_old = self.__input6
             self.__input7_old = self.__input7
             self.__input8_old = self.__input8
+            return True
+        return False
+
+    def input2b_is_changed(self):
+        if self.__input9 != self.__input9_old or self.__input10 != self.__input10_old or \
+                self.__input11 != self.__input11_old or self.__input12 != self.__input12_old or \
+                self.__input13 != self.__input13_old or self.__input14 != self.__input14_old or \
+                self.__input15 != self.__input15_old or self.__input16 != self.__input16_old:
+            self.__input9_old = self.__input9
+            self.__input10_old = self.__input10
+            self.__input11_old = self.__input11
+            self.__input12_old = self.__input12
+            self.__input13_old = self.__input13
+            self.__input14_old = self.__input14
+            self.__input15_old = self.__input15
+            self.__input16_old = self.__input16
             return True
         return False
 

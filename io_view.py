@@ -22,7 +22,7 @@ class App(PLC_ViewA):
         self.plc_data.read_data()
 
     def loop(self):
-        if self.plc_data.input_is_changed():
+        if self.plc_data.input1b_is_changed() or self.plc_data.input2b_is_changed():
             self.__input_refresh()
 
         if self.plc_data.output_is_changed():
@@ -75,6 +75,46 @@ class App(PLC_ViewA):
         else:
             input8_color = 'gray'
 
+        if self.plc_data.input9:
+            input9_color = 'red'
+        else:
+            input9_color = 'gray'
+
+        if self.plc_data.input10:
+            input10_color = 'red'
+        else:
+            input10_color = 'gray'
+
+        if self.plc_data.input11:
+            input11_color = 'red'
+        else:
+            input11_color = 'gray'
+
+        if self.plc_data.input12:
+            input12_color = 'red'
+        else:
+            input12_color = 'gray'
+
+        if self.plc_data.input13:
+            input13_color = 'red'
+        else:
+            input13_color = 'gray'
+
+        if self.plc_data.input14:
+            input14_color = 'red'
+        else:
+            input14_color = 'gray'
+
+        if self.plc_data.input15:
+            input15_color = 'red'
+        else:
+            input15_color = 'gray'
+
+        if self.plc_data.input16:
+            input16_color = 'red'
+        else:
+            input16_color = 'gray'
+
         self.io.input_change_color(input1_color,
                                    input2_color,
                                    input3_color,
@@ -82,7 +122,15 @@ class App(PLC_ViewA):
                                    input5_color,
                                    input6_color,
                                    input7_color,
-                                   input8_color)
+                                   input8_color,
+                                   input9_color,
+                                   input10_color,
+                                   input11_color,
+                                   input12_color,
+                                   input13_color,
+                                   input14_color,
+                                   input15_color,
+                                   input16_color)
 
     def __output_refresh(self):
         if self.plc_data.output1:
