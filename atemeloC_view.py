@@ -1,6 +1,6 @@
 from _view.plc_view import PLC_ViewA
-from atemelo_data.atemelo4_data import Atemelo4_data
-from atemelo_data.atemelo4_draw import Atemelo4_View
+from atemelo_data.atemeloC_data import Atemelo_C_Data
+from atemelo_data.atemeloC_draw import Atemelo4_View
 
 
 class App(PLC_ViewA):
@@ -8,13 +8,13 @@ class App(PLC_ViewA):
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
-        self.title('Átemelő 4')
-        self.name_label.config(text='Átemelő 4')
+        self.title('Átemelő')
+        self.name_label.config(text='Átemelő')
 
         self.tank = Atemelo4_View(self.process_frame)
         self.tank.pack()
 
-        self.plc_data = Atemelo4_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
+        self.plc_data = Atemelo_C_Data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
         self.transfer_loop.start()
 

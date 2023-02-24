@@ -1,7 +1,7 @@
 from _plc_data.plc_data import PLC_Address, PLC_data
 
 
-class Atemelo4_Address(PLC_Address):
+class Atemelo_C_Address(PLC_Address):
 
     JELADO_1 = 'I0.2'
     JELADO_2 = 'I0.1'
@@ -17,7 +17,7 @@ class Atemelo4_Address(PLC_Address):
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB136', 1))
 
 
-class Atemelo4_data(PLC_data):
+class Atemelo_C_Data(PLC_data):
 
     __jelado_1_old = False
     __jelado_2_old = False
@@ -31,7 +31,7 @@ class Atemelo4_data(PLC_data):
     __hiba_lampa_old = False
 
     def __init__(self, ip, rack, slot):
-        super().__init__(Atemelo4_Address(), ip, rack, slot)
+        super().__init__(Atemelo_C_Address(), ip, rack, slot)
         self.__jelado_1 = False
         self.__jelado_2 = False
         self.__jelado_3 = False
@@ -82,16 +82,16 @@ class Atemelo4_data(PLC_data):
     def read_data(self):
         super().read_data()
 
-        self.__jelado_1 = self.get_bit_tag_page(Atemelo4_Address.JELADO_1)
-        self.__jelado_2 = self.get_bit_tag_page(Atemelo4_Address.JELADO_2)
-        self.__jelado_3 = self.get_bit_tag_page(Atemelo4_Address.JELADO_3)
-        self.__aramlas_a = self.get_bit_tag_page(Atemelo4_Address.ARALMAS_A)
-        self.__aramlas_b = self.get_bit_tag_page(Atemelo4_Address.ARAMLAS_B)
-        self.__nyugta = self.get_bit_tag_page(Atemelo4_Address.NYUGTA)
+        self.__jelado_1 = self.get_bit_tag_page(Atemelo_C_Address.JELADO_1)
+        self.__jelado_2 = self.get_bit_tag_page(Atemelo_C_Address.JELADO_2)
+        self.__jelado_3 = self.get_bit_tag_page(Atemelo_C_Address.JELADO_3)
+        self.__aramlas_a = self.get_bit_tag_page(Atemelo_C_Address.ARALMAS_A)
+        self.__aramlas_b = self.get_bit_tag_page(Atemelo_C_Address.ARAMLAS_B)
+        self.__nyugta = self.get_bit_tag_page(Atemelo_C_Address.NYUGTA)
 
-        self.__motor_a = self.get_bit_tag_page(Atemelo4_Address.MOTOR_A)
-        self.__motor_b = self.get_bit_tag_page(Atemelo4_Address.MOTOR_B)
-        self.__hiba_lampa = self.get_bit_tag_page(Atemelo4_Address.HIBA_LAMPA)
+        self.__motor_a = self.get_bit_tag_page(Atemelo_C_Address.MOTOR_A)
+        self.__motor_b = self.get_bit_tag_page(Atemelo_C_Address.MOTOR_B)
+        self.__hiba_lampa = self.get_bit_tag_page(Atemelo_C_Address.HIBA_LAMPA)
 
     def jeladi_1_is_changed(self):
         if self.__jelado_1 != self.__jelado_1_old:
