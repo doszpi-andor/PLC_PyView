@@ -212,6 +212,8 @@ class IO_View_Data(PLC_data):
             self.__input6_old = self.__input6
             self.__input7_old = self.__input7
             self.__input8_old = self.__input8
+            return True
+        return False
 
     def output_is_changed(self):
         if self.__output1 != self.__output1_old or self.__output2 != self.__output2_old or \
@@ -229,6 +231,8 @@ class IO_View_Data(PLC_data):
             self.__output8_old = self.__output8
             self.__output9_old = self.__output9
             self.__output10_old = self.__output10
+            return True
+        return False
 
     def analog_in_ch0_is_changed(self, threshold=0):
         if self.__analog_in_ch0 < self.__analog_in_ch0_old - threshold // 2 or \
