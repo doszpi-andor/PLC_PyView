@@ -14,6 +14,8 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
     OUTPUT_X_POSITION = INPUT_X_POSITION + 150
     ANALOG_IN_CH0_X_POSITION = OUTPUT_X_POSITION + 150
     ANALOG_IN_CH1_X_POSITION = ANALOG_IN_CH0_X_POSITION + 80
+    ANALOG_OUT_CH0_X_POSITION = ANALOG_IN_CH1_X_POSITION + 80
+    ANALOG_OUT_CH1_X_POSITION = ANALOG_OUT_CH0_X_POSITION + 80
 
     ROW1_Y_POSITION = 5
     ROW2_Y_POSITION = ROW1_Y_POSITION + INDICATOR_WIDTH + 5
@@ -26,11 +28,14 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
     ROW9_Y_POSITION = ROW8_Y_POSITION + INDICATOR_WIDTH + 5
     ROW10_Y_POSITION = ROW9_Y_POSITION + INDICATOR_WIDTH + 5
 
-    FULL_WIDTH = ANALOG_IN_CH1_X_POSITION + ANALOG_SENSOR_WIDTH + 20
+    FULL_WIDTH = ANALOG_OUT_CH1_X_POSITION + ANALOG_SENSOR_WIDTH + 20
     FULL_HEIGHT = ROW10_Y_POSITION + INDICATOR_WIDTH + 5
 
     __analog_in_ch0_id = None
     __analog_in_ch1_id = None
+
+    __analog_out_ch0_id = None
+    __analog_out_ch1_id = None
 
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
@@ -58,9 +63,13 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
         self.__analog_in_ch0_percent = 0
         self.__analog_in_ch1_percent = 0
 
+        self.__analog_out_ch0_percent = 0
+        self.__analog_out_ch1_percent = 0
+
         self.__input_drawing()
         self.__output_drawing()
         self.__analog_in_drawing()
+        self.__analog_out_drawing()
 
     def input_change_color(self,
                            input_color1, input_color2, input_color3, input_color4,
@@ -198,6 +207,25 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
                                height=self.ROW10_Y_POSITION - self.ROW1_Y_POSITION + self.INDICATOR_WIDTH,
                                activ_level_print=True,
                                name='Analóg bemenet CH1 [%s]' % IO_View_Address.ANALOG_IN_CH1)
+
+    def __analog_out_drawing(self):
+        self.delete(self.__analog_out_ch0_id)
+        self.__analog_out_ch0_id =\
+            self.create_analog(x_position=self.ANALOG_OUT_CH0_X_POSITION,
+                               y_position=self.ROW1_Y_POSITION,
+                               active_level=self.__analog_out_ch0_percent, active_color='red',
+                               height=self.ROW10_Y_POSITION - self.ROW1_Y_POSITION + self.INDICATOR_WIDTH,
+                               activ_level_print=True,
+                               name='Analóg kimenet CH0 [%s]' % IO_View_Address.ANALOG_OUT_CH0)
+        self.delete(self.__analog_out_ch1_id)
+        self.__analog_out_ch1_id = \
+            self.create_analog(x_position=self.ANALOG_OUT_CH1_X_POSITION,
+                               y_position=self.ROW1_Y_POSITION,
+                               active_level=self.__analog_out_ch1_percent, active_color='red',
+                               height=self.ROW10_Y_POSITION - self.ROW1_Y_POSITION + self.INDICATOR_WIDTH,
+                               activ_level_print=True,
+                               name='Analóg kimenet CH1 [%s]' % IO_View_Address.ANALOG_OUT_CH1)
+
 
 if __name__ == "__main__":
     root = Tk()
