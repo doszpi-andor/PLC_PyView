@@ -105,12 +105,6 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
             self.__analog_in_ch1_percent = ch1_percent
             self.__analog_in_drawing()
 
-    def analog_out_change_level(self, ch0_percent, ch1_percent):
-        if self.__analog_out_ch0_percent != ch0_percent or self.__analog_out_ch1_percent != ch1_percent:
-            self.__analog_out_ch0_percent = ch0_percent
-            self.__analog_out_ch1_percent = ch1_percent
-            self.__analog_out_drawing()
-
     def __input_drawing(self):
         self.create_square_indicator(x_position=self.INPUT_X_POSITION,
                                      y_position=self.ROW2_Y_POSITION,
