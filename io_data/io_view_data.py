@@ -28,16 +28,10 @@ class IO_View_Address(PLC_Address):
     ANALOG_IN_CH0 = 'IW64'
     ANALOG_IN_CH1 = 'IW66'
 
-    ANALOG_OUT_CH0 = 'QW96'
-    ANALOG_OUT_CH1 = 'QW98'
-
-    READ_WORDS_TAG_ADDRESS = (('IW64', 2), ('QW96', 2))
+    READ_WORDS_TAG_ADDRESS = (('IW64', 2), )
 
     ANALOG_IN_CH0_RANGE = 27648
     ANALOG_IN_CH1_RANGE = 27648
-
-    ANALOG_OUT_CH0_RANGE = 27648
-    ANALOG_OUT_CH1_RANGE = 27648
 
 
 class IO_View_Data(PLC_data):
@@ -65,9 +59,6 @@ class IO_View_Data(PLC_data):
     __analog_in_ch0_old = 0
     __analog_in_ch1_old = 0
 
-    __analog_out_ch0_old = 0
-    __analog_out_ch1_old = 0
-
     def __init__(self, ip, rack, slot):
         super().__init__(IO_View_Address(), ip, rack, slot)
 
@@ -93,9 +84,6 @@ class IO_View_Data(PLC_data):
 
         self.__analog_in_ch0 = 0
         self.__analog_in_ch1 = 0
-
-        self.__analog_out_ch0 = 0
-        self.__analog_out_ch1 = 0
 
     @property
     def input1(self):
@@ -185,22 +173,6 @@ class IO_View_Data(PLC_data):
     def analog_in_ch1_percent(self):
         return int(self.__analog_in_ch1 / IO_View_Address.ANALOG_IN_CH1_RANGE * 100)
 
-    @property
-    def analog_out_ch0(self):
-        return self.__analog_out_ch0
-
-    @property
-    def analog_out_ch0_percent(self):
-        return int(self.__analog_out_ch0 / IO_View_Address.ANALOG_OUT_CH0_RANGE * 100)
-
-    @property
-    def analog_out_ch1(self):
-        return self.__analog_out_ch1
-
-    @property
-    def analog_out_ch1_percent(self):
-        return int(self.__analog_out_ch1 / IO_View_Address.ANALOG_OUT_CH1_RANGE * 100)
-
     def read_data(self):
         super().read_data()
 
@@ -226,9 +198,6 @@ class IO_View_Data(PLC_data):
 
         self.__analog_in_ch0 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH0)
         self.__analog_in_ch1 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH1)
-
-        self.__analog_out_ch0 = self.get_int_tag_page(IO_View_Address.ANALOG_OUT_CH0)
-        self.__analog_out_ch1 = self.get_int_tag_page(IO_View_Address.ANALOG_OUT_CH1)
 
     def input_is_changed(self):
         if self.__input1 != self.__input1_old or self.__input2 != self.__input2_old or \
@@ -276,19 +245,5 @@ class IO_View_Data(PLC_data):
         if self.__analog_in_ch1 < self.__analog_in_ch1_old - threshold // 2 or \
                 self.__analog_in_ch1 > self.__analog_in_ch1_old + threshold // 2:
             self.__analog_in_ch1_old = self.__analog_in_ch1
-            return True
-        return False
-
-    def analog_out_ch0_is_changed(self, threshold=0):
-        if self.__analog_out_ch0 < self.__analog_out_ch0_old - threshold // 2 or \
-                self.__analog_out_ch0 > self.__analog_out_ch0_old + threshold // 2:
-            self.__analog_out_ch0_old = self.__analog_out_ch0
-            return True
-        return False
-
-    def analog_out_ch1_is_changed(self, threshold=0):
-        if self.__analog_out_ch1 < self.__analog_out_ch1_old - threshold // 2 or \
-                self.__analog_out_ch1 > self.__analog_out_ch1_old + threshold // 2:
-            self.__analog_out_ch1_old = self.__analog_out_ch1
             return True
         return False
