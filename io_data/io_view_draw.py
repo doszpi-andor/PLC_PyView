@@ -2,12 +2,12 @@ from tkinter import Tk
 
 from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import AnalogCanvas
-from io_view_data import IO_View_Address
+from io_data.io_view_data import IO_View_Address
 
 
 class IO_View(IndicatorCanvas, AnalogCanvas):
-    INDICATOR_WIDTH = 35
-    ANALOG_SENSOR_WIDTH = 35
+    INDICATOR_WIDTH = 30
+    ANALOG_SENSOR_WIDTH = 30
     ANALOG_SENSOR_FONT_SIZE = 15
 
     INPUT_X_POSITION = 5
