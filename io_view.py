@@ -31,10 +31,6 @@ class App(PLC_ViewA):
         if self.plc_data.analog_in_ch0_is_changed(threshold=1000) \
                 or self.plc_data.analog_in_ch1_is_changed(threshold=1000):
             self.__analog_in_refresh()
-            
-        if self.plc_data.analog_out_ch0_is_changed(threshold=1000) \
-                or self.plc_data.analog_out_ch1_is_changed(threshold=1000):
-            self.__analog_out_refresh()
 
         super().loop()
 
@@ -152,9 +148,6 @@ class App(PLC_ViewA):
 
     def __analog_in_refresh(self):
         self.io.analog_in_change_level(self.plc_data.analog_in_ch0_percent, self.plc_data.analog_in_ch1_percent)
-
-    def __analog_out_refresh(self):
-        self.io.analog_out_change_level(self.plc_data.analog_out_ch0_percent, self.plc_data.analog_out_ch1_percent)
 
 
 if __name__ == '__main__':
