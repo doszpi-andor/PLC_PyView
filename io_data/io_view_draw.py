@@ -62,6 +62,49 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
         self.__output_drawing()
         self.__analog_in_drawing()
 
+    def input_change_color(self,
+                           input_color1, input_color2, input_color3, input_color4,
+                           input_color5, input_color6, input_color7, input_color8):
+        if self.__input1_color != input_color1 or self.__input2_color != input_color2 \
+                or self.__input3_color != input_color3 or self.__input4_color != input_color4 \
+                or self.__input5_color != input_color5 or self.__input6_color != input_color6\
+                or self.__input7_color != input_color7 or self.__input8_color != input_color8:
+            self.__input1_color = input_color1
+            self.__input2_color = input_color2
+            self.__input3_color = input_color3
+            self.__input4_color = input_color4
+            self.__input5_color = input_color5
+            self.__input6_color = input_color6
+            self.__input7_color = input_color7
+            self.__input8_color = input_color8
+            self.__input_drawing()
+
+    def output_change_color(self,
+                            output1_color, output2_color, output3_color, output4_color, output5_color,
+                            output6_color, output7_color, output8_color, output9_color, output10_color):
+        if self.__output1_color != output1_color or self.__output2_color != output2_color \
+                or self.__output3_color != output3_color or self.__output4_color != output4_color \
+                or self.__output5_color != output5_color or self.__output6_color != output6_color \
+                or self.__output7_color != output7_color or self.__output8_color != output8_color \
+                or self.__output9_color != output9_color or self.__output10_color != output10_color:
+            self.__output1_color = output1_color
+            self.__output2_color = output2_color
+            self.__output3_color = output3_color
+            self.__output4_color = output4_color
+            self.__output5_color = output5_color
+            self.__output6_color = output6_color
+            self.__output7_color = output7_color
+            self.__output8_color = output8_color
+            self.__output9_color = output9_color
+            self.__output10_color = output10_color
+            self.__output_drawing()
+
+    def analog_in_change_level(self, ch0_percent, ch1_percent):
+        if self.__analog_in_ch0_percent != ch0_percent or self.__analog_in_ch1_percent != ch1_percent:
+            self.__analog_in_ch0_percent = ch0_percent
+            self.__analog_in_ch1_percent = ch1_percent
+            self.__analog_in_drawing()
+
     def __input_drawing(self):
         self.create_square_indicator(x_position=self.INPUT_X_POSITION,
                                      y_position=self.ROW2_Y_POSITION,
