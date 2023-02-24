@@ -67,6 +67,7 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
         if self.__receipt_color != receipt_color or self.__error_lamp_color != error_lamp_color:
             self.__receipt_color = receipt_color
             self.__error_lamp_color = error_lamp_color
+            self.__feedback_drawing()
 
     def tank_change_color(self, sensor_1_color, sensor_2_color, sensor_3_color):
         if self.__sensor_1_color != sensor_1_color or\
@@ -75,16 +76,25 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
             self.__sensor_1_color = sensor_1_color
             self.__sensor_2_color = sensor_2_color
             self.__sensor_3_color = sensor_3_color
+            self.__tank_drawing()
+            self.__pump_a_drawing()
+            self.__pump_b_drawing()
 
     def pump_a_change_color(self, motor_color, flow_sensor_color):
         if self.__motor_a_color != motor_color or self.__flow_sensor_a_color != flow_sensor_color:
             self.__motor_a_color = motor_color
             self.__flow_sensor_a_color = flow_sensor_color
+            self.__tank_drawing()
+            self.__pump_a_drawing()
+            self.__pump_b_drawing()
 
     def pump_b_change_color(self, motor_color, flow_sensor_color):
         if self.__motor_b_color != motor_color or self.__flow_sensor_b_color != flow_sensor_color:
             self.__motor_b_color = motor_color
             self.__flow_sensor_b_color = flow_sensor_color
+            self.__tank_drawing()
+            self.__pump_a_drawing()
+            self.__pump_b_drawing()
 
     def __feedback_drawing(self):
         self.create_circle_indicator(x_position=self.ERROR_LAMP_X_POSITION,
