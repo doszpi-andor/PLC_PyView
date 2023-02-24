@@ -3,7 +3,7 @@ from tkinter import Tk
 from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas
 from _view.tank_canvas import TankCanvas, PipeCanvas, PumpCanvas
-from atemelo_data.atemelo4_data import Atemelo4_Address
+from atemelo_data.atemeloC_data import Atemelo_C_Address
 
 
 class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorCanvas):
@@ -99,11 +99,11 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
     def __feedback_drawing(self):
         self.create_circle_indicator(x_position=self.ERROR_LAMP_X_POSITION,
                                      y_position=self.ERROR_LAMP_Y_POSITION,
-                                     name='Hiba lámpa\n[%s]' % Atemelo4_Address.HIBA_LAMPA,
+                                     name='Hiba lámpa\n[%s]' % Atemelo_C_Address.HIBA_LAMPA,
                                      color=self.__error_lamp_color)
         self.create_square_indicator(x_position=self.RECEIPT_X_POSITION,
                                      y_position=self.RECEIPT_Y_POSITION,
-                                     name='Nyugta\n[%s]' % Atemelo4_Address.NYUGTA,
+                                     name='Nyugta\n[%s]' % Atemelo_C_Address.NYUGTA,
                                      color=self.__receipt_color)
 
     def __tank_drawing(self):
@@ -113,15 +113,15 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
         self.create_sensor(x_position=self.TANK_X_POSITION,
                            y_position=self.SENSOR_1_Y_POSITION,
                            line_length=self.SENSOR_LINE_LENGTH,
-                           name='Jelado 1 [%s]' % Atemelo4_Address.JELADO_1, color=self.__sensor_1_color)
+                           name='Jelado 1 [%s]' % Atemelo_C_Address.JELADO_1, color=self.__sensor_1_color)
         self.create_sensor(x_position=self.TANK_X_POSITION,
                            y_position=self.SENSOR_2_Y_POSITION,
                            line_length=self.SENSOR_LINE_LENGTH,
-                           name='Jelado 2 [%s]' % Atemelo4_Address.JELADO_2, color=self.__sensor_2_color)
+                           name='Jelado 2 [%s]' % Atemelo_C_Address.JELADO_2, color=self.__sensor_2_color)
         self.create_sensor(x_position=self.TANK_X_POSITION,
                            y_position=self.SENSOR_3_Y_POSITION,
                            line_length=self.SENSOR_LINE_LENGTH,
-                           name='Jelado 3 [%s]' % Atemelo4_Address.JELADO_3, color=self.__sensor_3_color)
+                           name='Jelado 3 [%s]' % Atemelo_C_Address.JELADO_3, color=self.__sensor_3_color)
 
     def __pump_a_drawing(self):
         self.create_horizontal_pipe(x_position=self.PUMP_PIPE_A_X_POSITION,
@@ -129,7 +129,7 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
                                     length=self.PUMP_A_PIPE_LENGTH)
         self.create_pump(x_position=self.PUMP_A_MOTOR_X_POSITION,
                          y_position=self.PUMP_MOTOR_Y_POSITION,
-                         name=' Motor A [%s]\nAramlas A [%s]' % (Atemelo4_Address.MOTOR_A, Atemelo4_Address.ARALMAS_A),
+                         name=' Motor A [%s]\nAramlas A [%s]' % (Atemelo_C_Address.MOTOR_A, Atemelo_C_Address.ARALMAS_A),
                          color=self.__motor_a_color)
         self.create_delta_indicator(x_position=self.PUMP_A_INDICATOR_X_POSITION,
                                     y_position=self.PUMP_INDICATOR_Y_POSITION,
@@ -141,7 +141,7 @@ class Atemelo4_View(TankCanvas, PipeCanvas, SensorCanvas, PumpCanvas, IndicatorC
                                     length=self.PUMP_B_PIPE_LENGTH)
         self.create_pump(x_position=self.PUMP_B_MOTOR_X_POSITION,
                          y_position=self.PUMP_MOTOR_Y_POSITION,
-                         name=' Motor B[%s]\nAramlas B [%s]' % (Atemelo4_Address.MOTOR_B, Atemelo4_Address.ARAMLAS_B),
+                         name=' Motor B[%s]\nAramlas B [%s]' % (Atemelo_C_Address.MOTOR_B, Atemelo_C_Address.ARAMLAS_B),
                          color=self.__motor_b_color)
         self.create_delta_indicator(x_position=self.PUMP_B_INDICATOR_X_POSITION,
                                     y_position=self.PUMP_INDICATOR_Y_POSITION,
