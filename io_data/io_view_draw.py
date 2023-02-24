@@ -182,6 +182,7 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
                                      color=self.__output10_color)
 
     def __analog_in_drawing(self):
+        self.delete(self.__analog_in_ch0_id)
         self.__analog_in_ch0_id =\
             self.create_analog(x_position=self.ANALOG_IN_CH0_X_POSITION,
                                y_position=self.ROW1_Y_POSITION,
@@ -189,13 +190,14 @@ class IO_View(IndicatorCanvas, AnalogCanvas):
                                height=self.ROW10_Y_POSITION - self.ROW1_Y_POSITION + self.INDICATOR_WIDTH,
                                activ_level_print=True,
                                name='Analóg bemenet CH0 [%s]' % IO_View_Address.ANALOG_IN_CH0)
+        self.delete(self.__analog_in_ch1_id)
         self.__analog_in_ch1_id = \
             self.create_analog(x_position=self.ANALOG_IN_CH1_X_POSITION,
                                y_position=self.ROW1_Y_POSITION,
                                active_level=self.__analog_in_ch1_percent, active_color='red',
                                height=self.ROW10_Y_POSITION - self.ROW1_Y_POSITION + self.INDICATOR_WIDTH,
                                activ_level_print=True,
-                               name='Analóg bemenet CH0 [%s]' % IO_View_Address.ANALOG_IN_CH1)
+                               name='Analóg bemenet CH1 [%s]' % IO_View_Address.ANALOG_IN_CH1)
 
 if __name__ == "__main__":
     root = Tk()
