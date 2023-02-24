@@ -18,10 +18,10 @@ class IO_View_Address(PLC_Address):
     OUTPUT4 = 'Q0.3'
     OUTPUT5 = 'Q0.4'
     OUTPUT6 = 'Q0.5'
-    OUTPUT7 = 'Q4.0'
-    OUTPUT8 = 'Q4.1'
-    OUTPUT9 = 'Q4.2'
-    OUTPUT10 = 'Q4.3'
+    OUTPUT7 = 'Q0.6'
+    OUTPUT8 = 'Q0.7'
+    OUTPUT9 = 'Q1.0'
+    OUTPUT10 = 'Q1.1'
 
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
@@ -319,4 +319,4 @@ class IO_View_Data(PLC_data):
                 self.__analog_in_ch1 > self.__analog_in_ch1_old + threshold // 2:
             self.__analog_in_ch1_old = self.__analog_in_ch1
             return True
-        return False
+        return False
