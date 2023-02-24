@@ -199,113 +199,36 @@ class IO_View_Data(PLC_data):
         self.__analog_in_ch0 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH0)
         self.__analog_in_ch1 = self.get_int_tag_page(IO_View_Address.ANALOG_IN_CH1)
 
-    def input1_is_changed(self):
-        if self.__input1 != self.__input1_old:
+    def input_is_changed(self):
+        if self.__input1 != self.__input1_old or self.__input2 != self.__input2_old or \
+                self.__input3 != self.__input3_old or self.__input4 != self.__input4_old or \
+                self.__input5 != self.__input5_old or self.__input6 != self.__input6_old or \
+                self.__input7 != self.__input7_old or self.__input8 != self.__input8_old:
             self.__input1_old = self.__input1
-            return True
-        return False
-
-    def input2_is_changed(self):
-        if self.__input2 != self.__input2_old:
             self.__input2_old = self.__input2
-            return True
-        return False
-
-    def input3_is_changed(self):
-        if self.__input3 != self.__input3_old:
             self.__input3_old = self.__input3
-            return True
-        return False
-
-    def input4_is_changed(self):
-        if self.__input4 != self.__input4_old:
             self.__input4_old = self.__input4
-            return True
-        return False
-
-    def input5_is_changed(self):
-        if self.__input5 != self.__input5_old:
             self.__input5_old = self.__input5
-            return True
-        return False
-
-    def input6_is_changed(self):
-        if self.__input6 != self.__input6_old:
             self.__input6_old = self.__input6
-            return True
-        return False
-
-    def input7_is_changed(self):
-        if self.__input7 != self.__input7_old:
             self.__input7_old = self.__input7
-            return True
-        return False
-
-    def input8_is_changed(self):
-        if self.__input8 != self.__input8_old:
             self.__input8_old = self.__input8
-            return True
-        return False
 
-    def output1_is_changed(self):
-        if self.__output1 != self.__output1_old:
+    def output_is_changed(self):
+        if self.__output1 != self.__output1_old or self.__output2 != self.__output2_old or \
+                self.__output3 != self.__output3_old or self.__output4 != self.__output4_old or \
+                self.__output5 != self.__output5_old or self.__output6 != self.__output6_old or \
+                self.__output7 != self.__output7_old or self.__output8 != self.__output8_old or \
+                self.__output9 != self.__output9_old or self.__output10 != self.__output10_old:
             self.__output1_old = self.__output1
-            return True
-        return False
-
-    def output2_is_changed(self):
-        if self.__output2 != self.__output2_old:
             self.__output2_old = self.__output2
-            return True
-        return False
-
-    def output3_is_changed(self):
-        if self.__output3 != self.__output3_old:
             self.__output3_old = self.__output3
-            return True
-        return False
-
-    def output4_is_changed(self):
-        if self.__output4 != self.__output4_old:
             self.__output4_old = self.__output4
-            return True
-        return False
-
-    def output5_is_changed(self):
-        if self.__output5 != self.__output5_old:
             self.__output5_old = self.__output5
-            return True
-        return False
-
-    def output6_is_changed(self):
-        if self.__output6 != self.__output6_old:
             self.__output6_old = self.__output6
-            return True
-        return False
-
-    def output7_is_changed(self):
-        if self.__output7 != self.__output7_old:
             self.__output7_old = self.__output7
-            return True
-        return False
-
-    def output8_is_changed(self):
-        if self.__output8 != self.__output8_old:
             self.__output8_old = self.__output8
-            return True
-        return False
-
-    def output9_is_changed(self):
-        if self.__output9 != self.__output9_old:
             self.__output9_old = self.__output9
-            return True
-        return False
-
-    def output10_is_changed(self):
-        if self.__output10 != self.__output10_old:
             self.__output10_old = self.__output10
-            return True
-        return False
 
     def analog_in_ch0_is_changed(self, threshold=0):
         if self.__analog_in_ch0 < self.__analog_in_ch0_old - threshold // 2 or \
