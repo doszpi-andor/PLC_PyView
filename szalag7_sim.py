@@ -12,13 +12,13 @@ class ConveyorError(Frame):
                  error3_process=None, error4_process=None, cnf={}, **kw):
         super().__init__(master, cnf, **kw)
         self.error1_var = IntVar()
-        self.error1 = Checkbutton(self, variable=self.error1_var, command=error1_process, text='Szalag 1 hiba')
+        self.error1 = Checkbutton(self, variable=self.error1_var, command=error1_process, text='Szalag 1 hiba\nszimulálása')
         self.error2_var = IntVar()
-        self.error2 = Checkbutton(self, variable=self.error2_var, command=error2_process, text='Szalag 2 hiba')
+        self.error2 = Checkbutton(self, variable=self.error2_var, command=error2_process, text='Szalag 2 hiba\nszimulálása')
         self.error3_var = IntVar()
-        self.error3 = Checkbutton(self, variable=self.error3_var, command=error3_process, text='Szalag 3 hiba')
+        self.error3 = Checkbutton(self, variable=self.error3_var, command=error3_process, text='Szalag 3 hiba\nszimulálása')
         self.error4_var = IntVar()
-        self.error4 = Checkbutton(self, variable=self.error4_var, command=error4_process, text='Szalag 4 hiba')
+        self.error4 = Checkbutton(self, variable=self.error4_var, command=error4_process, text='Szalag 4 hiba\nszimulálása')
         self.error1.grid(row=1, column=1)
         self.error2.grid(row=1, column=2)
         self.error3.grid(row=1, column=3)
@@ -30,8 +30,8 @@ class App(PLC_ViewA):
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
-        self.title('Szalag 7')
-        self.name_label.config(text='Szalag 7')
+        self.title('Szalag 7 - szimuláció')
+        self.name_label.config(text='Szalag 7 - szimuláció')
 
         self.conveyor_error = ConveyorError(error1_process=self.error1_change,
                                             error2_process=self.error2_change,
@@ -119,7 +119,7 @@ class App(PLC_ViewA):
             self.conveyor4_refresh()
 
     def s1_on_delay(self):
-        timer = Timer(1.5, self.s1_changed)
+        timer = Timer(1, self.s1_changed)
         timer.start()
 
     def s1_changed(self):
@@ -128,7 +128,7 @@ class App(PLC_ViewA):
         self.conveyor1_refresh()
 
     def s2_on_delay(self):
-        timer = Timer(1.5, self.s2_changed)
+        timer = Timer(1, self.s2_changed)
         timer.start()
 
     def s2_changed(self):
@@ -137,7 +137,7 @@ class App(PLC_ViewA):
         self.conveyor2_refresh()
 
     def s3_on_delay(self):
-        timer = Timer(1.5, self.s3_changed)
+        timer = Timer(1, self.s3_changed)
         timer.start()
 
     def s3_changed(self):
@@ -146,7 +146,7 @@ class App(PLC_ViewA):
         self.conveyor3_refresh()
 
     def s4_on_delay(self):
-        timer = Timer(1.5, self.s4_changed)
+        timer = Timer(1, self.s4_changed)
         timer.start()
 
     def s4_changed(self):
