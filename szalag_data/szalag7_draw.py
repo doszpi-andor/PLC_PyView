@@ -64,7 +64,10 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
 
         self.__buttons_drawing()
         self.__indicators_drawing()
-        self.__conveyors_drawing()
+        self.__conveyor1_drawing()
+        self.__conveyor2_drawing()
+        self.__conveyor3_drawing()
+        self.__conveyor4_drawing()
 
     def button_change_color(self, start_color, stop_color):
         if self.start_color != start_color or self.stop_color != stop_color:
@@ -82,45 +85,45 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
         if self.conveyor1_motor_color != motor_color or self.conveyor1_sensor_color != sensor_color:
             self.conveyor1_motor_color = motor_color
             self.conveyor1_sensor_color = sensor_color
-            self.__conveyors_drawing()
+            self.__conveyor1_drawing()
 
     def conveyor2_change_color(self, motor_color, sensor_color):
         if self.conveyor2_motor_color != motor_color or self.conveyor2_sensor_color != sensor_color:
             self.conveyor2_motor_color = motor_color
             self.conveyor2_sensor_color = sensor_color
-            self.__conveyors_drawing()
+            self.__conveyor2_drawing()
 
     def conveyor3_change_color(self, motor_color, sensor_color):
         if self.conveyor3_motor_color != motor_color or self.conveyor3_sensor_color != sensor_color:
             self.conveyor3_motor_color = motor_color
             self.conveyor3_sensor_color = sensor_color
-            self.__conveyors_drawing()
+            self.__conveyor3_drawing()
 
     def conveyor4_change_color(self, motor_color, sensor_color):
         if self.conveyor4_motor_color != motor_color or self.conveyor4_sensor_color != sensor_color:
             self.conveyor4_motor_color = motor_color
             self.conveyor4_sensor_color = sensor_color
-            self.__conveyors_drawing()
+            self.__conveyor4_drawing()
 
     def conveyor1_mame_change_color(self, name_color):
         if self.conveyor1_name_color != name_color:
             self.conveyor1_name_color = name_color
-            self.__conveyors_drawing()
+            self.__conveyor1_drawing()
 
     def conveyor2_mame_change_color(self, name_color):
         if self.conveyor2_name_color != name_color:
             self.conveyor2_name_color = name_color
-            self.__conveyors_drawing()
+            self.__conveyor2_drawing()
 
     def conveyor3_mame_change_color(self, name_color):
         if self.conveyor3_name_color != name_color:
             self.conveyor3_name_color = name_color
-            self.__conveyors_drawing()
+            self.__conveyor3_drawing()
 
     def conveyor4_mame_change_color(self, name_color):
         if self.conveyor4_name_color != name_color:
             self.conveyor4_name_color = name_color
-            self.__conveyors_drawing()
+            self.__conveyor4_drawing()
 
     def __buttons_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
@@ -138,7 +141,7 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
                                      self.INDICATOR_ROW2_Y_POSITION,
                                      name='Hiba [%s]' % Szalag7_Address.HIBA, color=self.error_color)
 
-    def __conveyors_drawing(self):
+    def __conveyor1_drawing(self):
         self.delete(self.conveyor1_id)
         self.conveyor1_id = self.create_conveyor(self.CONVEYOR1_X_POSITION,
                                                  self.CONVEYOR1_Y_POSITION,
@@ -148,6 +151,8 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
                                                  circle1_color=self.conveyor1_motor_color,
                                                  circle2_name='S1\n[%s]' % Szalag7_Address.S1,
                                                  circle2_color=self.conveyor1_sensor_color)
+
+    def __conveyor2_drawing(self):
         self.delete(self.conveyor2_id)
         self.conveyor2_id = self.create_conveyor(self.CONVEYOR2_X_POSITION,
                                                  self.CONVEYOR2_Y_POSITION,
@@ -157,6 +162,8 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
                                                  circle1_color=self.conveyor2_motor_color,
                                                  circle2_name='S2\n[%s]' % Szalag7_Address.S2,
                                                  circle2_color=self.conveyor2_sensor_color)
+
+    def __conveyor3_drawing(self):
         self.delete(self.conveyor3_id)
         self.conveyor3_id = self.create_conveyor(self.CONVEYOR3_X_POSITION,
                                                  self.CONVEYOR3_Y_POSITION,
@@ -166,6 +173,8 @@ class Szalag7_View(ConveyorCanvas, IndicatorCanvas, SensorCanvas):
                                                  circle1_color=self.conveyor3_motor_color,
                                                  circle2_name='S3\n[%s]' % Szalag7_Address.S3,
                                                  circle2_color=self.conveyor3_sensor_color)
+
+    def __conveyor4_drawing(self):
         self.delete(self.conveyor4_id)
         self.conveyor4_id = self.create_conveyor(self.CONVEYOR4_X_POSITION,
                                                  self.CONVEYOR4_Y_POSITION,
