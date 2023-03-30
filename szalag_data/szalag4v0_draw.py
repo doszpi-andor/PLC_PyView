@@ -55,10 +55,6 @@ class Szalag4v0_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
         self.__conveyor1_left_color = 'gray'
         self.__conveyor1_right_color = 'gray'
         self.__conveyor1_sensor_color = 'gray'
-        self.__conveyor2_motor_color = 'gray'
-        self.__conveyor2_sensor_color = 'gray'
-        self.__conveyor3_motor_color = 'gray'
-        self.__conveyor3_sensor_color = 'gray'
 
         self.__start1_color = 'gray'
         self.__start2_color = 'gray'
@@ -108,20 +104,6 @@ class Szalag4v0_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
             self.__conveyor1_right_color = right_color
             self.__conveyor1_sensor_color = sensor_color
             self.__direction_drawing()
-            self.__conveyors_drawing()
-
-    def conveyor2_change_color(self, motor_color, sensor_color):
-        if self.__conveyor2_motor_color != motor_color or \
-                self.__conveyor2_sensor_color != sensor_color:
-            self.__conveyor2_motor_color = motor_color
-            self.__conveyor2_sensor_color = sensor_color
-            self.__conveyors_drawing()
-
-    def conveyor3_change_color(self, motor_color, sensor_color):
-        if self.__conveyor3_motor_color != motor_color or \
-                self.__conveyor3_sensor_color != sensor_color:
-            self.__conveyor3_motor_color = motor_color
-            self.__conveyor3_sensor_color = sensor_color
             self.__conveyors_drawing()
 
     def __buttons_drawing(self):
