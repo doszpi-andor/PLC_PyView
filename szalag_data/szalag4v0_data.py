@@ -13,10 +13,10 @@ class Szalag4v0_Address(PLC_Address):
     M2_BAL = 'Q0.1'
     M2_JOBB = 'Q0.2'
     UZEM1 = 'Q0.5'
-    UZEM2 = 'Q4.0'
-    HIBA = 'Q4.1'
+    UZEM2 = 'Q0.6'
+    HIBA = 'Q0.7'
 
-    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 1))
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
