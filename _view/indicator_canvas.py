@@ -57,6 +57,30 @@ class IndicatorCanvas(Canvas):
                              y_position + self.INDICATOR_WIDTH // 2,
                              font=("Arial", self.INDICATOR_FONT_SIZE),
                              anchor=W, text=name)
+        elif direction == 'up':
+            self.create_polygon(x_position + self.INDICATOR_WIDTH // 2,
+                                y_position,
+                                x_position,
+                                y_position + self.INDICATOR_WIDTH,
+                                x_position + self.INDICATOR_WIDTH,
+                                y_position + self.INDICATOR_WIDTH,
+                                fill=color, outline='black')
+            self.create_text(x_position + self.INDICATOR_WIDTH + self.INDICATOR_TEXT_SHIFT,
+                             y_position + self.INDICATOR_WIDTH // 2,
+                             font=("Arial", self.INDICATOR_FONT_SIZE),
+                             anchor=W, text=name)
+        elif direction == 'down':
+            self.create_polygon(x_position,
+                                y_position,
+                                x_position + self.INDICATOR_WIDTH,
+                                y_position,
+                                x_position + self.INDICATOR_WIDTH // 2,
+                                y_position + self.INDICATOR_WIDTH,
+                                fill=color, outline='black')
+            self.create_text(x_position + self.INDICATOR_WIDTH + self.INDICATOR_TEXT_SHIFT,
+                             y_position + self.INDICATOR_WIDTH // 2,
+                             font=("Arial", self.INDICATOR_FONT_SIZE),
+                             anchor=W, text=name)
 
 
 if __name__ == "__main__":
