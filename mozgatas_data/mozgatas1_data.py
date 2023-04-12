@@ -25,9 +25,9 @@ class Mozgatas1B_Address(PLC_Address):
     M_LE = 'Q0.1'
     M_FOG = 'Q0.2'
 
-    UZEM = 'Q4.7'
+    UZEM = 'Q0.7'
 
-    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
+    READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 1))
 
 
 class Mozgatas1A_data(PLC_data):
