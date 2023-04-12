@@ -4,7 +4,7 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 class Mozgatas1A_Address(PLC_Address):
     E2 = 'I0.0'
     E1 = 'I0.1'
-    E0 = 'I0.0'
+    E0 = 'I0.2'
 
     M_FEL = 'Q0.0'
     M_LE = 'Q0.1'
