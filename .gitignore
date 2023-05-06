@@ -1,0 +1,11 @@
+*.sh
+*.bat
+*.img
+*.docx
+*.jpg
+*.pdf
+default.xml
+.idea
+__pycache__
+.local.zip
+snap7-iot-arm-1.4.2.tar
