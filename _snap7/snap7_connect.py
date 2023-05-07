@@ -215,7 +215,7 @@ class PLC_Connect:
     def __get_byte(self, area, db_number, address, length):
         try:
             result = self.__plc.read_area(area, db_number, address, length)
-        except Snap7Exception:
+        except (Snap7Exception, RuntimeError):
             self.disconnect()
             raise S7ConnectFailed
         byte_list = []
@@ -229,14 +229,14 @@ class PLC_Connect:
             for index in range(0, length):
                 set_byte(result, index, data[index])
             self.__plc.write_area(area, db_number, address, result)
-        except Snap7Exception:
+        except (Snap7Exception, RuntimeError):
             self.disconnect()
             raise S7ConnectFailed
 
     def __get_int(self, area, db_number, address, length):
         try:
             result = self.__plc.read_area(area, db_number, address, length * 2)
-        except Snap7Exception:
+        except (Snap7Exception, RuntimeError):
             self.disconnect()
             raise S7ConnectFailed
         int_list = []
@@ -250,7 +250,7 @@ class PLC_Connect:
             for index in range(0, length):
                 set_int(result, index * 2, data[index])
             self.__plc.write_area(area, db_number, address, result)
-        except Snap7Exception:
+        except (Snap7Exception, RuntimeError):
             self.disconnect()
             raise S7ConnectFailed
 
