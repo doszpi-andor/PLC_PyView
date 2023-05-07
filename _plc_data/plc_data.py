@@ -45,8 +45,8 @@ class PLC_Address:
 
     @staticmethod
     def db_bit_index(db_bit_address):
-        byte_index, bit_index = (int(x) for x in db_bit_address[7:].split(sep='.'))
-        return bit_index
+        db_address, byte_address, bit_address = db_bit_address.split(sep='.')
+        return int(bit_address)
 
 
 # noinspection PyPep8Naming
