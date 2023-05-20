@@ -22,7 +22,7 @@ class Szalag2v2_Address(PLC_Address):
 
     READ_WORDS_TAG_ADDRESS = (('IW64', 1),)
 
-    KS_RANGE = 27648
+    KS_RANGE = 26000
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
