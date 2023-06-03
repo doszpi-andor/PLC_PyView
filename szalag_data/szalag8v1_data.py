@@ -17,8 +17,8 @@ class Szalag8v1_Address(PLC_Address):
     MEGTELT_A = 'Q0.3'
     MEGTELT_B = 'Q0.4'
     FOLYAMAT = 'Q0.5'
-    UZEM = 'Q4.0'
-    HIBA = 'Q4.1'
+    UZEM = 'Q0.5'
+    HIBA = 'Q0.6'
 
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
