@@ -30,7 +30,7 @@ class App(PLC_ViewA):
         if self.plc_data.start_is_changed() or self.plc_data.stop_is_changed() or self.plc_data.nyugta_is_changed():
             self.button_refresh()
 
-        if self.plc_data.uzem_is_changed() or self.plc_data.hiba_is_changed():
+        if self.plc_data.uzem_is_changed() or self.plc_data.hiba_is_changed() or self.plc_data.folyamat_is_changed():
             self.indicator1_refresh()
 
         if self.plc_data.megtelt_a_is_changed() or self.plc_data.megtelt_b_is_changed():
@@ -72,18 +72,30 @@ class App(PLC_ViewA):
             self.conveyors.button_change_color(start_color='gray', stop_color='gray', receipt_color='gray')
 
     def indicator1_refresh(self):
-        # 1 1
-        if self.plc_data.uzem and self.plc_data.hiba:
-            self.conveyors.indicator1_change_color(factory_color='green', error_color='red')
-        # 0 1
-        elif not self.plc_data.uzem and self.plc_data.hiba:
-            self.conveyors.indicator1_change_color(factory_color='gray', error_color='red')
-        # 1 0
-        elif self.plc_data.uzem and not self.plc_data.hiba:
-            self.conveyors.indicator1_change_color(factory_color='green', error_color='gray')
-        # 0 0
+        # 1 1 1
+        if self.plc_data.uzem and self.plc_data.hiba and self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='green', error_color='red', process_color='green')
+        # 0 1 1
+        elif not self.plc_data.uzem and self.plc_data.hiba and self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='gray', error_color='red', process_color='green')
+        # 1 0 1
+        elif self.plc_data.uzem and not self.plc_data.hiba and self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='green', error_color='gray', process_color='green')
+        # 0 0 1
+        elif not self.plc_data.uzem and not self.plc_data.hiba and self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='gray', error_color='gray', process_color='green')
+        # 1 1 0
+        elif self.plc_data.uzem and self.plc_data.hiba and not self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='green', error_color='red', process_color='gray')
+        # 0 1 0
+        elif not self.plc_data.uzem and self.plc_data.hiba and not self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='gray', error_color='red', process_color='gray')
+        # 1 0 0
+        elif self.plc_data.uzem and not self.plc_data.hiba and not self.plc_data.folyamat:
+            self.conveyors.indicator1_change_color(factory_color='green', error_color='gray', process_color='gray')
+        # 0 0 0
         else:
-            self.conveyors.indicator1_change_color(factory_color='gray', error_color='gray')
+            self.conveyors.indicator1_change_color(factory_color='gray', error_color='gray', process_color='gray')
 
     def indicator2_refresh(self):
         # 1 1
