@@ -113,25 +113,25 @@ class App(PLC_ViewA):
 
     def sensor_refresh(self):
         # 1 1 1
-        if self.plc_data.sbe and self.plc_data.sb and self.plc_data.sb:
+        if self.plc_data.sbe and self.plc_data.sa and self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='red', sensor_a_color='red', sensor_b_color='red')
         # 0 1 1
-        elif not self.plc_data.sbe and self.plc_data.sb and self.plc_data.sb:
+        elif not self.plc_data.sbe and self.plc_data.sa and self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='gray', sensor_a_color='red', sensor_b_color='red')
         # 1 0 1
-        elif self.plc_data.sbe and not self.plc_data.sb and self.plc_data.sb:
+        elif self.plc_data.sbe and not self.plc_data.sa and self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='red', sensor_a_color='gray', sensor_b_color='red')
         # 0 0 1
-        elif not self.plc_data.sbe and not self.plc_data.sb and self.plc_data.sb:
+        elif not self.plc_data.sbe and not self.plc_data.sa and self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='gray', sensor_a_color='gray', sensor_b_color='red')
         # 1 1 0
-        elif self.plc_data.sbe and self.plc_data.sb and not self.plc_data.sb:
+        elif self.plc_data.sbe and self.plc_data.sa and not self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='red', sensor_a_color='red', sensor_b_color='gray')
         # 0 1 0
-        elif not self.plc_data.sbe and self.plc_data.sb and not self.plc_data.sb:
+        elif not self.plc_data.sbe and self.plc_data.sa and not self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='gray', sensor_a_color='red', sensor_b_color='gray')
         # 1 0 0
-        elif self.plc_data.sbe and not self.plc_data.sb and not self.plc_data.sb:
+        elif self.plc_data.sbe and not self.plc_data.sa and not self.plc_data.sb:
             self.conveyors.sensor_change_color(sensor_in_color='red', sensor_a_color='gray', sensor_b_color='gray')
         else:
             self.conveyors.sensor_change_color(sensor_in_color='gray', sensor_a_color='gray', sensor_b_color='gray')
