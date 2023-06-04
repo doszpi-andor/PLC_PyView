@@ -37,7 +37,7 @@ class Szalag8v1_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas, SensorCanvas):
     CONVEYOR1_Y_POSITION = INDICATOR_ROW3_Y_POSITION + CONVEYOR_WIDTH + 50
     CONVEYOR2_Y_POSITION = CONVEYOR1_Y_POSITION + CONVEYOR_WIDTH + 20
 
-    FULL_WIDTH = CONVEYOR2_X_POSITION + CONVEYOR2_LENGTH + 70
+    FULL_WIDTH = CONVEYOR2_X_POSITION + CONVEYOR2_LENGTH + 80
     FULL_HEIGHT = CONVEYOR2_Y_POSITION + CONVEYOR_WIDTH + 40
 
     # noinspection PyDefaultArgument
@@ -166,7 +166,7 @@ class Szalag8v1_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas, SensorCanvas):
         self.create_delta_indicator(self.CONVEYOR2_X_POSITION + self.CONVEYOR2_LENGTH - self.INDICATOR_WIDTH - 90,
                                     self.CONVEYOR2_Y_POSITION + (self.CONVEYOR_WIDTH - self.INDICATOR_WIDTH) // 2,
                                     direction='right',
-                                    name='M2B\n[%s]' % Szalag8v1_Address.M2B, color=self.conveyor2_motor_a_color)
+                                    name='M2B\n[%s]' % Szalag8v1_Address.M2B, color=self.conveyor2_motor_b_color)
 
 
 if __name__ == "__main__":
