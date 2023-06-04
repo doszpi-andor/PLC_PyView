@@ -74,11 +74,13 @@ class Szalag8v1_View(SiloCanvas, ConveyorCanvas, IndicatorCanvas, SensorCanvas):
             self.receipt_color = receipt_color
             self.__buttons_drawing()
 
-    def indicator1_change_color(self, factory_color, error_color):
+    def indicator1_change_color(self, factory_color, error_color, process_color):
         if self.factory_color != factory_color or\
-                self.error_color != error_color:
+                self.error_color != error_color or\
+                self.process_color != process_color:
             self.factory_color = factory_color
             self.error_color = error_color
+            self.process_color = process_color
             self.__indicators1_drawing()
 
     def indicator2_change_color(self, full_a_color, full_b_color):
