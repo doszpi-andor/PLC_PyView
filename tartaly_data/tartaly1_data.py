@@ -5,8 +5,8 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 # noinspection SpellCheckingInspection,PyPep8Naming
 class Tartaly1_Address(PLC_Address):
 
-    T1_TELI = 'I0.0'
-    T2_TELI = 'I0.3'
+    T1_TELI = 'I0.4'
+    T2_TELI = 'I0.5'
     START = 'I0.6'
     STOP = 'I0.7'
 
@@ -15,8 +15,8 @@ class Tartaly1_Address(PLC_Address):
     T1_URIT = 'Q0.2'
     T2_TOLT = 'Q0.3'
     T2_URIT = 'Q0.5'
-    T3_KEVER = 'Q0.6'
-    T3_URIT = 'Q0.7'
+    T3_KEVER = 'Q1.0'
+    T3_URIT = 'Q1.1'
 
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
