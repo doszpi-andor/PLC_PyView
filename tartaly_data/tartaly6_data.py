@@ -2,7 +2,7 @@ from _plc_data.plc_data import PLC_Address
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
-class Tartaly4_Address(PLC_Address):
+class Tartaly6_Address(PLC_Address):
 
     T1_TELI = 'I0.0'
     START = 'I0.6'
