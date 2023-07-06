@@ -85,7 +85,7 @@ class Tartaly1_View(TankCanvas, ValveCanvas, SensorCanvas, AnalogCanvas, Heating
         self.__buttons_drawing()
 
     def button_change_color(self, start_color, stop_color):
-        if self.__stop_color != start_color or self.__stop_color != stop_color:
+        if self.__start_color != start_color or self.__stop_color != stop_color:
             self.__start_color = start_color
             self.__stop_color = stop_color
             self.__buttons_drawing()
