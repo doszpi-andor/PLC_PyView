@@ -3,8 +3,8 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 # noinspection PyPep8Naming,SpellCheckingInspection
 class Szalag4v1_Address(PLC_Address):
-    S1 = 'I0.0'
-    S2 = 'I0.1'
+    S1 = 'I0.1'
+    S2 = 'I0.2'
     S3 = 'I0.3'
     S4 = 'I0.4'
     START1 = 'I0.5'
