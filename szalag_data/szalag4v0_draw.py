@@ -4,7 +4,7 @@ from _view.conveyor_canvas import ConveyorCanvas
 from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas
 from _view.silo_camvas import SiloCanvas
-from szalag_data.szalag4v1_data import Szalag4v1_Address
+from szalag_data.szalag4v0_data import Szalag4v0_Address
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
@@ -109,44 +109,44 @@ class Szalag4v0_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
     def __buttons_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Start 1 [%s]' % Szalag4v1_Address.START1, color=self.__start1_color)
+                                     name='Start 1 [%s]' % Szalag4v0_Address.START1, color=self.__start1_color)
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Start 2 [%s]' % Szalag4v1_Address.START2, color=self.__start2_color)
+                                     name='Start 2 [%s]' % Szalag4v0_Address.START2, color=self.__start2_color)
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW3_Y_POSITION,
-                                     name='Stop [%s]' % Szalag4v1_Address.STOP, color=self.__stop_color)
+                                     name='Stop [%s]' % Szalag4v0_Address.STOP, color=self.__stop_color)
 
     def __indicators_drawing(self):
         self.create_circle_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Üzem 1 [%s]' % Szalag4v1_Address.UZEM1, color=self.__factory1_color)
+                                     name='Üzem 1 [%s]' % Szalag4v0_Address.UZEM1, color=self.__factory1_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Üzem 2 [%s]' % Szalag4v1_Address.UZEM2, color=self.__factory2_color)
+                                     name='Üzem 2 [%s]' % Szalag4v0_Address.UZEM2, color=self.__factory2_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN2_X_POSITION,
                                      self.INDICATOR_ROW3_Y_POSITION,
-                                     name='Hiba [%s]' % Szalag4v1_Address.HIBA, color=self.__error_color)
+                                     name='Hiba [%s]' % Szalag4v0_Address.HIBA, color=self.__error_color)
 
     def __silo_drawing(self):
         self.create_silo(self.SILO_X_POSITION,
                          self.SILO_Y_POSITION,
                          silo_name='Siló',
-                         motor_name='M1[%s]' % Szalag4v1_Address.M1, motor_color=self.__silo_motor_color)
+                         motor_name='M1[%s]' % Szalag4v0_Address.M1, motor_color=self.__silo_motor_color)
         self.create_sensor(self.SILO_SENSOR_X_POSITION,
                            self.SILO_SENSOR_Y_POSITION,
                            line_length=self.SILO_WIDTH,
-                           name='S1\n[%s]' % Szalag4v1_Address.S1, color=self.__silo_sensor_color)
+                           name='S1\n[%s]' % Szalag4v0_Address.S1, color=self.__silo_sensor_color)
 
     def __direction_drawing(self):
         self.create_delta_indicator(self.DIRECTION1_INDICATOR_X_POSITION,
                                     self.DIRECTION1_INDICATOR_Y_POSITION,
-                                    name='M2_BAL\n[%s]' % Szalag4v1_Address.M2_BAL,
+                                    name='M2_BAL\n[%s]' % Szalag4v0_Address.M2_BAL,
                                     direction='left',
                                     color=self.__conveyor1_left_color)
         self.create_delta_indicator(self.DIRECTION2_INDICATOR_X_POSITION,
                                     self.DIRECTION2_INDICATOR_Y_POSITION,
-                                    name='M2_JOBB\n[%s]' % Szalag4v1_Address.M2_JOBB,
+                                    name='M2_JOBB\n[%s]' % Szalag4v0_Address.M2_JOBB,
                                     direction='right',
                                     color=self.__conveyor1_right_color)
 
@@ -156,7 +156,7 @@ class Szalag4v0_View(SiloCanvas, ConveyorCanvas, SensorCanvas, IndicatorCanvas):
                              length=self.CONVEYOR1_LENGTH, name='Szalag 1',
                              circle1_name='M2',
                              circle1_color=self.__conveyor1_motor_color,
-                             circle2_name='S2\n[%s]' % Szalag4v1_Address.S2,
+                             circle2_name='S2\n[%s]' % Szalag4v0_Address.S2,
                              circle2_color=self.__conveyor1_sensor_color)
 
 
