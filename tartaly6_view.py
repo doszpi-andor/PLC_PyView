@@ -5,10 +5,13 @@ from tartaly_data.tartaly6_draw import Tartaly6_View
 
 class App(PLC_ViewB):
 
+    # noinspection PyPep8Naming
     def __init__(self, screenName=None, baseName=None, className='Tk', useTk=True, sync=False, use=None):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
+        # noinspection SpellCheckingInspection
         self.title('Tartaly 6')
+        # noinspection SpellCheckingInspection
         self.name_label.config(text='Tartály-6')
 
         self.tanks = Tartaly6_View(self.process_frame)
