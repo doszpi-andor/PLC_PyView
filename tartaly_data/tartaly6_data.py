@@ -118,10 +118,6 @@ class Tartaly6_data(PLC_data):
         return int(self.__t2_szint / Tartaly6_Address.T2_SZINT_RANGE * 100)
 
     @property
-    def t2_homerseklet(self):
-        return self.__t2_homerseklet
-
-    @property
     def t3_szint_percent(self):
         return int(self.__t3_szint / Tartaly6_Address.T3_SZINT_RANGE * 100)
 
