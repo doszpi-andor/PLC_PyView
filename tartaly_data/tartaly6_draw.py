@@ -6,6 +6,7 @@ from _view.tank_canvas import TankCanvas, ValveCanvas, PipeCanvas
 from tartaly_data.tartaly6_data import Tartaly6_Address
 
 
+# noinspection PyPep8Naming,SpellCheckingInspection
 class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCanvas, IndicatorCanvas):
     TANK_WIDTH = 55
     TANK_HEIGHT = 120
@@ -49,6 +50,7 @@ class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCan
     __tank2_analog_id = None
     __tank3_analog_id = None
 
+    # noinspection PyDefaultArgument
     def __init__(self, master=None, cnf={}, **kw):
         super().__init__(master, cnf, width=self.FULL_WIDTH, height=self.FULL_HEIGHT, **kw)
 
