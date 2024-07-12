@@ -3,7 +3,7 @@ from tkinter import Tk
 from _view.indicator_canvas import IndicatorCanvas
 from _view.sensor_canvas import SensorCanvas, AnalogCanvas
 from _view.tank_canvas import TankCanvas, ValveCanvas, PipeCanvas
-from tartaly_data.tartaly6_data import Tartaly6_Address
+from tartaly_data.tartaly6v1_data import Tartaly6v1_Address
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
@@ -126,13 +126,13 @@ class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCan
     def __operator_interface_drawing(self):
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW1_Y_POSITION,
-                                     name='Start [%s]' % Tartaly6_Address.START, color=self.__start_color)
+                                     name='Start [%s]' % Tartaly6v1_Address.START, color=self.__start_color)
         self.create_square_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW2_Y_POSITION,
-                                     name='Stop [%s]' % Tartaly6_Address.STOP, color=self.__stop_color)
+                                     name='Stop [%s]' % Tartaly6v1_Address.STOP, color=self.__stop_color)
         self.create_circle_indicator(self.INDICATOR_COLUMN1_X_POSITION,
                                      self.INDICATOR_ROW3_Y_POSITION,
-                                     name='Üzem [%s]' % Tartaly6_Address.UZEM, color=self.__factory_color)
+                                     name='Üzem [%s]' % Tartaly6v1_Address.UZEM, color=self.__factory_color)
 
     def __pipe1_drawing(self):
         self.create_vertical_pipe(
@@ -201,22 +201,22 @@ class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCan
     def __tank1_drawing(self):
         self.create_valve(x_position=self.T1_TANK_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.T1_TOP_VALVE_Y_POSITION,
-                          name='T1_Tolt [%s]' % Tartaly6_Address.T1_TOLT, color=self.__tank1_top_valve_color)
+                          name='T1_Tolt [%s]' % Tartaly6v1_Address.T1_TOLT, color=self.__tank1_top_valve_color)
         self.create_tank(x_position=self.T1_TANK_X_POSITION,
                          y_position=self.T1_TANK_Y_POSITION,
                          tank_name='T1', tank_color='gray')
         self.create_sensor(x_position=self.T1_TANK_X_POSITION,
                            y_position=self.T1_SENSOR_Y_POSITION,
                            line_length=self.SENSOR_LINE_LENGTH,
-                           name='T1_Teli\n[%s]' % Tartaly6_Address.T1_TELI, color=self.__tank1_sensor_color)
+                           name='T1_Teli\n[%s]' % Tartaly6v1_Address.T1_TELI, color=self.__tank1_sensor_color)
 
     def __tank2_drawing(self):
         self.create_valve(x_position=self.T2_TOP_VALVE_X_POSITION,
                           y_position=self.T2_T3_TOP_VALVE_Y_POSITION,
-                          name='T2_Tolt [%s]' % Tartaly6_Address.T2_TOLT, color=self.__tank2_top_valve_color)
+                          name='T2_Tolt [%s]' % Tartaly6v1_Address.T2_TOLT, color=self.__tank2_top_valve_color)
         self.create_valve(x_position=self.T2_ADD_VALVE_X_POSITION,
                           y_position=self.T2_T3_TOP_VALVE_Y_POSITION,
-                          name='T2_Adalek [%s]' % Tartaly6_Address.T2_ADALEK, color=self.__tank2_add_valve_color)
+                          name='T2_Adalek [%s]' % Tartaly6v1_Address.T2_ADALEK, color=self.__tank2_add_valve_color)
         self.create_tank(x_position=self.T2_TANK_X_POSITION,
                          y_position=self.T2_T3_TANK_Y_POSITION,
                          tank_name='T2', tank_color='gray')
@@ -227,18 +227,18 @@ class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCan
                                                     line_length=self.TANK_WIDTH + 10,
                                                     active_level=self.__tank2_level_percent,
                                                     activ_level_print=True, active_color='red',
-                                                    name='T2_Szint [%s]\n' % Tartaly6_Address.T2_SZINT)
+                                                    name='T2_Szint [%s]\n' % Tartaly6v1_Address.T2_SZINT)
         self.create_valve(x_position=self.T2_TANK_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.T2_T3_BOTTOM_VALVE_Y_POSITION,
-                          name='T2_Urit [%s]' % Tartaly6_Address.T2_URIT, color=self.__tank2_bottom_valve_color)
+                          name='T2_Urit [%s]' % Tartaly6v1_Address.T2_URIT, color=self.__tank2_bottom_valve_color)
 
     def __tank3_drawing(self):
         self.create_valve(x_position=self.T3_TOP_VALVE_X_POSITION,
                           y_position=self.T2_T3_TOP_VALVE_Y_POSITION,
-                          name='T3_Tolt [%s]' % Tartaly6_Address.T3_TOLT, color=self.__tank3_top_valve_color)
+                          name='T3_Tolt [%s]' % Tartaly6v1_Address.T3_TOLT, color=self.__tank3_top_valve_color)
         self.create_valve(x_position=self.T3_ADD_VALVE_X_POSITION,
                           y_position=self.T2_T3_TOP_VALVE_Y_POSITION,
-                          name='T3_Adalek [%s]' % Tartaly6_Address.T2_ADALEK, color=self.__tank3_add_valve_color)
+                          name='T3_Adalek [%s]' % Tartaly6v1_Address.T2_ADALEK, color=self.__tank3_add_valve_color)
         self.create_tank(x_position=self.T3_TANK_X_POSITION,
                          y_position=self.T2_T3_TANK_Y_POSITION,
                          tank_name='T3', tank_color='gray')
@@ -249,10 +249,10 @@ class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCan
                                                     line_length=self.TANK_WIDTH + 10,
                                                     active_level=self.__tank3_level_percent,
                                                     activ_level_print=True, active_color='red',
-                                                    name='T3_Szint [%s]\n' % Tartaly6_Address.T3_SZINT)
+                                                    name='T3_Szint [%s]\n' % Tartaly6v1_Address.T3_SZINT)
         self.create_valve(x_position=self.T3_TANK_X_POSITION + self.TANK_WIDTH // 2 - self.VALVE_WIDTH // 2,
                           y_position=self.T2_T3_BOTTOM_VALVE_Y_POSITION,
-                          name='T3_Urit [%s]' % Tartaly6_Address.T3_URIT, color=self.__tank3_bottom_valve_color)
+                          name='T3_Urit [%s]' % Tartaly6v1_Address.T3_URIT, color=self.__tank3_bottom_valve_color)
 
 
 if __name__ == "__main__":
