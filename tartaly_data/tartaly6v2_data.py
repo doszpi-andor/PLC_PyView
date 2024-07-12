@@ -16,10 +16,10 @@ class Tartaly6v2_Address(PLC_Address):
     T2_URIT = 'Q0.3'
     T3_TOLT = 'Q0.4'
     T3_ADALEK = 'Q0.5'
-    T3_URIT = 'Q4.0'
-    UZEM = 'Q4.1'
-    T2_KEVEREK_KEZS = 'Q4.2'
-    T3_KEVEREK_KESZ = 'Q4.3'
+    T3_URIT = 'Q0.6'
+    UZEM = 'Q0.7'
+    T2_KEVEREK_KEZS = 'Q1.0'
+    T3_KEVEREK_KESZ = 'Q1.1'
 
     READ_BYTES_TAG_ADDRESS = (('IB0', 1), ('QB0', 5))
 
