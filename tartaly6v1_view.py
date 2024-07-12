@@ -10,9 +10,9 @@ class App(PLC_ViewB):
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
         # noinspection SpellCheckingInspection
-        self.title('Tartaly 6')
+        self.title('Tartaly 6v1')
         # noinspection SpellCheckingInspection
-        self.name_label.config(text='Tartály-6')
+        self.name_label.config(text='Tartály-6v1')
 
         self.tanks = Tartaly6v1_View(self.process_frame)
         self.tanks.pack()
