@@ -1,5 +1,5 @@
 from _view.plc_view import PLC_ViewB
-from tartaly_data.tartaly6v1_data import Tartaly6_data
+from tartaly_data.tartaly6v1_data import Tartaly6v1_data
 from tartaly_data.tartaly6v1_draw import Tartaly6v1_View
 
 
@@ -17,7 +17,7 @@ class App(PLC_ViewB):
         self.tanks = Tartaly6v1_View(self.process_frame)
         self.tanks.pack()
 
-        self.plc_data = Tartaly6_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
+        self.plc_data = Tartaly6v1_data(self.ip_select.ip_address.get(), self.plc_rack, self.plc_slot)
 
         self.transfer_loop.start()
 

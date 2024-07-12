@@ -29,7 +29,7 @@ class Tartaly6v1_Address(PLC_Address):
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
-class Tartaly6_data(PLC_data):
+class Tartaly6v1_data(PLC_data):
 
     __t1_teli_old = False
     __start_old = False
