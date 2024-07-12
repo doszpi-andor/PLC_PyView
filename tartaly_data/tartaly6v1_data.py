@@ -2,7 +2,7 @@ from _plc_data.plc_data import PLC_Address, PLC_data
 
 
 # noinspection SpellCheckingInspection,PyPep8Naming
-class Tartaly6_Address(PLC_Address):
+class Tartaly6v1_Address(PLC_Address):
 
     T1_TELI = 'I0.0'
     START = 'I0.6'
@@ -48,7 +48,7 @@ class Tartaly6_data(PLC_data):
     __t3_szint_old = 0
 
     def __init__(self, ip, rack, slot):
-        super().__init__(Tartaly6_Address(), ip, rack, slot)
+        super().__init__(Tartaly6v1_Address(), ip, rack, slot)
         self.__t1_teli = False
         self.__start = False
         self.__stop = False
@@ -115,30 +115,30 @@ class Tartaly6_data(PLC_data):
 
     @property
     def t2_szint_percent(self):
-        return int(self.__t2_szint / Tartaly6_Address.T2_SZINT_RANGE * 100)
+        return int(self.__t2_szint / Tartaly6v1_Address.T2_SZINT_RANGE * 100)
 
     @property
     def t3_szint_percent(self):
-        return int(self.__t3_szint / Tartaly6_Address.T3_SZINT_RANGE * 100)
+        return int(self.__t3_szint / Tartaly6v1_Address.T3_SZINT_RANGE * 100)
 
     def read_data(self):
         super().read_data()
 
-        self.__t1_teli = self.get_bit_tag_page(Tartaly6_Address.T1_TELI)
-        self.__start = self.get_bit_tag_page(Tartaly6_Address.START)
-        self.__stop = self.get_bit_tag_page(Tartaly6_Address.STOP)
+        self.__t1_teli = self.get_bit_tag_page(Tartaly6v1_Address.T1_TELI)
+        self.__start = self.get_bit_tag_page(Tartaly6v1_Address.START)
+        self.__stop = self.get_bit_tag_page(Tartaly6v1_Address.STOP)
 
-        self.__t1_tolt = self.get_bit_tag_page(Tartaly6_Address.T1_TOLT)
-        self.__t2_tolt = self.get_bit_tag_page(Tartaly6_Address.T2_TOLT)
-        self.__t2_adalek = self.get_bit_tag_page(Tartaly6_Address.T2_ADALEK)
-        self.__t2_urit = self.get_bit_tag_page(Tartaly6_Address.T2_URIT)
-        self.__t3_tolt = self.get_bit_tag_page(Tartaly6_Address.T3_TOLT)
-        self.__t3_adalek = self.get_bit_tag_page(Tartaly6_Address.T3_ADALEK)
-        self.__t3_urit = self.get_bit_tag_page(Tartaly6_Address.T3_URIT)
-        self.__uzem = self.get_bit_tag_page(Tartaly6_Address.UZEM)
+        self.__t1_tolt = self.get_bit_tag_page(Tartaly6v1_Address.T1_TOLT)
+        self.__t2_tolt = self.get_bit_tag_page(Tartaly6v1_Address.T2_TOLT)
+        self.__t2_adalek = self.get_bit_tag_page(Tartaly6v1_Address.T2_ADALEK)
+        self.__t2_urit = self.get_bit_tag_page(Tartaly6v1_Address.T2_URIT)
+        self.__t3_tolt = self.get_bit_tag_page(Tartaly6v1_Address.T3_TOLT)
+        self.__t3_adalek = self.get_bit_tag_page(Tartaly6v1_Address.T3_ADALEK)
+        self.__t3_urit = self.get_bit_tag_page(Tartaly6v1_Address.T3_URIT)
+        self.__uzem = self.get_bit_tag_page(Tartaly6v1_Address.UZEM)
 
-        self.__t2_szint = self.get_int_tag_page(Tartaly6_Address.T2_SZINT)
-        self.__t3_szint = self.get_int_tag_page(Tartaly6_Address.T3_SZINT)
+        self.__t2_szint = self.get_int_tag_page(Tartaly6v1_Address.T2_SZINT)
+        self.__t3_szint = self.get_int_tag_page(Tartaly6v1_Address.T3_SZINT)
 
     def t1_teli_is_changed(self):
         if self.__t1_teli != self.__t1_teli_old:
