@@ -74,7 +74,7 @@ class Tartaly6v2_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogC
         self.__tank2_dump_color = 'gray'
         self.__tank2_completed_color = 'gray'
         self.__tank3_dump_color = 'gray'
-        self.__tank3_completed_clor = 'gray'
+        self.__tank3_completed_color = 'gray'
 
         self.__tank2_level_percent = 0
         self.__tank3_level_percent = 0
@@ -120,6 +120,12 @@ class Tartaly6v2_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogC
             self.__tank2_level_percent = level_percent
             self.__tank2_drawing()
 
+    def tank2_indicator_change_color(self, completed_color, dump_color):
+        if self.__tank2_completed_color != completed_color or self.__tank2_dump_color != dump_color:
+            self.__tank2_completed_color = completed_color
+            self.__tank2_dump_color = dump_color
+            self.__tank2_indicator_draving()
+
     def tank3_change_color(self, top_valve_color, add_valve_color, bottom_valve_color):
         if self.__tank3_top_valve_color != top_valve_color or\
                 self.__tank3_add_valve_color != add_valve_color or\
@@ -128,6 +134,12 @@ class Tartaly6v2_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogC
             self.__tank3_add_valve_color = add_valve_color
             self.__tank3_bottom_valve_color = bottom_valve_color
             self.__tank3_drawing()
+
+    def tank3_indicator_change_color(self, completed_color, dump_color):
+        if self.__tank3_completed_color != completed_color or self.__tank3_dump_color != dump_color:
+            self.__tank3_completed_color = completed_color
+            self.__tank3_dump_color = dump_color
+            self.__tank3_indicator_draving()
 
     def tank3_change_level(self, level_percent):
         if self.__tank3_level_percent != level_percent:
@@ -279,7 +291,7 @@ class Tartaly6v2_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogC
         self.create_circle_indicator(x_position=self.INDICATOR_T3_X_POSITION,
                                      y_position=self.INDICATOR_T2_T3_ROW1_Y_POSITION,
                                      name='Keverek\nKesz_T3\n[%s]' % Tartaly6v2_Address.T3_KEVEREK_KESZ,
-                                     color=self.__tank3_completed_clor)
+                                     color=self.__tank3_completed_color)
         self.create_square_indicator(x_position=self.INDICATOR_T3_X_POSITION,
                                      y_position=self.INDICATOR_T2_T3_ROW2_Y_POSITION,
                                      name='Start\nUrit_T3\n[%s]' % Tartaly6v2_Address.T3_START_URIT,
