@@ -7,7 +7,7 @@ from tartaly_data.tartaly6v1_data import Tartaly6v1_Address
 
 
 # noinspection PyPep8Naming,SpellCheckingInspection
-class Tartaly6_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCanvas, IndicatorCanvas):
+class Tartaly6v1_View(TankCanvas, ValveCanvas, PipeCanvas, SensorCanvas, AnalogCanvas, IndicatorCanvas):
     TANK_WIDTH = 55
     TANK_HEIGHT = 120
     VALVE_WIDTH = 15
@@ -259,7 +259,7 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("800x480")
 
-    tank = Tartaly6_View(root)
+    tank = Tartaly6v1_View(root)
     tank.pack()
 
     root.mainloop()
