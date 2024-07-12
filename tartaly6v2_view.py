@@ -41,6 +41,12 @@ class App(PLC_ViewB):
                 self.plc_data.t3_urit_is_changed():
             self.tank3_change_refresh()
 
+        if self.plc_data.t2_keverek_kesz_is_changed() or self.plc_data.t2_start_urit_is_changed():
+            self.tank2_indicator_refresh()
+
+        if self.plc_data.t3_keverek_kesz_is_changed() or self.plc_data.t3_start_urit_is_changed():
+            self.tank3_indicator_refresh()
+
         if self.plc_data.t2_szint_is_changed(threshold=1000):
             self.tank2_level_refresh()
 
@@ -115,6 +121,20 @@ class App(PLC_ViewB):
         else:
             self.tanks.tank2_change_color(top_valve_color='gray', add_valve_color='gray', bottom_valve_color='gray')
 
+    def tank2_indicator_refresh(self):
+        # 1 1
+        if self.plc_data.t2_keverek_kesz and self.plc_data.t2_start_urit:
+            self.tanks.tank2_indicator_change_color(completed_color='green', dump_color='yellow')
+        # 0 1
+        elif not self.plc_data.t2_keverek_kesz and self.plc_data.t2_start_urit:
+            self.tanks.tank2_indicator_change_color(completed_color='gray', dump_color='yellow')
+        # 1 0
+        elif self.plc_data.t2_keverek_kesz and not self.plc_data.t2_start_urit:
+            self.tanks.tank2_indicator_change_color(completed_color='green', dump_color='gray')
+        # 0 0
+        else:
+            self.tanks.tank2_indicator_change_color(completed_color='gray', dump_color='gray')
+
     def tank2_level_refresh(self):
         self.tanks.tank2_change_level(level_percent=self.plc_data.t2_szint_percent)
 
@@ -143,6 +163,20 @@ class App(PLC_ViewB):
         # 0 0 0
         else:
             self.tanks.tank3_change_color(top_valve_color='gray', add_valve_color='gray', bottom_valve_color='gray')
+
+    def tank3_indicator_refresh(self):
+        # 1 1
+        if self.plc_data.t3_keverek_kesz and self.plc_data.t3_start_urit:
+            self.tanks.tank3_indicator_change_color(completed_color='green', dump_color='yellow')
+        # 0 1
+        elif not self.plc_data.t3_keverek_kesz and self.plc_data.t3_start_urit:
+            self.tanks.tank3_indicator_change_color(completed_color='gray', dump_color='yellow')
+        # 1 0
+        elif self.plc_data.t3_keverek_kesz and not self.plc_data.t3_start_urit:
+            self.tanks.tank3_indicator_change_color(completed_color='green', dump_color='gray')
+        # 0 0
+        else:
+            self.tanks.tank3_indicator_change_color(completed_color='gray', dump_color='gray')
 
     def tank3_level_refresh(self):
         self.tanks.tank3_change_level(level_percent=self.plc_data.t3_szint_percent)
