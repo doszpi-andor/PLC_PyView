@@ -1,4 +1,4 @@
-from platform import system
+from platform import system, machine
 from tkinter import Tk, Frame, Label, Button, RIGHT, Y, Toplevel, BOTTOM, X, TOP, LEFT
 
 from _config.plc_config_read import PLC_Config
@@ -24,7 +24,7 @@ class PLC_View(Tk):
             self.plc_slot = 0
             self.plc_default_ip = ''
 
-        if system() == 'Windows':
+        if system() == 'Windows' or machine() == 'x86_64':
             self.resizable(False, False)
             self.geometry("800x480")
         else:
