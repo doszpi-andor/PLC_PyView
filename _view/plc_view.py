@@ -84,6 +84,7 @@ class PLC_View(Tk):
         if self.__closed and not self.transfer_loop.is_alive():
             self.destroy()
 
+        # noinspection PyTypeChecker
         self.after(100, self.loop)
 
 
@@ -143,6 +144,7 @@ class PLC_ViewB(PLC_View):
 if __name__ == '__main__':
     app = PLC_ViewB()
 
+    # noinspection PyTypeChecker
     app.after(100, app.loop)
 
     app.mainloop()
