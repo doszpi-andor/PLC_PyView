@@ -10,7 +10,7 @@ $ M1\_TOF(RT) = Hiba1F + Hiba2F $
 $ Uzem = UzemF + \overline{UzemF} \cdot M2 \cdot Clock\_1Hz $
 
 $ M2 = TOF(M1) $ <br>
-$ M2_TOF(RT) = Hiba2F $
+$ M2\_TOF(RT) = Hiba2F $
 
 ## _Hibakezelés_
 $ Hiba1F(SET) = TON(M1 \cdot \overline{S1}) $ <br>
